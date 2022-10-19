@@ -207,6 +207,48 @@ namespace Pharmacy.Core.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "24a55d20-f21c-43b0-b96b-be842c8a8f35", "89c6de87-6b67-4474-b4e6-d8e6f00e380b", "User", "USER" },
+                    { "da250fb8-c765-4a58-a045-778acc4f139a", "b6defdca-4427-434e-9c58-fe93917c6532", "Admin", "ADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "0fe15a4c-ffa7-4853-825e-564321387793", 0, "55860c25-0e40-4b81-897b-ca7aadfbffc5", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMINPHARMACY", "AQAAAAEAACcQAAAAENsDAyUgcpOFX7ey4SqhlaHnpBB3RJ4bc8pTIEkUmabnI5GQcrnRu9MUJ9tX8lO5nA==", null, false, "f68cc7ba-4718-4ec1-bc6e-c2921cafa89b", false, "adminPharmacy" },
+                    { "2ef05a8e-4062-4c79-9fac-e3a64629f6cc", 0, "299c92d8-174e-4c68-bad9-74aa668b35e6", "usern@pharmacy.com", true, null, null, false, null, "USERPHARMACY", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAENZP3NjdeESP4d5PcWlcwQoVvEtaw4gtHkUydaIFZJi3WQmPjjZw/uRvHk1wnD+Zrw==", null, false, "1c38ca09-dfde-4c63-87fd-38cb59428a32", false, "userPharmacy" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Літаки" },
+                    { 2, "Dsl pfcnelb" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "da250fb8-c765-4a58-a045-778acc4f139a", "0fe15a4c-ffa7-4853-825e-564321387793" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "24a55d20-f21c-43b0-b96b-be842c8a8f35", "2ef05a8e-4062-4c79-9fac-e3a64629f6cc" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "da250fb8-c765-4a58-a045-778acc4f139a", "2ef05a8e-4062-4c79-9fac-e3a64629f6cc" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",

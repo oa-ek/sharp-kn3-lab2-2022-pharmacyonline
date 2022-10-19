@@ -1,8 +1,26 @@
-﻿@{
+﻿@using Pharmacy.Core
+@{
     ViewData["Title"] = "Home Page";
 }
-
+@model List<Category>
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+<h3>Каталог</h3>
+<hr />
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var ct in Model)
+        {
+            <li>@ct.Name</li>
+        }
+    </ul>
+}
+else
+{
+    <div class="alert alert-danger">Відсутні</div>
+}

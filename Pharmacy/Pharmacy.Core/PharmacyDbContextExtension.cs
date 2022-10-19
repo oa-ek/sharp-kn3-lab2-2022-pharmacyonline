@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Pharmacy.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,7 +81,18 @@ namespace XStats.Core
                     UserId = USER_ID,
                 });
 
-
+            builder.Entity<Category>().HasData(
+                new Category
+                {
+                    Id = 1,
+                    Name = "Літаки",
+                },
+                new Category
+                {
+                    Id = 2,
+                    Name = "Dsl pfcnelb",
+                }
+                );
             /*builder.Entity<EquipmentType>().HasData(
               new EquipmentType
               {

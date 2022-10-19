@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Pharmacy.Repos;
 using XStats.Core;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<PharmacyDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<CategoryRepository>();
+
 
 var app = builder.Build();
 

@@ -12,7 +12,7 @@ using XStats.Core;
 namespace Pharmacy.Core.Migrations
 {
     [DbContext(typeof(PharmacyDbContext))]
-    [Migration("20221018172254_init")]
+    [Migration("20221019124911_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,6 +49,22 @@ namespace Pharmacy.Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "da250fb8-c765-4a58-a045-778acc4f139a",
+                            ConcurrencyStamp = "b6defdca-4427-434e-9c58-fe93917c6532",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "24a55d20-f21c-43b0-b96b-be842c8a8f35",
+                            ConcurrencyStamp = "89c6de87-6b67-4474-b4e6-d8e6f00e380b",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -138,6 +154,23 @@ namespace Pharmacy.Core.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "0fe15a4c-ffa7-4853-825e-564321387793",
+                            RoleId = "da250fb8-c765-4a58-a045-778acc4f139a"
+                        },
+                        new
+                        {
+                            UserId = "2ef05a8e-4062-4c79-9fac-e3a64629f6cc",
+                            RoleId = "da250fb8-c765-4a58-a045-778acc4f139a"
+                        },
+                        new
+                        {
+                            UserId = "2ef05a8e-4062-4c79-9fac-e3a64629f6cc",
+                            RoleId = "24a55d20-f21c-43b0-b96b-be842c8a8f35"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -175,6 +208,18 @@ namespace Pharmacy.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Літаки"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Dsl pfcnelb"
+                        });
                 });
 
             modelBuilder.Entity("Pharmacy.Core.Medicaments", b =>
@@ -288,6 +333,40 @@ namespace Pharmacy.Core.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "0fe15a4c-ffa7-4853-825e-564321387793",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "55860c25-0e40-4b81-897b-ca7aadfbffc5",
+                            Email = "admin@pharmacy.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@PHARMACY.COM",
+                            NormalizedUserName = "ADMINPHARMACY",
+                            PasswordHash = "AQAAAAEAACcQAAAAENsDAyUgcpOFX7ey4SqhlaHnpBB3RJ4bc8pTIEkUmabnI5GQcrnRu9MUJ9tX8lO5nA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f68cc7ba-4718-4ec1-bc6e-c2921cafa89b",
+                            TwoFactorEnabled = false,
+                            UserName = "adminPharmacy"
+                        },
+                        new
+                        {
+                            Id = "2ef05a8e-4062-4c79-9fac-e3a64629f6cc",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "299c92d8-174e-4c68-bad9-74aa668b35e6",
+                            Email = "usern@pharmacy.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USERPHARMACY",
+                            NormalizedUserName = "USER@PHARMACY.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENZP3NjdeESP4d5PcWlcwQoVvEtaw4gtHkUydaIFZJi3WQmPjjZw/uRvHk1wnD+Zrw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "1c38ca09-dfde-4c63-87fd-38cb59428a32",
+                            TwoFactorEnabled = false,
+                            UserName = "userPharmacy"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
