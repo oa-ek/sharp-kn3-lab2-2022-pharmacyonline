@@ -17,10 +17,13 @@ namespace XStats.Core
             builder.Seed1();
             base.OnModelCreating(builder);
         }
-
+        
         public DbSet<Category> Category { get; set; }
         public DbSet<SubCategory> SubCategory { get; set; }
         public DbSet<Medicaments> Medicaments { get; set; }
         public DbSet<SubCategoryMedicaments> SubCategoryMedicaments { get; set; }
+        public DbSet<Brend> Brend { get; set; }
+        public DbSet<Country> Country { get; set; }
+        public DbSet<ProductLine> ProductLine { get; set; }
     }
 }
