@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pharmacy.Core
 {
-    internal class Country
+    public class Country
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

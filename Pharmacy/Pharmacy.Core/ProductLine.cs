@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pharmacy.Core
 {
-    internal class ProductLine
+    public class ProductLine
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pharmacy.Core
 {
-    internal class Brend
+    public class Brend
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
