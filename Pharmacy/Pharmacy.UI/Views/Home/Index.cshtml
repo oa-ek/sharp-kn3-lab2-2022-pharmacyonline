@@ -16,7 +16,11 @@
     <ul>
         @foreach (var ct in Model)
         {
-            <li>@ct.Name</li>
+            <li>
+                <a href="/Categories/CategoryCatalog/@ct.Id" class="title">
+                    @ct.Name
+                </a>
+            </li>
         }
     </ul>
 }
