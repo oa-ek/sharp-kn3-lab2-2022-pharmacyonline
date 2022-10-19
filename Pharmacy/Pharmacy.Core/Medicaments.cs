@@ -19,6 +19,15 @@ namespace Pharmacy.Core
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MedicamentsId { get; set; }
         public string? Name { get; set; }
+        public string Code { get; set; }
+        public int Price { get; set; }
+        public string? PhotoPath { get; set; }
+        //public ProductLine? ProductLine { get; set }
+        //public Brend? Brend { get; set }
+        public string ReleaseForm { get; set; }
+        public string Dosage { get; set; }
+        //public Country? Country { get; set }
+        public SubCategory? SubCategory { get; set; }
         public virtual ICollection<SubCategoryMedicaments>? SubCategoryMedicaments { get; set; }
 
     }
