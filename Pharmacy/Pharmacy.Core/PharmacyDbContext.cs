@@ -14,11 +14,13 @@ namespace XStats.Core
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Seed();
+            builder.Seed1();
             base.OnModelCreating(builder);
         }
 
         public DbSet<Category> Category { get; set; }
         public DbSet<SubCategory> SubCategory { get; set; }
         public DbSet<Medicaments> Medicaments { get; set; }
+        public DbSet<SubCategoryMedicaments> SubCategoryMedicaments { get; set; }
     }
 }

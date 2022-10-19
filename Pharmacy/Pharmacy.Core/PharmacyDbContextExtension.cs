@@ -13,6 +13,31 @@ namespace XStats.Core
 {
     public static class PharmacyDbContextExtension
     {
+        public static void Seed1(this ModelBuilder modelBuilder)
+        {
+
+            /*modelBuilder.Entity<Medicaments>()
+                        .HasMany<SubCategory>(s => s.SubCategory)
+                        .WithMany(c => c.Medicaments)
+                        .Map(cs =>
+                        {
+                            cs.MapLeftKey("MedicamentRefId");
+                            cs.MapRightKey("SubCategoryRefId");
+                            cs.ToTable("SubCategoryMedicaments");
+                        });*/
+            modelBuilder.Entity<SubCategoryMedicaments>()
+        .HasKey(bc => new { bc.MedicamentsId, bc.SubCategoryId });
+            modelBuilder.Entity<SubCategoryMedicaments>()
+                .HasOne(bc => bc.Medicaments)
+                .WithMany(b => b.SubCategoryMedicaments)
+                .HasForeignKey(bc => bc.MedicamentsId);
+            modelBuilder.Entity<SubCategoryMedicaments>()
+                .HasOne(bc => bc.SubCategory)
+                .WithMany(c => c.SubCategoryMedicaments)
+                .HasForeignKey(bc => bc.SubCategoryId);
+
+        }
+
         public static void Seed(this ModelBuilder builder)
         {
             string ADMIN_ROLE_ID = Guid.NewGuid().ToString();

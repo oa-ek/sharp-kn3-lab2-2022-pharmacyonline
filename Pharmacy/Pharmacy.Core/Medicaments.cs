@@ -5,16 +5,21 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XStats.Core;
 
 namespace Pharmacy.Core
 {
     public class Medicaments
     {
+        /*public Medicaments()
+        {
+            this.SubCategory = new HashSet<SubCategory>();
+        }*/
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int MedicamentsId { get; set; }
         public string? Name { get; set; }
-        public SubCategory? SubCategory { get; set; }
+        public virtual ICollection<SubCategoryMedicaments>? SubCategoryMedicaments { get; set; }
 
     }
 }

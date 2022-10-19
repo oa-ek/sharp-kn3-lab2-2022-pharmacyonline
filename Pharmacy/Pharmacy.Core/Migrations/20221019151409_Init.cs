@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Pharmacy.Core.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,6 +61,19 @@ namespace Pharmacy.Core.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Medicaments",
+                columns: table => new
+                {
+                    MedicamentsId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Medicaments", x => x.MedicamentsId);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,14 +186,14 @@ namespace Pharmacy.Core.Migrations
                 name: "SubCategory",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    SubCategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubCategory", x => x.Id);
+                    table.PrimaryKey("PK_SubCategory", x => x.SubCategoryId);
                     table.ForeignKey(
                         name: "FK_SubCategory_Category_CategoryId",
                         column: x => x.CategoryId,
@@ -189,22 +202,27 @@ namespace Pharmacy.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Medicaments",
+                name: "SubCategoryMedicaments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SubCategoryId = table.Column<int>(type: "int", nullable: true)
+                    MedicamentsId = table.Column<int>(type: "int", nullable: false),
+                    SubCategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Medicaments", x => x.Id);
+                    table.PrimaryKey("PK_SubCategoryMedicaments", x => new { x.MedicamentsId, x.SubCategoryId });
                     table.ForeignKey(
-                        name: "FK_Medicaments_SubCategory_SubCategoryId",
+                        name: "FK_SubCategoryMedicaments_Medicaments_MedicamentsId",
+                        column: x => x.MedicamentsId,
+                        principalTable: "Medicaments",
+                        principalColumn: "MedicamentsId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SubCategoryMedicaments_SubCategory_SubCategoryId",
                         column: x => x.SubCategoryId,
                         principalTable: "SubCategory",
-                        principalColumn: "Id");
+                        principalColumn: "SubCategoryId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -212,8 +230,8 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "24a55d20-f21c-43b0-b96b-be842c8a8f35", "89c6de87-6b67-4474-b4e6-d8e6f00e380b", "User", "USER" },
-                    { "da250fb8-c765-4a58-a045-778acc4f139a", "b6defdca-4427-434e-9c58-fe93917c6532", "Admin", "ADMIN" }
+                    { "4d632eed-4439-481d-a6e8-723457dc2357", "6eab3ace-10d9-4ca0-b642-49413ffe7a00", "User", "USER" },
+                    { "973f47d8-3ffa-47af-82be-ea8bc62cb8b3", "f5ac6a1e-62d6-4a38-a00c-b399e151bf2f", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -221,8 +239,8 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "0fe15a4c-ffa7-4853-825e-564321387793", 0, "55860c25-0e40-4b81-897b-ca7aadfbffc5", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMINPHARMACY", "AQAAAAEAACcQAAAAENsDAyUgcpOFX7ey4SqhlaHnpBB3RJ4bc8pTIEkUmabnI5GQcrnRu9MUJ9tX8lO5nA==", null, false, "f68cc7ba-4718-4ec1-bc6e-c2921cafa89b", false, "adminPharmacy" },
-                    { "2ef05a8e-4062-4c79-9fac-e3a64629f6cc", 0, "299c92d8-174e-4c68-bad9-74aa668b35e6", "usern@pharmacy.com", true, null, null, false, null, "USERPHARMACY", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAENZP3NjdeESP4d5PcWlcwQoVvEtaw4gtHkUydaIFZJi3WQmPjjZw/uRvHk1wnD+Zrw==", null, false, "1c38ca09-dfde-4c63-87fd-38cb59428a32", false, "userPharmacy" }
+                    { "a0d9c1d6-6d83-47e6-a834-bde3004e7192", 0, "f57c8f2d-f759-45c0-ba3d-f77d435bcf6d", "usern@pharmacy.com", true, null, null, false, null, "USERPHARMACY", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAECu1TU+fkgdp2/JXMHzJ1JJdIVMOD2EVXG+xE6HHibhxtcY4DQfyVtziZ3cnQNVBhw==", null, false, "3779124a-c750-47bf-b622-99d7247a7241", false, "userPharmacy" },
+                    { "dd0b694e-8ab7-4257-ba1b-d82b0e7bfb29", 0, "ed2d36ac-c855-43d3-a25f-685f038f7b07", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMINPHARMACY", "AQAAAAEAACcQAAAAEOqdmXjexebFeeLjh8XlqhRn+aHG8hWeaGYOs9ZcJskzfisxJPFx7Qy0obsIK6uPfQ==", null, false, "614d6152-dda2-4bad-94b4-680f8c677ab6", false, "adminPharmacy" }
                 });
 
             migrationBuilder.InsertData(
@@ -237,17 +255,17 @@ namespace Pharmacy.Core.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "da250fb8-c765-4a58-a045-778acc4f139a", "0fe15a4c-ffa7-4853-825e-564321387793" });
+                values: new object[] { "4d632eed-4439-481d-a6e8-723457dc2357", "a0d9c1d6-6d83-47e6-a834-bde3004e7192" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "24a55d20-f21c-43b0-b96b-be842c8a8f35", "2ef05a8e-4062-4c79-9fac-e3a64629f6cc" });
+                values: new object[] { "973f47d8-3ffa-47af-82be-ea8bc62cb8b3", "a0d9c1d6-6d83-47e6-a834-bde3004e7192" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "da250fb8-c765-4a58-a045-778acc4f139a", "2ef05a8e-4062-4c79-9fac-e3a64629f6cc" });
+                values: new object[] { "973f47d8-3ffa-47af-82be-ea8bc62cb8b3", "dd0b694e-8ab7-4257-ba1b-d82b0e7bfb29" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -289,14 +307,14 @@ namespace Pharmacy.Core.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Medicaments_SubCategoryId",
-                table: "Medicaments",
-                column: "SubCategoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SubCategory_CategoryId",
                 table: "SubCategory",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubCategoryMedicaments_SubCategoryId",
+                table: "SubCategoryMedicaments",
+                column: "SubCategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -317,13 +335,16 @@ namespace Pharmacy.Core.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Medicaments");
+                name: "SubCategoryMedicaments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Medicaments");
 
             migrationBuilder.DropTable(
                 name: "SubCategory");

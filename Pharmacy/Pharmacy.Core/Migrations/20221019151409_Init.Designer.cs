@@ -12,8 +12,8 @@ using XStats.Core;
 namespace Pharmacy.Core.Migrations
 {
     [DbContext(typeof(PharmacyDbContext))]
-    [Migration("20221019124911_init")]
-    partial class init
+    [Migration("20221019151409_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,15 +53,15 @@ namespace Pharmacy.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "da250fb8-c765-4a58-a045-778acc4f139a",
-                            ConcurrencyStamp = "b6defdca-4427-434e-9c58-fe93917c6532",
+                            Id = "973f47d8-3ffa-47af-82be-ea8bc62cb8b3",
+                            ConcurrencyStamp = "f5ac6a1e-62d6-4a38-a00c-b399e151bf2f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "24a55d20-f21c-43b0-b96b-be842c8a8f35",
-                            ConcurrencyStamp = "89c6de87-6b67-4474-b4e6-d8e6f00e380b",
+                            Id = "4d632eed-4439-481d-a6e8-723457dc2357",
+                            ConcurrencyStamp = "6eab3ace-10d9-4ca0-b642-49413ffe7a00",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -158,18 +158,18 @@ namespace Pharmacy.Core.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "0fe15a4c-ffa7-4853-825e-564321387793",
-                            RoleId = "da250fb8-c765-4a58-a045-778acc4f139a"
+                            UserId = "dd0b694e-8ab7-4257-ba1b-d82b0e7bfb29",
+                            RoleId = "973f47d8-3ffa-47af-82be-ea8bc62cb8b3"
                         },
                         new
                         {
-                            UserId = "2ef05a8e-4062-4c79-9fac-e3a64629f6cc",
-                            RoleId = "da250fb8-c765-4a58-a045-778acc4f139a"
+                            UserId = "a0d9c1d6-6d83-47e6-a834-bde3004e7192",
+                            RoleId = "973f47d8-3ffa-47af-82be-ea8bc62cb8b3"
                         },
                         new
                         {
-                            UserId = "2ef05a8e-4062-4c79-9fac-e3a64629f6cc",
-                            RoleId = "24a55d20-f21c-43b0-b96b-be842c8a8f35"
+                            UserId = "a0d9c1d6-6d83-47e6-a834-bde3004e7192",
+                            RoleId = "4d632eed-4439-481d-a6e8-723457dc2357"
                         });
                 });
 
@@ -224,32 +224,27 @@ namespace Pharmacy.Core.Migrations
 
             modelBuilder.Entity("Pharmacy.Core.Medicaments", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MedicamentsId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MedicamentsId"), 1L, 1);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SubCategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubCategoryId");
+                    b.HasKey("MedicamentsId");
 
                     b.ToTable("Medicaments");
                 });
 
             modelBuilder.Entity("Pharmacy.Core.SubCategory", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SubCategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategoryId"), 1L, 1);
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
@@ -257,11 +252,26 @@ namespace Pharmacy.Core.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SubCategoryId");
 
                     b.HasIndex("CategoryId");
 
                     b.ToTable("SubCategory");
+                });
+
+            modelBuilder.Entity("XStats.Core.SubCategoryMedicaments", b =>
+                {
+                    b.Property<int>("MedicamentsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MedicamentsId", "SubCategoryId");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("SubCategoryMedicaments");
                 });
 
             modelBuilder.Entity("XStats.Core.User", b =>
@@ -337,33 +347,33 @@ namespace Pharmacy.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0fe15a4c-ffa7-4853-825e-564321387793",
+                            Id = "dd0b694e-8ab7-4257-ba1b-d82b0e7bfb29",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "55860c25-0e40-4b81-897b-ca7aadfbffc5",
+                            ConcurrencyStamp = "ed2d36ac-c855-43d3-a25f-685f038f7b07",
                             Email = "admin@pharmacy.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@PHARMACY.COM",
                             NormalizedUserName = "ADMINPHARMACY",
-                            PasswordHash = "AQAAAAEAACcQAAAAENsDAyUgcpOFX7ey4SqhlaHnpBB3RJ4bc8pTIEkUmabnI5GQcrnRu9MUJ9tX8lO5nA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOqdmXjexebFeeLjh8XlqhRn+aHG8hWeaGYOs9ZcJskzfisxJPFx7Qy0obsIK6uPfQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f68cc7ba-4718-4ec1-bc6e-c2921cafa89b",
+                            SecurityStamp = "614d6152-dda2-4bad-94b4-680f8c677ab6",
                             TwoFactorEnabled = false,
                             UserName = "adminPharmacy"
                         },
                         new
                         {
-                            Id = "2ef05a8e-4062-4c79-9fac-e3a64629f6cc",
+                            Id = "a0d9c1d6-6d83-47e6-a834-bde3004e7192",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "299c92d8-174e-4c68-bad9-74aa668b35e6",
+                            ConcurrencyStamp = "f57c8f2d-f759-45c0-ba3d-f77d435bcf6d",
                             Email = "usern@pharmacy.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USERPHARMACY",
                             NormalizedUserName = "USER@PHARMACY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENZP3NjdeESP4d5PcWlcwQoVvEtaw4gtHkUydaIFZJi3WQmPjjZw/uRvHk1wnD+Zrw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECu1TU+fkgdp2/JXMHzJ1JJdIVMOD2EVXG+xE6HHibhxtcY4DQfyVtziZ3cnQNVBhw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1c38ca09-dfde-4c63-87fd-38cb59428a32",
+                            SecurityStamp = "3779124a-c750-47bf-b622-99d7247a7241",
                             TwoFactorEnabled = false,
                             UserName = "userPharmacy"
                         });
@@ -420,15 +430,6 @@ namespace Pharmacy.Core.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Pharmacy.Core.Medicaments", b =>
-                {
-                    b.HasOne("Pharmacy.Core.SubCategory", "SubCategory")
-                        .WithMany("Medicaments")
-                        .HasForeignKey("SubCategoryId");
-
-                    b.Navigation("SubCategory");
-                });
-
             modelBuilder.Entity("Pharmacy.Core.SubCategory", b =>
                 {
                     b.HasOne("Pharmacy.Core.Category", "Category")
@@ -438,14 +439,38 @@ namespace Pharmacy.Core.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("XStats.Core.SubCategoryMedicaments", b =>
+                {
+                    b.HasOne("Pharmacy.Core.Medicaments", "Medicaments")
+                        .WithMany("SubCategoryMedicaments")
+                        .HasForeignKey("MedicamentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pharmacy.Core.SubCategory", "SubCategory")
+                        .WithMany("SubCategoryMedicaments")
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Medicaments");
+
+                    b.Navigation("SubCategory");
+                });
+
             modelBuilder.Entity("Pharmacy.Core.Category", b =>
                 {
                     b.Navigation("SubCategory");
                 });
 
+            modelBuilder.Entity("Pharmacy.Core.Medicaments", b =>
+                {
+                    b.Navigation("SubCategoryMedicaments");
+                });
+
             modelBuilder.Entity("Pharmacy.Core.SubCategory", b =>
                 {
-                    b.Navigation("Medicaments");
+                    b.Navigation("SubCategoryMedicaments");
                 });
 #pragma warning restore 612, 618
         }
