@@ -311,8 +311,8 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0b042a6d-ef29-40a0-97ce-69b4386e7b71", "89dc4d8a-3681-4f94-add6-c4e4b3e8c596", "Admin", "ADMIN" },
-                    { "8ef2871b-7fb7-4b09-943e-cd7bca46b4ce", "294b7338-1e20-4b9e-a2ba-65fc0f054f32", "User", "USER" }
+                    { "23a4c645-8cae-4bc2-bfa7-78adb3b19a88", "172fbc8a-a058-4a67-b99c-3aa1006e369b", "Admin", "ADMIN" },
+                    { "8b29b6c4-7b23-4933-9046-78c8ea03d5e8", "c91d6337-22ba-42a2-8f02-48be9d585199", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -320,8 +320,8 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1e3c7d4d-6071-4704-969c-5ed9902edec6", 0, "788ba8fa-abad-4885-a40c-7a3608cde7b7", "usern@pharmacy.com", true, null, null, false, null, "USERPHARMACY", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAEMvsSjcFJobEXk/S2zAxxwOhzZZBdtQb6JKwNYhK0wXk1twaOhnLThYKWe/gAp2WrQ==", null, false, "5377f524-09ce-4a04-a2de-69464ef8ee5e", false, "userPharmacy" },
-                    { "9051f0d9-1694-4a36-a383-fd69d51e1fc1", 0, "d968edf4-6acb-4eaa-a76d-d297cc48197c", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMINPHARMACY", "AQAAAAEAACcQAAAAECTwz1bjDMSo3WI4lKpGGEAyPKyoz8Fn82Ml9xSLrPjRaudxUl1NJXJyanpSpSdM5Q==", null, false, "bf775602-b9f0-4f92-8aec-4d5e0299631f", false, "adminPharmacy" }
+                    { "5678359f-5231-49b2-b083-31650e77a921", 0, "195529b3-2306-402b-9d4e-532a8daa8b41", "usern@pharmacy.com", true, null, null, false, null, "USERPHARMACY", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAEH5tTteILhgg8Fv/2vBPufXdjvwwGuNx5ETg8+a4Vjolh7zESaZSZblpBSQFoy62MA==", null, false, "c8f8953d-433e-431d-8528-508d21c18433", false, "userPharmacy" },
+                    { "7bee057a-eb40-48d1-b909-290c0188d75c", 0, "f22d84af-89b5-45ea-b79f-a1974f334c70", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMINPHARMACY", "AQAAAAEAACcQAAAAEKAwlyWFuKlUfTf+QJf9eZVCh9kiuV3kdx0UV7j82WjSQ2dWXjHlahymmlnTLxyekg==", null, false, "60a3128c-5a54-4496-a2cc-496fa1c58595", false, "adminPharmacy" }
                 });
 
             migrationBuilder.InsertData(
@@ -345,17 +345,17 @@ namespace Pharmacy.Core.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "0b042a6d-ef29-40a0-97ce-69b4386e7b71", "1e3c7d4d-6071-4704-969c-5ed9902edec6" });
+                values: new object[] { "23a4c645-8cae-4bc2-bfa7-78adb3b19a88", "5678359f-5231-49b2-b083-31650e77a921" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "8ef2871b-7fb7-4b09-943e-cd7bca46b4ce", "1e3c7d4d-6071-4704-969c-5ed9902edec6" });
+                values: new object[] { "8b29b6c4-7b23-4933-9046-78c8ea03d5e8", "5678359f-5231-49b2-b083-31650e77a921" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "0b042a6d-ef29-40a0-97ce-69b4386e7b71", "9051f0d9-1694-4a36-a383-fd69d51e1fc1" });
+                values: new object[] { "23a4c645-8cae-4bc2-bfa7-78adb3b19a88", "7bee057a-eb40-48d1-b909-290c0188d75c" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

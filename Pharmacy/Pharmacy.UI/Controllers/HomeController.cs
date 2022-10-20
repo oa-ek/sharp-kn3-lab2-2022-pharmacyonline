@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Pharmacy.Repos;
 using Pharmacy.UI.Models;
 using System.Diagnostics;
-using XStats.Core;
+using Pharmacy.Core;
 
 namespace Pharmacy.UI.Controllers
 {

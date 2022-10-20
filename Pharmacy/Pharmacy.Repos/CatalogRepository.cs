@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using XStats.Core;
+
 
 namespace Pharmacy.Repos
 {
@@ -17,13 +17,13 @@ namespace Pharmacy.Repos
         {
             _ctx = ctx;
         }
-        public Catalog GetCategory(int id)
+        public Catalog GetCatalog(int id)
         {
             return _ctx.Catalog.Find(id);
         }
         public List<Catalog> GetAllCatalog()
         {
-            return _ctx.Catalog.Include(x=>x.Category).ToList();
+            return _ctx.Catalog.ToList();
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using Pharmacy.Core;
+﻿using Microsoft.EntityFrameworkCore;
+using Pharmacy.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using XStats.Core;
+
 
 namespace Pharmacy.Repos
 {
@@ -20,9 +21,9 @@ namespace Pharmacy.Repos
         {
             return _ctx.SubCategory.Find(id);
         }
-        public List<SubCategory> GetAllSubCategory()
+        public List<SubCategory> GetAllSubCategory(int id)
         {
-            return _ctx.SubCategory.ToList();
+            return _ctx.SubCategory.Include(x => x.Category).Where(x => x.Category.Id == id).ToList();
         }
         public List<SubCategory> GetAllSubCategoryFromCategory(int id)
         {

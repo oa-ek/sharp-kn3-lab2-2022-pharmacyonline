@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XStats.Core
+namespace Pharmacy.Core
 {
     public static class PharmacyDbContextExtension
     {

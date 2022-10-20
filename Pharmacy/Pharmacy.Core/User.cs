@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XStats.Core
+namespace Pharmacy.Core
 {
     public class User : IdentityUser
     {

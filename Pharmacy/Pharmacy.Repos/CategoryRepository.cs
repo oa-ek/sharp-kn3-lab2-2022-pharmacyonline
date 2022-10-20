@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using XStats.Core;
 
 namespace Pharmacy.Repos
 {
@@ -23,7 +22,11 @@ namespace Pharmacy.Repos
         }
         public List<Category> GetAllCategory()
         {
-            return _ctx.Category.ToList();
+            return _ctx.Category.Include(x=>x.SubCategory).ToList();
+        }
+        public List<Category> GetCategoryCatalogWithSub(int id)
+        {
+            return _ctx.Category.Include(x => x.SubCategory).Where(x=>x.Catalog.Id==id).ToList();
         }
     }
 }

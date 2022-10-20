@@ -8,18 +8,15 @@ using System.Threading.Tasks;
 
 namespace Pharmacy.Core
 {
-    public enum CatalogList
-    {
-        SingleBed,
-        DoubleBed        
-    }
+    
     public class Catalog
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? Name { get; set; }
-        public virtual ICollection<Category>? Category { get; set; }
+        //public virtual ICollection<Category>? Category { get; set; }
+
 
         public override string ToString()
         {

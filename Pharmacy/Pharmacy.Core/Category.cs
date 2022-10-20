@@ -14,6 +14,7 @@ namespace Pharmacy.Core
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? Name { get; set; }
+        public Catalog? Catalog { get; set; }
         public virtual ICollection<SubCategory>? SubCategory { get; set; }
 
         public override string ToString()

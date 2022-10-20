@@ -1,6 +1,6 @@
 ﻿@using Pharmacy.Core
 
-@model IEnumerable<Category>
+@model IEnumerable<Medicaments>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -13,10 +13,10 @@
     <div class="row">
         @foreach (var ct in Model)
         {
-            <div class="col-lg-2 col-md-3 col-4 mb-4 Item-card">
+            <div class="col-lg-2 col-md-3 col-4 mb-3">
                 <div class="card h-100 shadow">
                     <div class="card-body">
-                        <a href="/Category/Category/@ct.Id" class="title">
+                        <a href="/Category/Category/@ct.MedicamentsId" class="title">
                             @ct.Name
                         </a>
                     </div>

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Pharmacy.Repos;
-using XStats.Core;
+using Pharmacy.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +17,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<CategoryRepository>();
 builder.Services.AddTransient<SubCategoryRepository>();
 builder.Services.AddTransient<CatalogRepository>();
+builder.Services.AddTransient<MedicamentsRepository>();
+builder.Services.AddTransient<BrendRepository>();
+builder.Services.AddTransient<CountryRepository>();
+builder.Services.AddTransient<ProductLineRepository>();
+builder.Services.AddTransient<SubCategoryMedicamentsRepository>();
 
 
 var app = builder.Build();

@@ -5,7 +5,7 @@
 @model List<Category>
 
 
-<h3>Каталог</h3>
+<h3>@ViewData["catalog"].ToString()</h3>
 <hr />
 @if (Model.Any())
 {
@@ -19,18 +19,13 @@
                     <span class="expand j-expand"><i class="icon-plus2"></i></span>
                     <a href="/Category/CategoryCatalog/@ct.Id">@ct.Name</a>
                     <ul class="block-medications">
-                        @foreach (var ctg in ct.SubCategory)
-                        {
-                            <li>
-                                <span class="expand j-expand"><i class="icon-plus2"></i></span>
-                                <a href="">@ct.SubCategory</a>
-                                <ul class="block-medications">
-                                    <li>
-                                        <a href="">Протикашльові</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        }
+                            @foreach (var ctg in ct.SubCategory)
+                            {
+                                <li>
+                                    <span class="expand j-expand"><i class="icon-plus2"></i></span>
+                                <a href="/Category/CategoryProducts/@ct.Id">@ctg.Name</a>
+                                </li>
+                            }
 
                     </ul>
                 </li>

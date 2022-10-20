@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Pharmacy.Core;
 
-namespace XStats.Core
+namespace Pharmacy.Core
 {
     public class PharmacyDbContext : IdentityDbContext<User>
     {

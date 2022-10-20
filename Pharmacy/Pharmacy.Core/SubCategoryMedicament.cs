@@ -1,6 +1,6 @@
 ﻿using Pharmacy.Core;
 
-namespace XStats.Core
+namespace Pharmacy.Core
 {
     public class SubCategoryMedicaments
     {
@@ -8,5 +8,6 @@ namespace XStats.Core
         public Medicaments Medicaments { get; set; }
         public int SubCategoryId { get; set; }
         public SubCategory SubCategory { get; set; }
+
     }
 }
