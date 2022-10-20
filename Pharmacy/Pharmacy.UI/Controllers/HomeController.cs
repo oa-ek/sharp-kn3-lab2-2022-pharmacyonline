@@ -11,17 +11,19 @@ namespace Pharmacy.UI.Controllers
     {
         private readonly PharmacyDbContext _dbcontext;
         private readonly CategoryRepository _categoryRepository;
+        private readonly CatalogRepository _catalogRepository;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, CategoryRepository categoryRepository)
+        public HomeController(ILogger<HomeController> logger, CategoryRepository categoryRepository, CatalogRepository catalogRepository)
         {
+            _catalogRepository = catalogRepository;
             _categoryRepository = categoryRepository;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View(_categoryRepository.GetAllCategory());
+            return View(_catalogRepository.GetAllCatalog());
         }
 
         public IActionResult Privacy()

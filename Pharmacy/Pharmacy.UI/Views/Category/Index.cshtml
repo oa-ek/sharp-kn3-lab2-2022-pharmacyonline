@@ -1,0 +1,45 @@
+﻿@using Pharmacy.Core
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<Category>
+
+
+<h3>Каталог</h3>
+<hr />
+@if (Model.Any())
+{
+    <ul class="block-medications">
+        <ul class="block-medications">
+
+            @foreach (var ct in Model)
+            {
+
+                <li>
+                    <span class="expand j-expand"><i class="icon-plus2"></i></span>
+                    <a href="/Category/CategoryCatalog/@ct.Id">@ct.Name</a>
+                    <ul class="block-medications">
+                        @foreach (var ctg in ct.SubCategory)
+                        {
+                            <li>
+                                <span class="expand j-expand"><i class="icon-plus2"></i></span>
+                                <a href="">@ct.SubCategory</a>
+                                <ul class="block-medications">
+                                    <li>
+                                        <a href="">Протикашльові</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+            }
+        </ul>
+    </ul>
+}
+
+else
+{
+    <div class="alert alert-danger">Відсутні</div>
+}

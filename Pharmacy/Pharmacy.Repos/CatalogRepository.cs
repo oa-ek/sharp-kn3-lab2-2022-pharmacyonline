@@ -9,21 +9,21 @@ using XStats.Core;
 
 namespace Pharmacy.Repos
 {
-    public class CategoryRepository
+    public class CatalogRepository
     {
         public readonly PharmacyDbContext _ctx;
 
-        public CategoryRepository(PharmacyDbContext ctx)
+        public CatalogRepository(PharmacyDbContext ctx)
         {
             _ctx = ctx;
         }
-        public Category GetCategory(int id)
+        public Catalog GetCategory(int id)
         {
-            return _ctx.Category.Find(id);
+            return _ctx.Catalog.Find(id);
         }
-        public List<Category> GetAllCategory()
+        public List<Catalog> GetAllCatalog()
         {
-            return _ctx.Category.ToList();
+            return _ctx.Catalog.Include(x=>x.Category).ToList();
         }
     }
 }

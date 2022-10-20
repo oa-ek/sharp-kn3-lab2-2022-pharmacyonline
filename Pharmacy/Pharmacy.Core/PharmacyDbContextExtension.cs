@@ -118,6 +118,18 @@ namespace XStats.Core
                     Name = "Dsl pfcnelb",
                 }
                 );
+            builder.Entity<Catalog>().HasData(
+                new Catalog
+                {
+                    Id = 1,
+                    Name = "first",
+                },
+                new Catalog
+                {
+                    Id = 2,
+                    Name = "fvfvff",
+                }
+                );
             /*builder.Entity<EquipmentType>().HasData(
               new EquipmentType
               {

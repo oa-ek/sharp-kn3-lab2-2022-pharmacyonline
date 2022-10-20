@@ -24,6 +24,7 @@ namespace XStats.Core
         public DbSet<SubCategoryMedicaments> SubCategoryMedicaments { get; set; }
         public DbSet<Brend> Brend { get; set; }
         public DbSet<Country> Country { get; set; }
+        public DbSet<Catalog> Catalog { get; set; }
         public DbSet<ProductLine> ProductLine { get; set; }
     }
 }

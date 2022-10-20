@@ -24,5 +24,9 @@ namespace Pharmacy.Repos
         {
             return _ctx.SubCategory.ToList();
         }
+        public List<SubCategory> GetAllSubCategoryFromCategory(int id)
+        {
+            return _ctx.SubCategory.Where(x=>x.Category.Id == id).ToList();
+        }
     }
 }

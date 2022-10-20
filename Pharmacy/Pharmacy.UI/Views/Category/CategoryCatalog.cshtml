@@ -1,0 +1,31 @@
+﻿@using Pharmacy.Core
+
+@model IEnumerable<Category>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["category"].ToString()</h1>
+<hr />
+
+@if (Model.Any())
+{
+    <div class="row">
+        @foreach (var ct in Model)
+        {
+            <div class="col-lg-2 col-md-3 col-4 mb-4 Item-card">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <a href="/Category/Category/@ct.Id" class="title">
+                            @ct.Name
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">There aren't products</div>
+}

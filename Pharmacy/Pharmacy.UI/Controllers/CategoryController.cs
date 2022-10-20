@@ -5,27 +5,30 @@ using XStats.Core;
 
 namespace Pharmacy.UI.Controllers
 {
-    public class CategoryController1 : Controller
+    public class CategoryController : Controller
     {
         private readonly PharmacyDbContext _dbcontext;
         private readonly CategoryRepository _categoryRepository;
+        private readonly SubCategoryRepository _subcategoryRepository;
         //private readonly 
 
-        public CategoryController1(CategoryRepository categoryRepository)
+        public CategoryController(CategoryRepository categoryRepository, SubCategoryRepository subcategoryRepository)
         {
             _categoryRepository = categoryRepository;
+            _subcategoryRepository = subcategoryRepository;
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_categoryRepository.GetAllCategory());
         }
         [HttpGet]
         public IActionResult CategoryCatalog(int id)
         {
             ViewData["id"] = id;
-            var category = _dbcontext.SubCategory.First(x => x.SubCategoryId == id);
+            var category = _categoryRepository.GetCategory(id);
             ViewData["category"] = category;
-            return View(_dbcontext.Medicaments.Where(x => x.SubCategory == category).ToList());
+            return View(_subcategoryRepository.GetAllSubCategoryFromCategory(id));
         }
+
     }
 }

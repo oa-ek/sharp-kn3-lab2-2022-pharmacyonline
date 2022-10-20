@@ -1,28 +1,28 @@
 ﻿@using Pharmacy.Core
+@using Pharmacy.Repos
 @{
     ViewData["Title"] = "Home Page";
 }
-@model List<Category>
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model List<Catalog>
 
 
 <h3>Каталог</h3>
 <hr />
 @if (Model.Any())
 {
-    <ul>
-        @foreach (var ct in Model)
-        {
-            <li>
-                <a href="/Categories/CategoryCatalog/@ct.Id" class="title">
-                    @ct.Name
-                </a>
-            </li>
-        }
-    </ul>
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group" id="list-tab" role="tablist">
+                @foreach (var dl in Model)
+                {
+                    <a class="list-group-item list-group-item-action" href="/Category/CategoryCatalog/@dl.Id" role="button">
+                        @dl.Name
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+
 }
 else
 {

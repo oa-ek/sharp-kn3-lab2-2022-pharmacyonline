@@ -15,6 +15,8 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
     .AddEntityFrameworkStores<PharmacyDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<CategoryRepository>();
+builder.Services.AddTransient<SubCategoryRepository>();
+builder.Services.AddTransient<CatalogRepository>();
 
 
 var app = builder.Build();
