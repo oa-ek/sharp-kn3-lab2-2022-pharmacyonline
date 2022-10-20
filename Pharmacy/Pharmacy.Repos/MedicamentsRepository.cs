@@ -40,7 +40,7 @@ namespace Pharmacy.Repos
         }
         public Medicaments InfoMedicaments(int id)
         {
-            return _ctx.Medicaments.Include(x=>x.Brend).Include(x => x.Country).Include(x => x.Dosage).Include(x => x.ProductLine).Include(x => x.SubCategoryMedicaments).First(x => x.MedicamentsId==id);
+            return _ctx.Medicaments.Include(x=>x.Brend).Include(x => x.Country).Include(x => x.ProductLine).Include(x => x.SubCategoryMedicaments).First(x => x.MedicamentsId==id);
         }
     }
 }

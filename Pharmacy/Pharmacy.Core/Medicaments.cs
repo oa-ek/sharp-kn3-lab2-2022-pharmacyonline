@@ -10,22 +10,27 @@ namespace Pharmacy.Core
 {
     public class Medicaments
     {
-        /*public Medicaments()
-        {
-            this.SubCategory = new HashSet<SubCategory>();
-        }*/
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int MedicamentsId { get; set; }
+        public int MedicamentsId { get; set; }        
         public string? Name { get; set; }
+        [Display(Name = "Артикул")]
         public string Code { get; set; }
-        public int Price { get; set; }
+        [Display(Name = "Ціна")]
+        public double Price { get; set; }
         public string? PhotoPath { get; set; }
+        [Display(Name = "Лінійка продуктів")]
         public ProductLine? ProductLine { get; set; }
+        [Display(Name = "Бренд")]
         public Brend? Brend { get; set; }
+        [Display(Name = "Форма випуску")]
         public string ReleaseForm { get; set; }
+        [Display(Name = "Дозування")]
         public string Dosage { get; set; }
+        [Display(Name = "Країна")]
         public Country? Country { get; set; }
+        [Display(Name = "Опис")]
+        public string? Description { get; set; }
         public virtual ICollection<SubCategoryMedicaments>? SubCategoryMedicaments { get; set; }
 
     }

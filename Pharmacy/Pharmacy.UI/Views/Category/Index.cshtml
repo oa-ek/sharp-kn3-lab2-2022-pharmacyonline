@@ -9,16 +9,16 @@
 <hr />
 @if (Model.Any())
 {
-    <ul class="block-medications">
-        <ul class="block-medications">
+    <ul >
+        <ul >
 
             @foreach (var ct in Model)
             {
 
                 <li>
                     <span class="expand j-expand"><i class="icon-plus2"></i></span>
-                    <a href="/Category/CategoryCatalog/@ct.Id">@ct.Name</a>
-                    <ul class="block-medications">
+                    <a href="/Category/CategoryAllProducts/@ct.Id">@ct.Name</a>
+                    <ul >
                             @foreach (var ctg in ct.SubCategory)
                             {
                                 <li>

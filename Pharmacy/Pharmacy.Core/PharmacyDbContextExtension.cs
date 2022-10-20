@@ -106,127 +106,56 @@ namespace Pharmacy.Core
                     UserId = USER_ID,
                 });
 
+
             builder.Entity<Category>().HasData(
                 new Category
                 {
                     Id = 1,
-                    Name = "Літаки",
+                    Name = "Застуда і грип",
                 },
                 new Category
                 {
                     Id = 2,
-                    Name = "Dsl pfcnelb",
+                    Name = "Серцево-судинна система",
+                },
+                new Category
+                {
+                    Id = 3,
+                    Name = "Кровотворення та кров",
                 }
                 );
-            builder.Entity<Catalog>().HasData(
+            builder.Entity<SubCategory>().HasData(
+               new SubCategory
+               {
+                   SubCategoryId = 1,
+                   Name = "Від кашлю",
+               }
+               );
+           builder.Entity<Catalog>().HasData(
                 new Catalog
                 {
                     Id = 1,
-                    Name = "first",
+                    Name = "Лікарські засоби",
                 },
                 new Catalog
                 {
                     Id = 2,
-                    Name = "fvfvff",
+                    Name = "Краса та догляд",
                 }
                 );
-            /*builder.Entity<EquipmentType>().HasData(
-              new EquipmentType
-              {
-                  Id = 1,
-                  Title = "Літаки",
-                  FileTitle = "aircraft",
-                  IconPath = @"Images\eq\aircraft.png",
-                  Order = 1
-              },
-              new EquipmentType
-              {
-                  Id = 2,
-                  Title = "Гвинтокрили",
-                  FileTitle = "helicopter",
-                  IconPath = @"Images\eq\helicopter.png",
-                  Order = 2
-              },
-              new EquipmentType
-              {
-                  Id = 3,
-                  Title = "Дрони",
-                  FileTitle = "drone",
-                  IconPath = @"Images\eq\drone.png",
-                  Order = 3
-              },
-              new EquipmentType
-              {
-                  Id = 4,
-                  Title = "ППО",
-                  FileTitle = "anti-aircraft warfare",
-                  IconPath = @"Images\eq\anti-aircraft-warfare.png",
-                  Order = 5
-              },
-              new EquipmentType
-              {
-                  Id = 5,
-                  Title = "Крилаті ракети",
-                  FileTitle = "cruise missiles",
-                  IconPath = @"Images\eq\cruise-missiles.png",
-                  Order = 5
-              },
-              new EquipmentType
-              {
-                  Id = 6,
-                  Title = "Танки",
-                  FileTitle = "tank",
-                  IconPath = @"Images\eq\tank.png",
-                  Order = 6
-              },
-              new EquipmentType
-              {
-                  Id = 7,
-                  Title = "БТР",
-                  FileTitle = "APC",
-                  IconPath = @"Images\eq\apc.png",
-                  Order = 7
-              },
-              new EquipmentType
-              {
-                  Id = 8,
-                  Title = "Артилерія",
-                  FileTitle = "field artillery",
-                  IconPath = @"Images\eq\field-artillery.png",
-                  Order = 8
-              },
-              new EquipmentType
-              {
-                  Id = 9,
-                  Title = "РСЗВ",
-                  FileTitle = "MLP",
-                  IconPath = @"Images\eq\mlr.png",
-                  Order = 9
-              },
-              new EquipmentType
-              {
-                  Id = 10,
-                  Title = "Техніка і цистерни з ПММ",
-                  FileTitle = "vehicles and fuel tanks",
-                  IconPath = @"Images\eq\vehicles-and-fuel-tanks.png",
-                  Order = 10
-              },
-              new EquipmentType
-              {
-                  Id = 11,
-                  Title = "Морські кораблі",
-                  FileTitle = "naval ship",
-                  IconPath = @"Images\eq\naval-ship.png",
-                  Order = 11
-              },
-               new EquipmentType
-               {
-                   Id = 12,
-                   Title = "Спец. обладнання",
-                   FileTitle = "special equipment",
-                   IconPath = @"Images\eq\special-equipment.png",
-                   Order = 12
-               });*/
+            builder.Entity<Medicaments>().HasData(
+
+                new Medicaments
+                {
+                    MedicamentsId = 1,
+                    Name = "Синупрет табл. в/о №50",
+                    Code = "4882",
+                    Dosage="",
+                    Price= 125.62,
+                    ReleaseForm= "таблетки для внутрішнього застосування",
+                    PhotoPath="",
+                }
+                );
         }
     }
 }

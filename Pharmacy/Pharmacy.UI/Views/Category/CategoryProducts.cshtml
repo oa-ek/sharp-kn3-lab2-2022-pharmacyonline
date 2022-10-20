@@ -10,13 +10,13 @@
 
 @if (Model.Any())
 {
-    <div class="row">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin-top: 1em">
         @foreach (var ct in Model)
         {
-            <div class="col-lg-2 col-md-3 col-4 mb-3">
+            <div class="col">
                 <div class="card h-100 shadow">
                     <div class="card-body">
-                        <a href="/Category/Category/@ct.MedicamentsId" class="title">
+                        <a href="/Category/DetailsMedicament/@ct.MedicamentsId" class="title">
                             @ct.Name
                         </a>
                     </div>
