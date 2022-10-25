@@ -11,10 +11,20 @@ builder.Services.AddDbContext<PharmacyDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<User>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 5;
+}).AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<PharmacyDbContext>();
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<CategoryRepository>();
+builder.Services.AddTransient<UsersRepository>();
 builder.Services.AddTransient<SubCategoryRepository>();
 builder.Services.AddTransient<CatalogRepository>();
 builder.Services.AddTransient<MedicamentsRepository>();

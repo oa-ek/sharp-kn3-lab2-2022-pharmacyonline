@@ -64,19 +64,19 @@ namespace Pharmacy.Core
             var admin = new User
             {
                 Id = ADMIN_ID,
-                UserName = "adminPharmacy",
+                UserName = "admin@pharmacy.com",
                 Email = "admin@pharmacy.com",
                 EmailConfirmed = true,
                 NormalizedEmail = "admin@pharmacy.com".ToUpper(),
-                NormalizedUserName = "adminPharmacy".ToUpper()
+                NormalizedUserName = "admin@pharmacy.com".ToUpper()
             };
             var user = new User
             {
                 Id = USER_ID,
-                UserName = "userPharmacy",
-                Email = "usern@pharmacy.com",
+                UserName = "user@pharmacy.com",
+                Email = "user@pharmacy.com",
                 EmailConfirmed = true,
-                NormalizedEmail = "userPharmacy".ToUpper(),
+                NormalizedEmail = "user@pharmacy.com".ToUpper(),
                 NormalizedUserName = "user@pharmacy.com".ToUpper()
             };
 
@@ -84,7 +84,7 @@ namespace Pharmacy.Core
                
             PasswordHasher<User> hasher = new PasswordHasher<User>();
             admin.PasswordHash = hasher.HashPassword(admin, "admin111");
-            user.PasswordHash = hasher.HashPassword(admin, "user111");
+            user.PasswordHash = hasher.HashPassword(user, "user111");
 
 
             builder.Entity<User>().HasData(admin, user);
@@ -97,8 +97,8 @@ namespace Pharmacy.Core
                 },
                 new IdentityUserRole<string>
                 {
-                    RoleId = ADMIN_ROLE_ID,
-                    UserId = USER_ID,
+                    RoleId = USER_ROLE_ID,
+                    UserId = ADMIN_ID,
                 },
                 new IdentityUserRole<string>
                 {
