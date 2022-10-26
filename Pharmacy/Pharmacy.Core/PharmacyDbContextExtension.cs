@@ -106,7 +106,6 @@ namespace Pharmacy.Core
                     UserId = USER_ID,
                 });
 
-
             builder.Entity<Category>().HasData(
                 new Category
                 {
@@ -129,6 +128,7 @@ namespace Pharmacy.Core
                {
                    SubCategoryId = 1,
                    Name = "Від кашлю",
+                   
                }
                );
            builder.Entity<Catalog>().HasData(
@@ -153,7 +153,7 @@ namespace Pharmacy.Core
                     Dosage="",
                     Price= 125.62,
                     ReleaseForm= "таблетки для внутрішнього застосування",
-                    PhotoPath="",
+                    PhotoPath= "https://i.apteka24.ua/products/8986bcef-7cf8-4894-854a-825e8f724920.jpeg",
                 }
                 );
         }

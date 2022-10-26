@@ -1,29 +1,39 @@
 ﻿@using Pharmacy.Core
 
-@model IEnumerable<Medicaments>
+@model List<Medicaments>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@ViewData["category"].ToString()</h1>
+<h1>@ViewData["subcategory"].ToString()</h1>
 <hr />
 
 @if (Model.Any())
 {
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin-top: 1em">
-        @foreach (var ct in Model)
-        {
-            <div class="col">
-                <div class="card h-100 shadow">
-                    <div class="card-body">
-                        <a href="/Category/DetailsMedicament/@ct.MedicamentsId" class="title">
-                            @ct.Name
-                        </a>
+        <div class="container">
+            <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 g-3" style="margin-top: 1em;">
+                @foreach (var ct in Model)
+                {
+                <div class="card" style="width: 20rem; display:inline-block; margin-right: 1em">
+                        <img src="@ct.PhotoPath" class="card-img-top" style="height:16rem;" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => ct.Name)</h5>
+                            <p class="card-text">@Html.DisplayFor(modelItem => ct.Price) $</p>
+                            <!-- <p class="card-text">Quantity in stock: </p> -->
+                        </div>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="card-body">
+                                <a class="btn btn-outline-warning" class="card-link" asp-controller="Medicaments" asp-action="Edit" asp-route-id="@ct.MedicamentsId">Edit</a>
+                                <a class="btn btn-outline-primary" class="card-link" asp-controller="Medicaments"  asp-action="DetailsMedicament" asp-route-id="@ct.MedicamentsId">Details</a>
+                                <a class="btn btn-outline-danger" class="card-link" asp-controller="Medicaments" asp-action="Delete" asp-route-id="@ct.MedicamentsId">Delete</a>
+                            </div>
+                        }
                     </div>
-                </div>
+                }
             </div>
-        }
-    </div>
+        </div>
+
 }
 else
 {

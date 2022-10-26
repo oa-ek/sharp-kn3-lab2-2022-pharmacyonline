@@ -16,31 +16,43 @@ namespace Pharmacy.Repos
         {
             _ctx = ctx;
         }
-        public Medicaments GetMedicaments(int id)
+        public async Task<Medicaments> GetMedicament(int id)
         {
-            return _ctx.Medicaments.Find(id);
+            return await _ctx.Medicaments.Include(x=>x.SubCategoryMedicaments).FirstAsync(x=>x.MedicamentsId == id);
         }
-        public List<Medicaments> ListMedicaments(List<SubCategoryMedicaments> medicaments)
+
+
+        public async Task<List<Medicaments>> ListMedicaments(List<SubCategoryMedicaments> medicaments)
         {
             List<Medicaments> listmedicaments = new List<Medicaments>();
             foreach (var md in medicaments)
             {
-                var medics = _ctx.Medicaments.First(x => x.MedicamentsId == md.MedicamentsId);
+                var medics = await _ctx.Medicaments.FirstAsync(x => x.MedicamentsId == md.MedicamentsId);
                 listmedicaments.Add(medics);
             }
             return listmedicaments;
         }
-        public List<Medicaments> GetAllMedicaments()
+
+
+        public async Task<List<Medicaments>> GetAllMedicaments()
         {
-            return _ctx.Medicaments.ToList();
+            return await _ctx.Medicaments.ToListAsync();
         }
-        public List<Medicaments> GetAllMedicamentsFromCategory(SubCategory id)
+        public async Task<List<Medicaments>> GetAllMedicamentsFromCategory(SubCategory id)
         {
-            return _ctx.Medicaments.Include(x=>x.SubCategoryMedicaments).Where(x=>x.SubCategoryMedicaments==id).ToList();
+            return await _ctx.Medicaments.Include(x=>x.SubCategoryMedicaments).Where(x=>x.SubCategoryMedicaments==id).ToListAsync();
         }
-        public Medicaments InfoMedicaments(int id)
+        public async Task<Medicaments> InfoMedicaments(int id)
         {
-            return _ctx.Medicaments.Include(x=>x.Brend).Include(x => x.Country).Include(x => x.ProductLine).Include(x => x.SubCategoryMedicaments).First(x => x.MedicamentsId==id);
+            return await _ctx.Medicaments.Include(x=>x.Brend).Include(x => x.Country).Include(x => x.ProductLine).Include(x => x.SubCategoryMedicaments).FirstAsync(x => x.MedicamentsId==id);
+        }
+
+
+        public async Task DeleteMedicament(int id)
+        {
+            var medicament = await GetMedicament(id);
+            _ctx.Medicaments.Remove(medicament);
+            await _ctx.SaveChangesAsync();
         }
     }
 }

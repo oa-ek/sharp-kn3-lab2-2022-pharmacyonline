@@ -32,26 +32,26 @@ namespace Pharmacy.UI.Controllers
             return View(_categoryRepository.GetCategoryCatalogWithSub(id));
         }
         [HttpGet]
-        public IActionResult CategoryProducts(int id)
+        public async Task<IActionResult> CategoryProducts(int id)
         {
             ViewData["id"] = id;
             var subcategory = _subcategoryRepository.GetSubCategory(id);
-            ViewData["category"] = subcategory.Name;
+            ViewData["subcategory"] = subcategory.Name;
             var medicaments = _subcategorymedicamentsRepository.GetAllMedicamentsFromSubCategory(subcategory.SubCategoryId);
-            return View(_medicamentsRepository.ListMedicaments(medicaments));
+            return View( await _medicamentsRepository.ListMedicaments(medicaments));
         }
         [HttpGet]
-        public IActionResult CategoryAllProducts(int id)
+        public async Task<IActionResult> CategoryAllProducts(int id)
         {
             var category = _categoryRepository.GetCategory(id);
             ViewData["category"] = category.Name;
             var subcategories = _subcategoryRepository.GetAllSubCategoryFromCategory(id);
-            List<SubCategoryMedicaments> medicaments=new List<SubCategoryMedicaments>();
+            List<SubCategoryMedicaments> medicaments = new List<SubCategoryMedicaments>();
             foreach (var ct in subcategories)
             {
                 medicaments = _subcategorymedicamentsRepository.GetAllMedicamentsFromSubCategory(ct.SubCategoryId);
             }
-            return View("CategoryControl",_medicamentsRepository.ListMedicaments(medicaments));
+            return View("CategoryProducts",await _medicamentsRepository.ListMedicaments(medicaments));
         }
         [HttpGet]
         public IActionResult SubCategory(int id)
@@ -61,11 +61,5 @@ namespace Pharmacy.UI.Controllers
             ViewData["subcategory"] = subcategory;
             return View(_subcategoryRepository.GetAllSubCategoryFromCategory(id));
         }
-        [HttpGet]
-        public IActionResult DetailsMedicament(int id)
-        {
-            return View("Details", _medicamentsRepository.InfoMedicaments(id));
-        }
-
     }
 }

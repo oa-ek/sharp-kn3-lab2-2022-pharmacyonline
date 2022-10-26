@@ -18,7 +18,8 @@ namespace Pharmacy.Core
         public string Code { get; set; }
         [Display(Name = "Ціна")]
         public double Price { get; set; }
-        public string? PhotoPath { get; set; }
+        [Display(Name = "Photos")]
+        public string PhotoPath { get; set; }
         [Display(Name = "Лінійка продуктів")]
         public ProductLine? ProductLine { get; set; }
         [Display(Name = "Бренд")]
