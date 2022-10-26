@@ -18,7 +18,7 @@ namespace Pharmacy.Repos
         }
         public async Task<Medicaments> GetMedicament(int id)
         {
-            return await _ctx.Medicaments.Include(x=>x.SubCategoryMedicaments).FirstAsync(x=>x.MedicamentsId == id);
+            return await _ctx.Medicaments.FirstAsync(x=>x.MedicamentsId == id);
         }
 
 
@@ -38,13 +38,13 @@ namespace Pharmacy.Repos
         {
             return await _ctx.Medicaments.ToListAsync();
         }
-        public async Task<List<Medicaments>> GetAllMedicamentsFromCategory(SubCategory id)
+        /*public async Task<List<Medicaments>> GetAllMedicamentsFromCategory(SubCategory id)
         {
-            return await _ctx.Medicaments.Include(x=>x.SubCategoryMedicaments).Where(x=>x.SubCategoryMedicaments==id).ToListAsync();
-        }
+            return await _ctx.Medicaments.Where(x=>x.SubCategoryMedicaments==id).ToListAsync();
+        }*/
         public async Task<Medicaments> InfoMedicaments(int id)
         {
-            return await _ctx.Medicaments.Include(x=>x.Brend).Include(x => x.Country).Include(x => x.ProductLine).Include(x => x.SubCategoryMedicaments).FirstAsync(x => x.MedicamentsId==id);
+            return await _ctx.Medicaments.Include(x=>x.Brend).Include(x => x.Country).Include(x => x.ProductLine).FirstAsync(x => x.MedicamentsId==id);
         }
 
 

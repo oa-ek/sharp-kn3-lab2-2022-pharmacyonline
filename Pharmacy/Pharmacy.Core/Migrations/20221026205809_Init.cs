@@ -236,7 +236,7 @@ namespace Pharmacy.Core.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    PhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductLineId = table.Column<int>(type: "int", nullable: true),
                     BrendId = table.Column<int>(type: "int", nullable: true),
                     ReleaseForm = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -312,8 +312,8 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "085fa11f-6e2d-4189-9a4a-61bae96820d8", "b35c0750-7a2e-41ac-a4ed-308cd127c6f3", "Admin", "ADMIN" },
-                    { "9ba56352-2047-495f-b14b-d91e31e8a051", "60dc6477-8661-41fc-bb97-20ce664ff01a", "User", "USER" }
+                    { "95435233-8b7d-48b3-b1f4-acd1b76b40a6", "12131994-83a0-496e-8723-534b5b09d7ea", "Admin", "ADMIN" },
+                    { "ae9cc8f3-793d-45d7-929c-529fba9cab23", "2931b772-5cf3-455c-ba6d-d881b8ff1df8", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -321,8 +321,8 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "ac68a889-f61d-42c2-b6f4-67e0e2fa01de", 0, "149b1105-b347-43c9-9151-50fd06c47c91", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMIN@PHARMACY.COM", "AQAAAAEAACcQAAAAEDIPSkY9cBl/le/N6oc1tRu8Bl1Zc6m7mJkTHX44VrCGwFImBDJcWFazBTSF6xX5GA==", null, false, "d423b40a-852a-454d-a42d-7a3af06948dd", false, "admin@pharmacy.com" },
-                    { "b0c2a102-768e-4d57-863b-dcc3295ec1fa", 0, "b9488176-d576-4357-95b2-49dd92e4d132", "user@pharmacy.com", true, null, null, false, null, "USER@PHARMACY.COM", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAEKbfE3ZpudenIox2KmRhVZKIlageiDCD6vL+D6CePgvw8iqAfClXLVGCe00yTEPkTQ==", null, false, "10765aac-7158-45e5-9a02-d6cd2028cbb3", false, "user@pharmacy.com" }
+                    { "5dc4d032-9e05-4724-b2e3-16f9a83d5630", 0, "12530479-1946-4bcc-b62a-3c12af07da16", "user@pharmacy.com", true, null, null, false, null, "USER@PHARMACY.COM", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAEC552avJQFQwUd7nyRxW5iD0S1LdofCQvmaxdIwaLnFX3kt0w/62/PwOjs/78y5PfQ==", null, false, "efb8b9e6-4e2a-4c86-9d09-acd5e3bc2d5c", false, "user@pharmacy.com" },
+                    { "e4003711-3583-48d1-9078-76d42093904a", 0, "f6a49f35-ef19-4c93-8112-3e9c0a6e36b4", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMIN@PHARMACY.COM", "AQAAAAEAACcQAAAAEKIEYUIkljvRCrXMz+VOuodqxAJAoc4kB567YCmDeej1Aez3a38+agrKYiYWBoWpcw==", null, false, "1f67d98b-7953-4ff8-85dc-9af577710801", false, "admin@pharmacy.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -347,7 +347,7 @@ namespace Pharmacy.Core.Migrations
             migrationBuilder.InsertData(
                 table: "Medicaments",
                 columns: new[] { "MedicamentsId", "BrendId", "Code", "CountryId", "Description", "Dosage", "Name", "PhotoPath", "Price", "ProductLineId", "ReleaseForm" },
-                values: new object[] { 1, null, "4882", null, null, "", "Синупрет табл. в/о №50", "", 125.62, null, "таблетки для внутрішнього застосування" });
+                values: new object[] { 1, null, "4882", null, null, "", "Синупрет табл. в/о №50", "https://i.apteka24.ua/products/8986bcef-7cf8-4894-854a-825e8f724920.jpeg", 125.62, null, "таблетки для внутрішнього застосування" });
 
             migrationBuilder.InsertData(
                 table: "SubCategory",
@@ -357,17 +357,17 @@ namespace Pharmacy.Core.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "085fa11f-6e2d-4189-9a4a-61bae96820d8", "ac68a889-f61d-42c2-b6f4-67e0e2fa01de" });
+                values: new object[,]
+                {
+                    { "ae9cc8f3-793d-45d7-929c-529fba9cab23", "5dc4d032-9e05-4724-b2e3-16f9a83d5630" },
+                    { "95435233-8b7d-48b3-b1f4-acd1b76b40a6", "e4003711-3583-48d1-9078-76d42093904a" },
+                    { "ae9cc8f3-793d-45d7-929c-529fba9cab23", "e4003711-3583-48d1-9078-76d42093904a" }
+                });
 
             migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "9ba56352-2047-495f-b14b-d91e31e8a051", "ac68a889-f61d-42c2-b6f4-67e0e2fa01de" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "9ba56352-2047-495f-b14b-d91e31e8a051", "b0c2a102-768e-4d57-863b-dcc3295ec1fa" });
+                table: "SubCategoryMedicaments",
+                columns: new[] { "MedicamentsId", "SubCategoryId" },
+                values: new object[] { 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

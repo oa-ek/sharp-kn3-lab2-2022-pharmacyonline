@@ -19,7 +19,7 @@ namespace Pharmacy.Core
         public int SubCategoryId { get; set; }
         public string? Name { get; set; }
         public Category? Category { get; set; }
-        public virtual ICollection<SubCategoryMedicaments>? SubCategoryMedicaments { get; set; }
+        public virtual ICollection<SubCategoryMedicaments>? Medicaments { get; set; } = new HashSet<SubCategoryMedicaments>();
     }
     
 }

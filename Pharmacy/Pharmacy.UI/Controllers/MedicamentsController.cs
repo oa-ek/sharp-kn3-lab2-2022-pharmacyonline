@@ -40,6 +40,10 @@ namespace Pharmacy.UI.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> Edit(int id)
+        {
+            return View();
+        }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -32,7 +32,7 @@ namespace Pharmacy.Core
         public Country? Country { get; set; }
         [Display(Name = "Опис")]
         public string? Description { get; set; }
-        public virtual ICollection<SubCategoryMedicaments>? SubCategoryMedicaments { get; set; }
+        public virtual ICollection<SubCategoryMedicaments>? SubCategories { get; set; } = new HashSet<SubCategoryMedicaments>();
 
     }
 }

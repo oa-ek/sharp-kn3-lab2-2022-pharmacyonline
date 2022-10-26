@@ -14,9 +14,22 @@ namespace Pharmacy.Core
     public static class PharmacyDbContextExtension
     {
         public static void Seed1(this ModelBuilder modelBuilder)
+        {            
+            modelBuilder.Entity<SubCategoryMedicaments>()
+            .HasKey(bc => new { bc.MedicamentsId, bc.SubCategoryId });
+            modelBuilder.Entity<SubCategoryMedicaments>()
+                .HasOne(bc => bc.Medicaments)
+                .WithMany(b => b.SubCategories)
+                .HasForeignKey(bc => bc.MedicamentsId);
+            modelBuilder.Entity<SubCategoryMedicaments>()
+                .HasOne(bc => bc.SubCategory)
+                .WithMany(c => c.Medicaments)
+                .HasForeignKey(bc => bc.SubCategoryId);
+        }
+        /*public static void Seed1(this ModelBuilder modelBuilder)
         {
 
-            /*modelBuilder.Entity<Medicaments>()
+            modelBuilder.Entity<Medicaments>()
                         .HasMany<SubCategory>(s => s.SubCategory)
                         .WithMany(c => c.Medicaments)
                         .Map(cs =>
@@ -24,8 +37,8 @@ namespace Pharmacy.Core
                             cs.MapLeftKey("MedicamentRefId");
                             cs.MapRightKey("SubCategoryRefId");
                             cs.ToTable("SubCategoryMedicaments");
-                        });*/
-            modelBuilder.Entity<SubCategoryMedicaments>()
+                        });
+        modelBuilder.Entity<SubCategoryMedicaments>()
         .HasKey(bc => new { bc.MedicamentsId, bc.SubCategoryId });
             modelBuilder.Entity<SubCategoryMedicaments>()
                 .HasOne(bc => bc.Medicaments)
@@ -36,7 +49,7 @@ namespace Pharmacy.Core
                 .WithMany(c => c.SubCategoryMedicaments)
                 .HasForeignKey(bc => bc.SubCategoryId);
 
-        }
+        }*/
 
         public static void Seed(this ModelBuilder builder)
         {
@@ -106,6 +119,22 @@ namespace Pharmacy.Core
                     UserId = USER_ID,
                 });
 
+
+
+
+            var catalog1 = new Catalog
+            {
+                Id = 1,
+                Name = "Лікарські засоби",
+                
+            };
+            var catalog2 = new Catalog
+            {
+                Id = 2,
+                Name = "Краса та догляд",
+            };
+            builder.Entity<Catalog>().HasData(catalog1, catalog2);
+
             builder.Entity<Category>().HasData(
                 new Category
                 {
@@ -123,39 +152,37 @@ namespace Pharmacy.Core
                     Name = "Кровотворення та кров",
                 }
                 );
-            builder.Entity<SubCategory>().HasData(
-               new SubCategory
-               {
-                   SubCategoryId = 1,
-                   Name = "Від кашлю",
-                   
-               }
-               );
-           builder.Entity<Catalog>().HasData(
-                new Catalog
-                {
-                    Id = 1,
-                    Name = "Лікарські засоби",
-                },
-                new Catalog
-                {
-                    Id = 2,
-                    Name = "Краса та догляд",
-                }
-                );
-            builder.Entity<Medicaments>().HasData(
 
-                new Medicaments
-                {
-                    MedicamentsId = 1,
-                    Name = "Синупрет табл. в/о №50",
-                    Code = "4882",
-                    Dosage="",
-                    Price= 125.62,
-                    ReleaseForm= "таблетки для внутрішнього застосування",
-                    PhotoPath= "https://i.apteka24.ua/products/8986bcef-7cf8-4894-854a-825e8f724920.jpeg",
-                }
-                );
+            var subCategory1 = new SubCategory
+            {
+                SubCategoryId = 1,
+                Name = "Від кашлю",
+            };
+            builder.Entity<SubCategory>().HasData(subCategory1);
+           
+
+
+            var medicaments = new Medicaments
+            {
+                MedicamentsId = 1,
+                Name = "Синупрет табл. в/о №50",
+                Code = "4882",
+                Dosage = "",
+                Price = 125.62,
+                ReleaseForm = "таблетки для внутрішнього застосування",
+                PhotoPath = "https://i.apteka24.ua/products/8986bcef-7cf8-4894-854a-825e8f724920.jpeg",                
+            };
+            var SubCategoryMedicaments = new SubCategoryMedicaments
+            {
+                MedicamentsId = medicaments.MedicamentsId,
+                SubCategoryId = subCategory1.SubCategoryId,
+                Medicaments = null,
+                SubCategory = null,              
+            };
+            //medicaments.SubCategories = new List<SubCategoryMedicaments> { SubCategoryMedicaments };
+                builder.Entity<Medicaments>().HasData(medicaments);
+            builder.Entity<SubCategoryMedicaments>().HasData(SubCategoryMedicaments);
+
         }
     }
 }

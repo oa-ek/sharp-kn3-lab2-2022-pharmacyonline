@@ -51,15 +51,15 @@ namespace Pharmacy.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "085fa11f-6e2d-4189-9a4a-61bae96820d8",
-                            ConcurrencyStamp = "b35c0750-7a2e-41ac-a4ed-308cd127c6f3",
+                            Id = "95435233-8b7d-48b3-b1f4-acd1b76b40a6",
+                            ConcurrencyStamp = "12131994-83a0-496e-8723-534b5b09d7ea",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "9ba56352-2047-495f-b14b-d91e31e8a051",
-                            ConcurrencyStamp = "60dc6477-8661-41fc-bb97-20ce664ff01a",
+                            Id = "ae9cc8f3-793d-45d7-929c-529fba9cab23",
+                            ConcurrencyStamp = "2931b772-5cf3-455c-ba6d-d881b8ff1df8",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -156,18 +156,18 @@ namespace Pharmacy.Core.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "ac68a889-f61d-42c2-b6f4-67e0e2fa01de",
-                            RoleId = "085fa11f-6e2d-4189-9a4a-61bae96820d8"
+                            UserId = "e4003711-3583-48d1-9078-76d42093904a",
+                            RoleId = "95435233-8b7d-48b3-b1f4-acd1b76b40a6"
                         },
                         new
                         {
-                            UserId = "ac68a889-f61d-42c2-b6f4-67e0e2fa01de",
-                            RoleId = "9ba56352-2047-495f-b14b-d91e31e8a051"
+                            UserId = "e4003711-3583-48d1-9078-76d42093904a",
+                            RoleId = "ae9cc8f3-793d-45d7-929c-529fba9cab23"
                         },
                         new
                         {
-                            UserId = "b0c2a102-768e-4d57-863b-dcc3295ec1fa",
-                            RoleId = "9ba56352-2047-495f-b14b-d91e31e8a051"
+                            UserId = "5dc4d032-9e05-4724-b2e3-16f9a83d5630",
+                            RoleId = "ae9cc8f3-793d-45d7-929c-529fba9cab23"
                         });
                 });
 
@@ -319,6 +319,7 @@ namespace Pharmacy.Core.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoPath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
@@ -348,7 +349,7 @@ namespace Pharmacy.Core.Migrations
                             Code = "4882",
                             Dosage = "",
                             Name = "Синупрет табл. в/о №50",
-                            PhotoPath = "",
+                            PhotoPath = "https://i.apteka24.ua/products/8986bcef-7cf8-4894-854a-825e8f724920.jpeg",
                             Price = 125.62,
                             ReleaseForm = "таблетки для внутрішнього застосування"
                         });
@@ -411,6 +412,13 @@ namespace Pharmacy.Core.Migrations
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("SubCategoryMedicaments");
+
+                    b.HasData(
+                        new
+                        {
+                            MedicamentsId = 1,
+                            SubCategoryId = 1
+                        });
                 });
 
             modelBuilder.Entity("Pharmacy.Core.User", b =>
@@ -486,33 +494,33 @@ namespace Pharmacy.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ac68a889-f61d-42c2-b6f4-67e0e2fa01de",
+                            Id = "e4003711-3583-48d1-9078-76d42093904a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "149b1105-b347-43c9-9151-50fd06c47c91",
+                            ConcurrencyStamp = "f6a49f35-ef19-4c93-8112-3e9c0a6e36b4",
                             Email = "admin@pharmacy.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@PHARMACY.COM",
                             NormalizedUserName = "ADMIN@PHARMACY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDIPSkY9cBl/le/N6oc1tRu8Bl1Zc6m7mJkTHX44VrCGwFImBDJcWFazBTSF6xX5GA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKIEYUIkljvRCrXMz+VOuodqxAJAoc4kB567YCmDeej1Aez3a38+agrKYiYWBoWpcw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d423b40a-852a-454d-a42d-7a3af06948dd",
+                            SecurityStamp = "1f67d98b-7953-4ff8-85dc-9af577710801",
                             TwoFactorEnabled = false,
                             UserName = "admin@pharmacy.com"
                         },
                         new
                         {
-                            Id = "b0c2a102-768e-4d57-863b-dcc3295ec1fa",
+                            Id = "5dc4d032-9e05-4724-b2e3-16f9a83d5630",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b9488176-d576-4357-95b2-49dd92e4d132",
+                            ConcurrencyStamp = "12530479-1946-4bcc-b62a-3c12af07da16",
                             Email = "user@pharmacy.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@PHARMACY.COM",
                             NormalizedUserName = "USER@PHARMACY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKbfE3ZpudenIox2KmRhVZKIlageiDCD6vL+D6CePgvw8iqAfClXLVGCe00yTEPkTQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC552avJQFQwUd7nyRxW5iD0S1LdofCQvmaxdIwaLnFX3kt0w/62/PwOjs/78y5PfQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "10765aac-7158-45e5-9a02-d6cd2028cbb3",
+                            SecurityStamp = "efb8b9e6-4e2a-4c86-9d09-acd5e3bc2d5c",
                             TwoFactorEnabled = false,
                             UserName = "user@pharmacy.com"
                         });
@@ -611,13 +619,13 @@ namespace Pharmacy.Core.Migrations
             modelBuilder.Entity("Pharmacy.Core.SubCategoryMedicaments", b =>
                 {
                     b.HasOne("Pharmacy.Core.Medicaments", "Medicaments")
-                        .WithMany("SubCategoryMedicaments")
+                        .WithMany("SubCategories")
                         .HasForeignKey("MedicamentsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Pharmacy.Core.SubCategory", "SubCategory")
-                        .WithMany("SubCategoryMedicaments")
+                        .WithMany("Medicaments")
                         .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -634,12 +642,12 @@ namespace Pharmacy.Core.Migrations
 
             modelBuilder.Entity("Pharmacy.Core.Medicaments", b =>
                 {
-                    b.Navigation("SubCategoryMedicaments");
+                    b.Navigation("SubCategories");
                 });
 
             modelBuilder.Entity("Pharmacy.Core.SubCategory", b =>
                 {
-                    b.Navigation("SubCategoryMedicaments");
+                    b.Navigation("Medicaments");
                 });
 #pragma warning restore 612, 618
         }
