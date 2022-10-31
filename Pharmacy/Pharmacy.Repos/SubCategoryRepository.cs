@@ -27,7 +27,7 @@ namespace Pharmacy.Repos
         }
         public async Task<List<SubCategory>> GetAllSubCategoryFromCategory(Category id)
         {
-            return await _ctx.SubCategory.Include(x => x.Category).Where(x=>x.Category == id).ToListAsync();
+            return await _ctx.SubCategory.Include(x => x.Category).Where(x=>x.Category.Id == id.Id).ToListAsync();
         }
         public async Task<SubCategory> GetSubCategoryS(string name)
         {

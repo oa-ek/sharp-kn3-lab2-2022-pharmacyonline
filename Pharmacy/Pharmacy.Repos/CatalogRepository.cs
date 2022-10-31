@@ -17,13 +17,17 @@ namespace Pharmacy.Repos
         {
             _ctx = ctx;
         }
-        public Catalog GetCatalog(int id)
+        public async Task<Catalog> GetCatalog(int id)
         {
-            return _ctx.Catalog.Find(id);
+            return await _ctx.Catalog.FirstAsync(x => x.Id == id);
         }
-        public List<Catalog> GetAllCatalog()
+        public async Task<Catalog> GetCatalogS(string id)
         {
-            return _ctx.Catalog.ToList();
+            return await _ctx.Catalog.FirstAsync(x => x.Name == id);
+        }
+        public async Task<List<Catalog>> GetAllCatalog()
+        {
+            return await _ctx.Catalog.ToListAsync();
         }
     }
 }
