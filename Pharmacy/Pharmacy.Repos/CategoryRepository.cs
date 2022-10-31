@@ -16,13 +16,13 @@ namespace Pharmacy.Repos
         {
             _ctx = ctx;
         }
-        public Category GetCategory(int id)
+        public async Task<Category> GetCategory(int id)
         {
-            return _ctx.Category.Find(id);
+            return await _ctx.Category.FirstAsync(x => x.Id == id);
         }
-        public List<Category> GetAllCategory()
+        public async Task<List<Category>> GetAllCategory()
         {
-            return _ctx.Category.Include(x=>x.SubCategory).ToList();
+            return await _ctx.Category.Include(x=>x.SubCategory).Include(x=>x.Catalog).ToListAsync();
         }
         public List<Category> GetCategoryCatalogWithSub(int id)
         {

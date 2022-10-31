@@ -17,7 +17,7 @@ namespace Pharmacy.Core
         [Display(Name = "Артикул")]
         public string Code { get; set; }
         [Display(Name = "Ціна")]
-        public double Price { get; set; }
+        public float Price { get; set; }
         [Display(Name = "Photos")]
         public string PhotoPath { get; set; }
         [Display(Name = "Лінійка продуктів")]

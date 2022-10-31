@@ -17,17 +17,21 @@ namespace Pharmacy.Repos
         {
             _ctx = ctx;
         }
-        public SubCategory GetSubCategory(int id)
+        public async Task<SubCategory> GetSubCategory(int id)
         {
-            return _ctx.SubCategory.Find(id);
+            return await _ctx.SubCategory.FirstAsync(x=>x.SubCategoryId == id);
         }
-        public List<SubCategory> GetAllSubCategory(int id)
+        public async Task<List<SubCategory>> GetAllSubCategory()
         {
-            return _ctx.SubCategory.Include(x => x.Category).Where(x => x.Category.Id == id).ToList();
+            return await _ctx.SubCategory.Include(x => x.Category).ToListAsync();
         }
-        public List<SubCategory> GetAllSubCategoryFromCategory(int id)
+        public async Task<List<SubCategory>> GetAllSubCategoryFromCategory(Category id)
         {
-            return _ctx.SubCategory.Where(x=>x.Category.Id == id).ToList();
+            return await _ctx.SubCategory.Include(x => x.Category).Where(x=>x.Category == id).ToListAsync();
+        }
+        public async Task<SubCategory> GetSubCategoryS(string name)
+        {
+            return await _ctx.SubCategory.FirstAsync(x=>x.Name == name);
         }
     }
 }

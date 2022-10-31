@@ -35,21 +35,21 @@ namespace Pharmacy.UI.Controllers
         public async Task<IActionResult> CategoryProducts(int id)
         {
             ViewData["id"] = id;
-            var subcategory = _subcategoryRepository.GetSubCategory(id);
-            ViewData["subcategory"] = subcategory.Name;
-            var medicaments = _subcategorymedicamentsRepository.GetAllMedicamentsFromSubCategory(subcategory.SubCategoryId);
+            var subcategory = await _subcategoryRepository.GetSubCategory(id);
+            ViewData["title"] = subcategory.Name;
+            var medicaments = await _subcategorymedicamentsRepository.GetAllMedicamentsFromSubCategory(subcategory.SubCategoryId);
             return View( await _medicamentsRepository.ListMedicaments(medicaments));
         }
         [HttpGet]
         public async Task<IActionResult> CategoryAllProducts(int id)
         {
-            var category = _categoryRepository.GetCategory(id);
-            ViewData["category"] = category.Name;
-            var subcategories = _subcategoryRepository.GetAllSubCategoryFromCategory(id);
+            var category = await _categoryRepository.GetCategory(id);
+            ViewData["title"] = category.Name;
+            var subcategories = await _subcategoryRepository.GetAllSubCategoryFromCategory(category);
             List<SubCategoryMedicaments> medicaments = new List<SubCategoryMedicaments>();
             foreach (var ct in subcategories)
             {
-                medicaments = _subcategorymedicamentsRepository.GetAllMedicamentsFromSubCategory(ct.SubCategoryId);
+                medicaments.AddRange(await _subcategorymedicamentsRepository.GetAllMedicamentsFromSubCategory(ct.SubCategoryId));
             }
             return View("CategoryProducts",await _medicamentsRepository.ListMedicaments(medicaments));
         }
@@ -59,7 +59,7 @@ namespace Pharmacy.UI.Controllers
             ViewData["id"] = id;
             var subcategory = _subcategoryRepository.GetSubCategory(id);
             ViewData["subcategory"] = subcategory;
-            return View(_subcategoryRepository.GetAllSubCategoryFromCategory(id));
+            return View();//_subcategoryRepository.GetAllSubCategoryFromCategory(subcategory));
         }
     }
 }

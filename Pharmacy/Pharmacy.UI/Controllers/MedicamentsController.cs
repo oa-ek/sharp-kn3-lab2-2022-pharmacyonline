@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pharmacy.Core;
 using Pharmacy.Repos;
+using Pharmacy.Repos.Dto;
 
 namespace Pharmacy.UI.Controllers
 {
@@ -35,12 +36,37 @@ namespace Pharmacy.UI.Controllers
             return View("Details", await _medicamentsRepository.InfoMedicaments(id));
         }
 
+        // EDIT       
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var med = await _medicamentsRepository.GetMedicament(id);
+            ViewBag.Subcategory = await _subcategoryRepository.GetAllSubCategory();
+            ViewBag.SubcategoryOfMed = await _subcategorymedicamentsRepository.GetSubCategoriesMedicament(med.MedicamentsId);
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
+            return View(med);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Edit(Medicaments model, string returnUrl, string[] subcategoriesofMed)
+        {
+            var subcategory = new List<SubCategory>();
+            foreach(var s in subcategoriesofMed)
+            {
+                subcategory.Add(await _subcategoryRepository.GetSubCategoryS(s));
+            }
+            if (ModelState.IsValid)
+            {
+                await _medicamentsRepository.UpdateAsync(model, subcategory);
+            }
+            ViewBag.Subcategory = await _subcategoryRepository.GetAllSubCategory();
+            return Redirect(returnUrl); ;
+        }
+
+        // DELETE
 
         public async Task<IActionResult> Delete(int id)
-        {
-            return View();
-        }
-        public async Task<IActionResult> Edit(int id)
         {
             return View();
         }
@@ -51,6 +77,30 @@ namespace Pharmacy.UI.Controllers
         {
             await _medicamentsRepository.DeleteMedicament(id);
             return RedirectToPage("CategoryProducts");
+        }
+
+        // CREATE
+
+        [HttpGet]
+        public async Task<IActionResult> CreateAsync()
+        {
+            ViewBag.Subcategory = await _subcategoryRepository.GetAllSubCategory();
+            return View();
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Create(Medicaments model)
+        { 
+            ViewBag.Subcategory = await _subcategoryRepository.GetAllSubCategory();
+            var listsubcategory = ViewBag.Subcategory;
+            if (ModelState.IsValid)
+            {
+                Medicaments md = await _medicamentsRepository.Create(model.Name, model.Code, model.Price, model.ReleaseForm, model.Dosage, model.PhotoPath, model.Description);
+                await _subcategorymedicamentsRepository.AddToSubCategory(md, listsubcategory);
+                return RedirectToAction("DetailsMedicamemt", "Medicaments", new { id = md.MedicamentsId });
+            }
+            return View(model);
         }
 
     }

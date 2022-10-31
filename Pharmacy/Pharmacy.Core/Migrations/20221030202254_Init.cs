@@ -235,7 +235,7 @@ namespace Pharmacy.Core.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false),
                     PhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductLineId = table.Column<int>(type: "int", nullable: true),
                     BrendId = table.Column<int>(type: "int", nullable: true),
@@ -312,8 +312,8 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "95435233-8b7d-48b3-b1f4-acd1b76b40a6", "12131994-83a0-496e-8723-534b5b09d7ea", "Admin", "ADMIN" },
-                    { "ae9cc8f3-793d-45d7-929c-529fba9cab23", "2931b772-5cf3-455c-ba6d-d881b8ff1df8", "User", "USER" }
+                    { "411e9110-b9e6-4903-b6ca-070226a0efb1", "45495340-f2ce-4477-8144-553dd7221d20", "User", "USER" },
+                    { "d399012e-fe46-418b-9a2d-2cc4444a456d", "eb8ddb1d-8e73-49de-a2f2-11e7af2a5b34", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -321,8 +321,8 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "5dc4d032-9e05-4724-b2e3-16f9a83d5630", 0, "12530479-1946-4bcc-b62a-3c12af07da16", "user@pharmacy.com", true, null, null, false, null, "USER@PHARMACY.COM", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAEC552avJQFQwUd7nyRxW5iD0S1LdofCQvmaxdIwaLnFX3kt0w/62/PwOjs/78y5PfQ==", null, false, "efb8b9e6-4e2a-4c86-9d09-acd5e3bc2d5c", false, "user@pharmacy.com" },
-                    { "e4003711-3583-48d1-9078-76d42093904a", 0, "f6a49f35-ef19-4c93-8112-3e9c0a6e36b4", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMIN@PHARMACY.COM", "AQAAAAEAACcQAAAAEKIEYUIkljvRCrXMz+VOuodqxAJAoc4kB567YCmDeej1Aez3a38+agrKYiYWBoWpcw==", null, false, "1f67d98b-7953-4ff8-85dc-9af577710801", false, "admin@pharmacy.com" }
+                    { "bfae235d-50b1-440d-a068-9053f2382cb5", 0, "c2f0bf36-c484-46c4-a39c-411baa660c3a", "user@pharmacy.com", true, null, null, false, null, "USER@PHARMACY.COM", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAEBYCZ0ADzxNPzYmJL+FJDGaIxFIf9PNHdVHXprqeX72vvgDIIvOPIb3Vd6hLV+cLBw==", null, false, "354e4ae0-9ef2-447e-ae37-de07d66ba5e4", false, "user@pharmacy.com" },
+                    { "d7e29c85-b286-4705-a0f5-72aebe2cab43", 0, "26db40b9-6e5d-41c8-80e6-68b5da0a2c1b", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMIN@PHARMACY.COM", "AQAAAAEAACcQAAAAEFBugldhhMLCZ0/CwIbnUJRjEf04/KU2Dm4gFY0Y01vNVpxFlZ6ujeH9EWokblfIlg==", null, false, "f8ed6df1-2d39-4d85-a86d-38b5da22fbe9", false, "admin@pharmacy.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -347,7 +347,7 @@ namespace Pharmacy.Core.Migrations
             migrationBuilder.InsertData(
                 table: "Medicaments",
                 columns: new[] { "MedicamentsId", "BrendId", "Code", "CountryId", "Description", "Dosage", "Name", "PhotoPath", "Price", "ProductLineId", "ReleaseForm" },
-                values: new object[] { 1, null, "4882", null, null, "", "Синупрет табл. в/о №50", "https://i.apteka24.ua/products/8986bcef-7cf8-4894-854a-825e8f724920.jpeg", 125.62, null, "таблетки для внутрішнього застосування" });
+                values: new object[] { 1, null, "4882", null, null, "", "Синупрет табл. в/о №50", "https://i.apteka24.ua/products/8986bcef-7cf8-4894-854a-825e8f724920.jpeg", 125.62f, null, "таблетки для внутрішнього застосування" });
 
             migrationBuilder.InsertData(
                 table: "SubCategory",
@@ -359,9 +359,9 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "ae9cc8f3-793d-45d7-929c-529fba9cab23", "5dc4d032-9e05-4724-b2e3-16f9a83d5630" },
-                    { "95435233-8b7d-48b3-b1f4-acd1b76b40a6", "e4003711-3583-48d1-9078-76d42093904a" },
-                    { "ae9cc8f3-793d-45d7-929c-529fba9cab23", "e4003711-3583-48d1-9078-76d42093904a" }
+                    { "411e9110-b9e6-4903-b6ca-070226a0efb1", "bfae235d-50b1-440d-a068-9053f2382cb5" },
+                    { "411e9110-b9e6-4903-b6ca-070226a0efb1", "d7e29c85-b286-4705-a0f5-72aebe2cab43" },
+                    { "d399012e-fe46-418b-9a2d-2cc4444a456d", "d7e29c85-b286-4705-a0f5-72aebe2cab43" }
                 });
 
             migrationBuilder.InsertData(
