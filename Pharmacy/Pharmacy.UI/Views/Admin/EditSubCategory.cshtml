@@ -1,9 +1,9 @@
 ﻿@using Pharmacy.Core
-@model Pharmacy.Core.Category
+@model Pharmacy.Core.SubCategory
 
 @{
-    ViewData["Title"] = "EditCategory";
-    var catalog = ViewBag.Catalog as IEnumerable<Catalog>;
+    ViewData["Title"] = "EditSubCategory";
+    var category = ViewBag.Categories as IEnumerable<Category>;
 }
 
 <h1>Редагування</h1>
@@ -11,12 +11,12 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditCategory">
+        <form asp-action="EditSubCategory">
 
             @Html.AntiForgeryToken()
-            <input asp-for="Id" type="hidden" />
+            <input asp-for="SubCategoryId" type="hidden" />
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -24,14 +24,15 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Catalog" class="form-label"></label>
-                <select class="form-select" size="3" id="catalog" name="catalog">
-                    @foreach (var r in catalog)
+                <label asp-for="Category" class="form-label"></label>
+                <select class="form-select" size="3" id="category" name="category">
+                    @foreach (var r in category)
                     {
                         <!option value="@r.Name">@r.Name</!option>
                     }
                 </select>
             </div>
+
             <div class="form-group" style="margin-top:1em">
                 <input type="submit" value="Зберегти" class="btn btn-primary" />
             </div>
@@ -40,9 +41,11 @@
 </div>
 
 <div>
-    <a asp-action="Categories">Повернутись до списку</a>
+    <a asp-action="SubCategories">Повернутись до списку</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

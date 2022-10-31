@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Pharmacy.Core.Catalog>
+
+@{
+    ViewData["Title"] = "Catalog";
+}
+
+<div class="float-end">
+    <a href="/admin/createcatalog" class="btn btn-outline-primary">Додати каталог</a>
+</div>
+
+
+<h1>Список каталогів</h1>
+<hr />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="EditCatalog" asp-route-id="@item.Id" class="btn btn-warning">Редагувати</a> |
+                    <a asp-action="DeleteCatalog" asp-route-id="@item.Id" class="btn btn-danger">Видалити</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

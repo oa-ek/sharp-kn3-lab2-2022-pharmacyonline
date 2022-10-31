@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Pharmacy.Core.SubCategory>
+
+@{
+    ViewData["Title"] = "SubCategories";
+}
+
+<div class="float-end">
+    <a href="/admin/createsubcategory" class="btn btn-outline-primary">Додати категорію</a>
+</div>
+
+
+<h1>Список підкатергорій</h1>
+<hr />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SubCategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>Категорія</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubCategoryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @string.Join(", ", item.Category.Name)
+                </td>
+                <td>
+                    <a asp-action="EditSubCategory" asp-route-id="@item.SubCategoryId" class="btn btn-warning">Редагувати</a> |
+                    <a asp-action="DeleteSubCategory" asp-route-id="@item.SubCategoryId" class="btn btn-danger">Видалити</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

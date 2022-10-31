@@ -24,12 +24,12 @@ namespace Pharmacy.UI.Controllers
             _medicamentsRepository = medicamentsRepository;
             _subcategorymedicamentsRepository = subcategorymedicamentsRepository;
         }
-        public IActionResult Index(int id)
+        public async Task<IActionResult> IndexAsync(int id)
         {
             ViewData["id"] = id;
-            var catalog = _catalogRepository.GetCatalog(id);
+            var catalog = await _catalogRepository.GetCatalog(id);
             ViewData["catalog"] = catalog;
-            return View(_categoryRepository.GetCategoryCatalogWithSub(id));
+            return View(await _categoryRepository.GetCategoryCatalogWithSub(id));
         }
         [HttpGet]
         public async Task<IActionResult> CategoryProducts(int id)

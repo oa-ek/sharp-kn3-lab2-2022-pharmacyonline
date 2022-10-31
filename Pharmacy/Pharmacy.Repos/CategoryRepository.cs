@@ -23,21 +23,31 @@ namespace Pharmacy.Repos
         {
             return await _ctx.Category.FirstAsync(x => x.Id == id);
         }
+        public async Task<Category> GetCategoryS(string id)
+        {
+            return await _ctx.Category.FirstAsync(x => x.Name == id);
+        }
         public async Task<List<Category>> GetAllCategory()
         {
             return await _ctx.Category.Include(x => x.SubCategory).Include(x => x.Catalog).ToListAsync();
         }
-        public List<Category> GetCategoryCatalogWithSub(int id)
+        public async Task<List<Category>> GetCategoryCatalogWithSub(int id)
         {
-            return _ctx.Category.Include(x => x.SubCategory).Where(x => x.Catalog.Id == id).ToList();
+            return await _ctx.Category.Include(x => x.SubCategory).Where(x => x.Catalog.Id == id).ToListAsync();
         }
 
-        public async Task UpdateAsync(Category model)
+        public async Task UpdateAsync(Category model, List<Catalog> catalog)
         {
             var md = await _ctx.Category.FirstAsync(x => x.Id == model.Id);
 
             if (md.Name != model.Name)
                 md.Name = model.Name;
+            md.Catalog = null;
+
+            if (catalog.Any())
+            {
+                await AddToCatalog(md, catalog);
+            }
 
             await _ctx.SaveChangesAsync();
         }
