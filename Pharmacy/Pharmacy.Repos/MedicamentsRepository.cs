@@ -81,6 +81,11 @@ namespace Pharmacy.Repos
 
             if (md.Description != model.Description)
                 md.Description = model.Description;
+            if (model.Image != null)
+            {
+                    md.Image = model.Image;
+            }
+            
             // ProductLine
             // Brend
             // Country
@@ -111,7 +116,7 @@ namespace Pharmacy.Repos
                 Price = price,
                 ReleaseForm = realiseform,
                 Dosage = dosage,
-                PhotoPath = photo,
+                Image = photo,
                 Description = description,
             };
             _ctx.Medicaments.Add(newMd);

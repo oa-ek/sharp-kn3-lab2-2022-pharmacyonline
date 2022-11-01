@@ -10,35 +10,28 @@
     <h6 style="color:darkgray">@Html.DisplayNameFor(model => model.Code): @Html.DisplayFor(model => model.Code)</h6>
     <hr />
     <div class="row">
-        <div class="col-3">
-        <dd class="col-sm-4">
-            <div class="card">
-                <a href="@Model.PhotoPath" target="_blank">
-                    <img src="@Model.PhotoPath" class="card-img-top"
-                         style="width: 20em; height: auto;">
-                </a>
-            </div>
-        </dd>
+        <div class="col-4">
+            <img src="/medicaments/getimage/@Model.MedicamentsId" class="card-img-top" style="height:16rem;" alt="...">
         </div>
-        <div class="col-9">
-        <dt class="col-sm-2">
+        <div class="col-8">
+            <div class="col-sm-2">
             @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class="col-sm-6">
+        </div>
+            <div class="col-sm-6">
             @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class="col-sm-2">
+        </div>
+            <div class="col-sm-2">
             @Html.DisplayNameFor(model => model.ReleaseForm)
-        </dt>
-        <dd class="col-sm-4">
+        </div>
+            <div class="col-sm-4">
             @Html.DisplayFor(model => model.ReleaseForm)
-        </dd>
-        <dt class="col-sm-2">
+        </div>
+            <div class="col-sm-2">
             @Html.DisplayNameFor(model => model.Dosage)
-        </dt>
-        <dd class="col-sm-4">
+        </div>
+            <div class="col-sm-4">
             @Html.DisplayFor(model => model.Dosage)
-        </dd>
+        </div>
         </div>
     </div>
     <div>
@@ -55,5 +48,5 @@
 
 <div class="text-right">
     <a asp-action="Edit" asp-route-id="@Model.MedicamentsId" class="btn btn-primary">Edit</a>
-    <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary">Back to List</a>
 </div>

@@ -47,8 +47,8 @@ namespace Pharmacy.Repos
             var subcategorymedicament = new SubCategoryMedicaments();
             foreach (var sc in list)
             {
-                subcategorymedicament.SubCategoryId = sc.SubCategoryId;
                 subcategorymedicament.MedicamentsId = md.MedicamentsId;
+                subcategorymedicament.SubCategoryId = sc.SubCategoryId;                
                 subcategorymedicament.SubCategory = null;
                 subcategorymedicament.Medicaments = null;
                 await _ctx.SubCategoryMedicaments.AddAsync(subcategorymedicament);

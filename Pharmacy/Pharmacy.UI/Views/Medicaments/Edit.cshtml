@@ -12,7 +12,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
             <input asp-for="MedicamentsId" type="hidden" />
             @Html.AntiForgeryToken()
@@ -49,6 +49,7 @@
                         //<!option value="@r.Name" @(selected ? "selected" : "")>@r.Name</!option>
                     }
                 </select>
+                <span asp-validation-for="SubCategories" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
@@ -61,9 +62,9 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PhotoPath" class="control-label"></label>
-                <input asp-for="PhotoPath" class="form-control" />
-                <span asp-validation-for="PhotoPath" class="text-danger"></span>
+                <label asp-for="Image" class="control-label"></label>
+                <input class="form-control" name="picture" id="picture" type="file" />
+                <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReleaseForm" class="control-label"></label>

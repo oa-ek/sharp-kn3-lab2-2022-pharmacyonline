@@ -21,4 +21,10 @@
     <ProjectReference Include="..\Pharmacy.Repos\Pharmacy.Repos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\img\catalogue\sample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

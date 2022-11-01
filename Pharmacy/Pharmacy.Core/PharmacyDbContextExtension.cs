@@ -170,7 +170,7 @@ namespace Pharmacy.Core
                 Dosage = "",
                 Price = (float)125.62,
                 ReleaseForm = "таблетки для внутрішнього застосування",
-                PhotoPath = "https://i.apteka24.ua/products/8986bcef-7cf8-4894-854a-825e8f724920.jpeg",                
+                Image = "https://i.apteka24.ua/products/8986bcef-7cf8-4894-854a-825e8f724920.jpeg",                
             };
             var SubCategoryMedicaments = new SubCategoryMedicaments
             {
