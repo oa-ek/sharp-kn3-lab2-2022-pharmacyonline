@@ -17,13 +17,46 @@ namespace Pharmacy.Repos
         {
             _ctx = ctx;
         }
-        public Catalog GetCatalog(int id)
+        public async Task<Catalog> GetCatalog(int id)
         {
-            return _ctx.Catalog.Find(id);
+            return await _ctx.Catalog.FirstAsync(x => x.Id == id);
         }
-        public List<Catalog> GetAllCatalog()
+        public async Task<Catalog> GetCatalogS(string id)
         {
-            return _ctx.Catalog.ToList();
+            return await _ctx.Catalog.FirstAsync(x => x.Name == id);
+        }
+        public async Task<List<Catalog>> GetAllCatalog()
+        {
+            return await _ctx.Catalog.ToListAsync();
+        }
+
+        public async Task UpdateAsync(Catalog model)
+        {
+            var md = await _ctx.Catalog.FirstAsync(x => x.Id == model.Id);
+
+            if (md.Name != model.Name)
+                md.Name = model.Name;
+
+            await _ctx.SaveChangesAsync();
+        }
+
+        public async Task Delete(int id)
+        {
+            var catalog = await GetCatalog(id);
+            _ctx.Catalog.Remove(catalog);
+            await _ctx.SaveChangesAsync();
+        }
+
+        public async Task<Catalog> CreateCatalog(string name)
+        {
+            var newCt = new Catalog
+            {
+                Name = name,
+            };
+            _ctx.Catalog.Add(newCt);
+            await _ctx.SaveChangesAsync();
+
+            return await _ctx.Catalog.FirstAsync(x => x.Name == name);
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Pharmacy.Core;
 using Pharmacy.Repos;
 using Pharmacy.Repos.Dto;
+using static Pharmacy.Core.Pictures;
 
 namespace Pharmacy.UI.Controllers
 {
@@ -15,21 +17,34 @@ namespace Pharmacy.UI.Controllers
         private readonly CatalogRepository _catalogRepository;
         private readonly MedicamentsRepository _medicamentsRepository;
         private readonly SubCategoryMedicamentsRepository _subcategorymedicamentsRepository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         //private readonly 
 
         public MedicamentsController(CategoryRepository categoryRepository, SubCategoryRepository subcategoryRepository,
-            CatalogRepository catalogRepository, MedicamentsRepository medicamentsRepository, SubCategoryMedicamentsRepository subcategorymedicamentsRepository)
+            CatalogRepository catalogRepository, MedicamentsRepository medicamentsRepository, 
+            SubCategoryMedicamentsRepository subcategorymedicamentsRepository, IWebHostEnvironment webHostEnvironment)
         {
             _categoryRepository = categoryRepository;
             _subcategoryRepository = subcategoryRepository;
             _catalogRepository = catalogRepository;
             _medicamentsRepository = medicamentsRepository;
             _subcategorymedicamentsRepository = subcategorymedicamentsRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
             return View();
         }
+
+
+        [HttpGet]
+        public async Task<FileContentResult> GetImage(int id)
+        {
+            var item = await _medicamentsRepository.GetMedicament(id);
+            var byteArray = System.IO.File.ReadAllBytes(item.Image);
+            return new FileContentResult(byteArray, "image/jpeg");
+        }
+
         [HttpGet]
         public async Task<IActionResult> DetailsMedicament(int id)
         {
@@ -49,7 +64,7 @@ namespace Pharmacy.UI.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Edit(Medicaments model, string returnUrl, string[] subcategoriesofMed)
+        public async Task<IActionResult> Edit(Medicaments model, string returnUrl, string[] subcategoriesofMed, IFormFile? picture)
         {
             var subcategory = new List<SubCategory>();
             foreach(var s in subcategoriesofMed)
@@ -58,10 +73,25 @@ namespace Pharmacy.UI.Controllers
             }
             if (ModelState.IsValid)
             {
+                if (picture != null)
+                {
+                    string picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", picture.FileName);
+                    using (FileStream fileStream = new FileStream(picturePath, FileMode.Create))
+                        picture.CopyTo(fileStream);
+
+                    model.Image = picturePath;
+                }
+                else { model.Image = null; }
+
                 await _medicamentsRepository.UpdateAsync(model, subcategory);
+
+                ViewBag.Subcategory = await _subcategoryRepository.GetAllSubCategory();
+                return Redirect(returnUrl);
             }
+
             ViewBag.Subcategory = await _subcategoryRepository.GetAllSubCategory();
-            return Redirect(returnUrl); ;
+            return View(model);
+
         }
 
         // DELETE
@@ -90,15 +120,30 @@ namespace Pharmacy.UI.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Create(Medicaments model)
+        public async Task<IActionResult> Create(Medicaments model, IFormFile? picture)
         { 
             ViewBag.Subcategory = await _subcategoryRepository.GetAllSubCategory();
             var listsubcategory = ViewBag.Subcategory;
+
             if (ModelState.IsValid)
             {
-                Medicaments md = await _medicamentsRepository.Create(model.Name, model.Code, model.Price, model.ReleaseForm, model.Dosage, model.PhotoPath, model.Description);
+                string picturePath;
+                if (picture != null)
+                {
+                    picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", picture.FileName);
+                    using (FileStream fileStream = new FileStream(picturePath, FileMode.Create))
+                        picture.CopyTo(fileStream);
+                }
+                else { 
+                    picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", "no-photo.jpg");
+                }
+                
+
+                model.Image = picturePath;
+
+                Medicaments md = await _medicamentsRepository.Create(model.Name, model.Code, model.Price, model.ReleaseForm, model.Dosage, picturePath, model.Description);
                 await _subcategorymedicamentsRepository.AddToSubCategory(md, listsubcategory);
-                return RedirectToAction("DetailsMedicamemt", "Medicaments", new { id = md.MedicamentsId });
+                return RedirectToAction("DetailsMedicament", "Medicaments", new { id = md.MedicamentsId });
             }
             return View(model);
         }

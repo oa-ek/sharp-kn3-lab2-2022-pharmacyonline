@@ -21,9 +21,9 @@ namespace Pharmacy.UI.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_catalogRepository.GetAllCatalog());
+            return View(await _catalogRepository.GetAllCatalog());
         }
 
         public IActionResult Privacy()

@@ -1,0 +1,76 @@
+﻿@using Pharmacy.Core
+@model Pharmacy.Core.Catalog
+
+@{
+    ViewData["Title"] = "DeleteCatalog";
+    var categories = ViewBag.Сategories as List<Category>;
+}
+
+<h1>Видалити каталог?</h1>
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+
+
+
+    @if (categories != null && categories.Count() > 0)
+    {
+
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+            Видалити
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Помилка</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Видалення неможливе! Існують прив'язані об'єкти!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a asp-action="Catalogs" class="btn btn-outline-dark">Повернутися до списку / Відмінити</a>
+    }
+    else
+    {
+        <form asp-action="DeleteCatalog">
+            @Html.AntiForgeryToken()
+            <input asp-for="Id" type="hidden" />
+            <button type="submit" class="btn btn-danger">Видалити</button>
+            <a asp-action="Catalogs" class="btn btn-outline-dark">Повернутися до списку / Відмінити</a>
+
+        </form>
+
+    }
+
+</div>
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $('#exampleModalCenter').modal(options)
+    </script>
+}

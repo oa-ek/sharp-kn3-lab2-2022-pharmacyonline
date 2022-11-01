@@ -21,5 +21,6 @@ namespace Pharmacy.Core
         {
             return Name;
         }
+
     }
 }

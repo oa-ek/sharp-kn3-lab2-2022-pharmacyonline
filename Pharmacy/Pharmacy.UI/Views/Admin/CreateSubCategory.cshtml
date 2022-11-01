@@ -1,0 +1,58 @@
+﻿@using Pharmacy.Core
+@model Pharmacy.Core.SubCategory
+
+@{
+    ViewData["Title"] = "CreateSubCategory";
+
+    var category = ViewBag.Category as IEnumerable<Category>;
+}
+
+<div class="float-end">
+    <a href="/admin/subcategories" class="btn btn-outline-dark">Повернутися до списку</a>
+</div>
+<h1>Нова підкатегорія</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateSubCategory">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="form-label"></label>
+                <select class="form-select" size="3" id="category" name="category">
+                    @foreach (var r in category)
+                    {
+                        <!option value="@r.Name">@r.Name</!option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Створити" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="SubCategories">Повернутись до списку</a>
+</div>
+
+@section Scripts {
+
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <script src="~/lib/select2/js/select2.full.min.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(function () {
+            $(".form-select").select2();
+        });
+    </script>
+}

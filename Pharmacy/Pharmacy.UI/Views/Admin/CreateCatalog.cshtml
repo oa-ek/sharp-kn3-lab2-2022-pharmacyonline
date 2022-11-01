@@ -1,0 +1,48 @@
+﻿@using Pharmacy.Core
+@model Pharmacy.Core.Catalog
+
+@{
+    ViewData["Title"] = "CreateCatalog";
+
+}
+
+<div class="float-end">
+    <a href="/admin/catalogs" class="btn btn-outline-dark">Повернутися до списку</a>
+</div>
+<h1>Новий каталог</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateCatalog">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-top: 1em">
+                <input type="submit" value="Створити" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Catalogs">Повернутись до списку</a>
+</div>
+
+@section Scripts {
+
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <script src="~/lib/select2/js/select2.full.min.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(function () {
+            $(".form-select").select2();
+        });
+    </script>
+}
