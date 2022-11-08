@@ -8,21 +8,15 @@ using System.Threading.Tasks;
 
 namespace Pharmacy.Core
 {
-    public class Category
+    public class OrderItems
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string? Name { get; set; }
-        public Catalog? Catalog { get; set; }
-        [Display(Name = "Фото")]
-        public string? Image { get; set; }
-        public virtual ICollection<SubCategory>? SubCategory { get; set; }
-
-        public override string ToString()
-        {
-            return Name;
-        }
-
+        public Medicaments medicaments { get; set; }
+        public int Quantity { get; set; }
+        public float Price { get; set; }
+        public float Total { get { return Quantity * Price; } }
+        public int OrderDetailsId { get; set; }
     }
 }

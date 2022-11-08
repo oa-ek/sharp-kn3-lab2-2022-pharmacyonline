@@ -6,6 +6,35 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+        User user = await UserManager.GetUserAsync(User);
+
+        if (user != null)
+        {
+            if (user != null && await UserManager.IsInRoleAsync(user, "User"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                        <span class="badge rounded-pill bg-primary">User</span>
+                    </a>
+                </li>
+            }
+            else if (user != null && await UserManager.IsInRoleAsync(user, "Manager"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                        <span class="badge rounded-pill bg-success">Manager</span>
+                    </a>
+                </li>
+            }
+            else if (user != null && await UserManager.IsInRoleAsync(user, "Admin"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                        <span class="badge rounded-pill bg-danger">Admin</span>
+                    </a>
+                </li>
+            }
+        }
     <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
     </li>

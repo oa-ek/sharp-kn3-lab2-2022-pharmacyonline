@@ -26,5 +26,9 @@ namespace Pharmacy.Core
         public DbSet<Country> Country { get; set; }
         public DbSet<Catalog> Catalog { get; set; }
         public DbSet<ProductLine> ProductLine { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderDetails> OrderDetails { get; set; }
+        public DbSet<OrderItems> OrderItems { get; set; }
+        public DbSet<OrderAddress> OrderAddress { get; set; }
     }
 }

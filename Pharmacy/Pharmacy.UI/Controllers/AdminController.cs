@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Pharmacy.Core;
 using Pharmacy.Repos;
 using Pharmacy.Repos.Dto;
+using System.Data;
+using static Pharmacy.Core.Pictures;
 
 namespace Pharmacy.UI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly CategoryRepository _categoryRepository;
@@ -12,16 +16,19 @@ namespace Pharmacy.UI.Controllers
         private readonly CatalogRepository _catalogRepository;
         private readonly MedicamentsRepository _medicamentsRepository;
         private readonly SubCategoryMedicamentsRepository _subcategorymedicamentsRepository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         //private readonly 
 
         public AdminController(CategoryRepository categoryRepository, SubCategoryRepository subcategoryRepository,
-            CatalogRepository catalogRepository, MedicamentsRepository medicamentsRepository, SubCategoryMedicamentsRepository subcategorymedicamentsRepository)
+            CatalogRepository catalogRepository, MedicamentsRepository medicamentsRepository,
+            SubCategoryMedicamentsRepository subcategorymedicamentsRepository, IWebHostEnvironment webHostEnvironment)
         {
             _categoryRepository = categoryRepository;
             _subcategoryRepository = subcategoryRepository;
             _catalogRepository = catalogRepository;
             _medicamentsRepository = medicamentsRepository;
             _subcategorymedicamentsRepository = subcategorymedicamentsRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -46,7 +53,7 @@ namespace Pharmacy.UI.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> EditCategory(Category model, string[] catalog)
+        public async Task<IActionResult> EditCategory(Category model, string[] catalog, IFormFile? picture)
         {
             var catalogs = new List<Catalog>();
             foreach (var item in catalog)
@@ -55,6 +62,16 @@ namespace Pharmacy.UI.Controllers
             }
             if (ModelState.IsValid)
             {
+                if (picture != null)
+                {
+                    string picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", picture.FileName);
+                    using (FileStream fileStream = new FileStream(picturePath, FileMode.Create))
+                        picture.CopyTo(fileStream);
+
+                    model.Image = picturePath;
+                }
+                else { model.Image = null; }
+
                 await _categoryRepository.UpdateAsync(model,catalogs);
             }
             return RedirectToAction("Categories"); ;
@@ -65,6 +82,14 @@ namespace Pharmacy.UI.Controllers
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var category = await _categoryRepository.GetCategory(id);
+            if (!string.Equals(category.Image, "no-photo.jpg"))
+            {
+                string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", category.Image);
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+            }
             ViewBag.Subcategory = await _subcategoryRepository.GetAllSubCategoryFromCategory(category);
             return View(await _categoryRepository.GetCategory(id));
         }
@@ -94,7 +119,7 @@ namespace Pharmacy.UI.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> CreateCategory(Category model, string[] catalog)
+        public async Task<IActionResult> CreateCategory(Category model, string[] catalog, IFormFile? picture)
         {
             var catalogs = new List<Catalog>();
             foreach (var item in catalog)
@@ -103,7 +128,22 @@ namespace Pharmacy.UI.Controllers
             }
             if (ModelState.IsValid)
             {
-                Category ct = await _categoryRepository.CreateCategory(model.Name, catalogs);
+                string picturePath;
+                if (picture != null)
+                {
+                    picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", picture.FileName);
+                    using (FileStream fileStream = new FileStream(picturePath, FileMode.Create))
+                        picture.CopyTo(fileStream);
+                }
+                else
+                {
+                    picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", "no-photo.jpg");
+                }
+
+
+                model.Image = picturePath;
+
+                Category ct = await _categoryRepository.CreateCategory(model.Name, catalogs, model.Image);
                 //await _categoryRepository.AddToCatalog(ct, catalog);
                 return RedirectToAction("Categories");
             }

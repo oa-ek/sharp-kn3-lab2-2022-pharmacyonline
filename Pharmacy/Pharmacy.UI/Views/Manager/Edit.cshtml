@@ -1,0 +1,81 @@
+﻿@model Pharmacy.Core.Order
+
+@{
+    ViewData["Title"] = "Edit";
+    var statuslist = ViewBag.Status as IEnumerable<string>;
+    var selectStatus = ViewData["selectstatus"].ToString();
+}
+
+<h1>Edit</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="OrderId" id="modelId" name="modelId" type="hidden" />
+            <div class="form-group">
+                <label asp-for="OrderId" class="control-label"></label>
+                <input asp-for="OrderId" class="form-control" disabled />
+                <span asp-validation-for="OrderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Total" class="control-label"></label>
+                <div class="input-group md-3">
+                    <input asp-for="Total" class="form-control" disabled>
+                        <span class="input-group-text">$</span>                    
+                    </div>
+                <span asp-validation-for="Total" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label"></label>
+                <input asp-for="OrderDate" class="form-control" disabled />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select class="form-select" size="3" id="status" name="status">
+                    @foreach (var r in statuslist)
+                    {
+                        bool selected = false;
+                        @if(r == selectStatus)
+                            selected = true;
+
+                        <!option value="@r" @(selected ? "selected" : "")>@r</!option>
+                    }
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-check">
+                <label asp-for="IsPaid" class="control-label"></label>
+                <input asp-for="IsPaid" type="checkbox" class="form-check-input">
+                <span asp-validation-for="IsPaid" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Змінити" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Orders">Back to List</a>
+</div>
+
+@section Scripts {
+
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <script src="~/lib/select2/js/select2.full.min.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(function () {
+            $(".form-select").select2();
+        });
+    </script>
+ }

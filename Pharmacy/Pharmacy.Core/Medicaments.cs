@@ -33,6 +33,7 @@ namespace Pharmacy.Core
         [Display(Name = "Опис")]
         public string? Description { get; set; }
         public virtual ICollection<SubCategoryMedicaments>? SubCategories { get; set; } = new HashSet<SubCategoryMedicaments>();
+        //public List<ShopCart> ShoppingCarts { get; set; } = new List<ShopCart>();
 
     }
 }

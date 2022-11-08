@@ -12,8 +12,8 @@ using Pharmacy.Core;
 namespace Pharmacy.Core.Migrations
 {
     [DbContext(typeof(PharmacyDbContext))]
-    [Migration("20221101171634_init")]
-    partial class init
+    [Migration("20221108074408_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,17 +53,24 @@ namespace Pharmacy.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "688380bc-3b76-4bf3-a474-dba732cf27a5",
-                            ConcurrencyStamp = "986dd51c-a0c4-4588-90d9-720f433d3226",
+                            Id = "fc056ad0-997b-4966-948d-d6a667444fc6",
+                            ConcurrencyStamp = "68909fb2-12fb-4d8c-9892-4712aed16f20",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "5f7e33b2-9ebc-43e9-ae52-469a63503ffd",
-                            ConcurrencyStamp = "69551563-4939-4f0a-a8d3-2b50cbec4abe",
+                            Id = "b4949472-1f1e-4810-90af-ae61fa308e1b",
+                            ConcurrencyStamp = "a71807a5-302e-4d51-8e78-ef3253e4865c",
                             Name = "User",
                             NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "ecde7c2d-7e5a-459e-b912-aabf22fb2cdd",
+                            ConcurrencyStamp = "4036d256-d0b6-4783-8c5e-41c1e8ae71a7",
+                            Name = "Manager",
+                            NormalizedName = "MANAGER"
                         });
                 });
 
@@ -158,18 +165,23 @@ namespace Pharmacy.Core.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "961833ac-c2a2-48ba-b4e0-c1e6f66adc8a",
-                            RoleId = "688380bc-3b76-4bf3-a474-dba732cf27a5"
+                            UserId = "eb882a65-da1d-4479-ad40-29c0ec243f1a",
+                            RoleId = "fc056ad0-997b-4966-948d-d6a667444fc6"
                         },
                         new
                         {
-                            UserId = "961833ac-c2a2-48ba-b4e0-c1e6f66adc8a",
-                            RoleId = "5f7e33b2-9ebc-43e9-ae52-469a63503ffd"
+                            UserId = "eb882a65-da1d-4479-ad40-29c0ec243f1a",
+                            RoleId = "b4949472-1f1e-4810-90af-ae61fa308e1b"
                         },
                         new
                         {
-                            UserId = "15c20007-8f29-4a9c-9c0c-1a3185e3ca2c",
-                            RoleId = "5f7e33b2-9ebc-43e9-ae52-469a63503ffd"
+                            UserId = "34976306-79f9-48d6-96c1-283464e2e54e",
+                            RoleId = "b4949472-1f1e-4810-90af-ae61fa308e1b"
+                        },
+                        new
+                        {
+                            UserId = "7006e163-71c7-4ff3-8074-befac77edec3",
+                            RoleId = "ecde7c2d-7e5a-459e-b912-aabf22fb2cdd"
                         });
                 });
 
@@ -248,6 +260,9 @@ namespace Pharmacy.Core.Migrations
 
                     b.Property<int?>("CatalogId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -349,11 +364,122 @@ namespace Pharmacy.Core.Migrations
                             MedicamentsId = 1,
                             Code = "4882",
                             Dosage = "",
-                            Image = "https://i.apteka24.ua/products/8986bcef-7cf8-4894-854a-825e8f724920.jpeg",
+                            Image = "C:\\Users\\Admin\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\catalogue\\jonas-jaeken-VyIj995OXNQ-unsplash.jpg",
                             Name = "Синупрет табл. в/о №50",
                             Price = 125.62f,
                             ReleaseForm = "таблетки для внутрішнього застосування"
                         });
+                });
+
+            modelBuilder.Entity("Pharmacy.Core.Order", b =>
+                {
+                    b.Property<string>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Total")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("detailsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("detailsId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("Pharmacy.Core.OrderAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrderAddress");
+                });
+
+            modelBuilder.Entity("Pharmacy.Core.OrderDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Payment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("Total")
+                        .HasColumnType("real");
+
+                    b.Property<string>("TypeOfDelivery")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("Pharmacy.Core.OrderItems", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("MedicamentsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderDetailsId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicamentsId");
+
+                    b.HasIndex("OrderDetailsId");
+
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Pharmacy.Core.ProductLine", b =>
@@ -495,35 +621,51 @@ namespace Pharmacy.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "961833ac-c2a2-48ba-b4e0-c1e6f66adc8a",
+                            Id = "eb882a65-da1d-4479-ad40-29c0ec243f1a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3c921f7b-7924-4487-bb1b-0d7d0cacbc6e",
+                            ConcurrencyStamp = "04d29e45-4478-4a91-a29f-2579a5a326a0",
                             Email = "admin@pharmacy.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@PHARMACY.COM",
                             NormalizedUserName = "ADMIN@PHARMACY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGS6cXwjuUbkYdbZGZBdtGGGqLyN0ylyO5yCi3wuFCnpHV7bWC92mR+3eHbcWbQfuw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOEQd9ukk1s1KLommr4Kxtz1jVrP7hBBEB+kSZTng+AWGtR5orcY3wZwaqaoyprUgQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1d29f6dd-26e2-49dc-a869-34baa9a6624b",
+                            SecurityStamp = "b4294965-e050-449d-94e0-7c5612f7fbc5",
                             TwoFactorEnabled = false,
                             UserName = "admin@pharmacy.com"
                         },
                         new
                         {
-                            Id = "15c20007-8f29-4a9c-9c0c-1a3185e3ca2c",
+                            Id = "34976306-79f9-48d6-96c1-283464e2e54e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6dca822d-dde4-49be-9ef6-9afbdc370185",
+                            ConcurrencyStamp = "c71c2fed-b6b4-41f3-b67e-d6f0fb639241",
                             Email = "user@pharmacy.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@PHARMACY.COM",
                             NormalizedUserName = "USER@PHARMACY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFNa0j/8qg0UHprMsNEJEIeUmK4167PSTzJabh1JKnXcgM2h1BvIrc2fYJnZRnqakA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKYVSgnaGBb1QrodVATzn3IumrwavgkTOS0Qz38Y/LFbcz3C607wuefsEygq3AZgOg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cd246ab9-1c60-43c0-baca-5c54f160f62c",
+                            SecurityStamp = "248fee51-8610-4908-a5eb-c027ef350871",
                             TwoFactorEnabled = false,
                             UserName = "user@pharmacy.com"
+                        },
+                        new
+                        {
+                            Id = "7006e163-71c7-4ff3-8074-befac77edec3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "38e55e01-0c19-439e-b172-5a35a2ff2303",
+                            Email = "manager@pharmacy.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MANAGER@PHARMACY.COM",
+                            NormalizedUserName = "MANAGER@PHARMACY.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAECTGUOvpmP0RFASzILx4QJzcj3bCAsCQc4L9I4k/5YiQySv35wNlZ6A/rOJjol12rQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "3ac08b93-0451-407c-8716-746c2e23c1bf",
+                            TwoFactorEnabled = false,
+                            UserName = "manager@pharmacy.com"
                         });
                 });
 
@@ -608,6 +750,47 @@ namespace Pharmacy.Core.Migrations
                     b.Navigation("ProductLine");
                 });
 
+            modelBuilder.Entity("Pharmacy.Core.Order", b =>
+                {
+                    b.HasOne("Pharmacy.Core.OrderDetails", "details")
+                        .WithMany()
+                        .HasForeignKey("detailsId");
+
+                    b.HasOne("Pharmacy.Core.User", "user")
+                        .WithMany()
+                        .HasForeignKey("userId");
+
+                    b.Navigation("details");
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("Pharmacy.Core.OrderDetails", b =>
+                {
+                    b.HasOne("Pharmacy.Core.OrderAddress", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("Pharmacy.Core.OrderItems", b =>
+                {
+                    b.HasOne("Pharmacy.Core.Medicaments", "medicaments")
+                        .WithMany()
+                        .HasForeignKey("MedicamentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pharmacy.Core.OrderDetails", null)
+                        .WithMany("orderItems")
+                        .HasForeignKey("OrderDetailsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("medicaments");
+                });
+
             modelBuilder.Entity("Pharmacy.Core.SubCategory", b =>
                 {
                     b.HasOne("Pharmacy.Core.Category", "Category")
@@ -649,6 +832,11 @@ namespace Pharmacy.Core.Migrations
             modelBuilder.Entity("Pharmacy.Core.Medicaments", b =>
                 {
                     b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("Pharmacy.Core.OrderDetails", b =>
+                {
+                    b.Navigation("orderItems");
                 });
 
             modelBuilder.Entity("Pharmacy.Core.SubCategory", b =>

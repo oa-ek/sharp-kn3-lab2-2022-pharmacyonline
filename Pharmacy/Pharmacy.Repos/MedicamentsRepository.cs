@@ -38,6 +38,26 @@ namespace Pharmacy.Repos
             return listmedicaments;
         }
 
+        public async Task<List<Medicaments>> ListSearchMedicaments(List<SubCategoryMedicaments> medicaments, string search)
+        {
+            if (search == null)
+            {
+                return await ListMedicaments(medicaments);
+            }
+            else
+            {
+                List<Medicaments> listmedicaments = new List<Medicaments>();
+
+                foreach (var md in medicaments)
+                {
+                    var medics = await _ctx.Medicaments.Where(x => x.Name.Contains(search)).FirstOrDefaultAsync(x => x.MedicamentsId == md.MedicamentsId);
+                    listmedicaments.Add(medics);
+                }
+
+                return listmedicaments;
+            }
+        }
+
 
         public async Task<List<Medicaments>> GetAllMedicaments()
         {

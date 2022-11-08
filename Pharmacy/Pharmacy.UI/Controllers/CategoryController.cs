@@ -13,10 +13,12 @@ namespace Pharmacy.UI.Controllers
         private readonly CatalogRepository _catalogRepository;
         private readonly MedicamentsRepository _medicamentsRepository;
         private readonly SubCategoryMedicamentsRepository _subcategorymedicamentsRepository;
+        
         //private readonly 
 
         public CategoryController(CategoryRepository categoryRepository, SubCategoryRepository subcategoryRepository, 
-            CatalogRepository catalogRepository, MedicamentsRepository medicamentsRepository, SubCategoryMedicamentsRepository subcategorymedicamentsRepository)
+            CatalogRepository catalogRepository, MedicamentsRepository medicamentsRepository, 
+            SubCategoryMedicamentsRepository subcategorymedicamentsRepository)
         {
             _categoryRepository = categoryRepository;
             _subcategoryRepository = subcategoryRepository;
@@ -32,13 +34,33 @@ namespace Pharmacy.UI.Controllers
             return View(await _categoryRepository.GetCategoryCatalogWithSub(id));
         }
         [HttpGet]
+        public async Task<FileContentResult> GetImage(int id)
+        {
+            var item = await _categoryRepository.GetCategory(id);
+            var byteArray = System.IO.File.ReadAllBytes(item.Image);
+            return new FileContentResult(byteArray, "image/jpeg");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> CategoryProducts(int id)
         {
             ViewData["id"] = id;
             var subcategory = await _subcategoryRepository.GetSubCategory(id);
             ViewData["title"] = subcategory.Name;
+            ViewData["subcategory"] = subcategory.SubCategoryId;
             var medicaments = await _subcategorymedicamentsRepository.GetAllMedicamentsFromSubCategory(subcategory.SubCategoryId);
             return View( await _medicamentsRepository.ListMedicaments(medicaments));
+        }
+
+        [HttpPost, ActionName("CategoryProductsS")]
+        public async Task<IActionResult> CategoryProducts(int id, string customerName)
+        {  
+            ViewData["id"] = id;
+            var subcategory = await _subcategoryRepository.GetSubCategory(id);
+            ViewData["title"] = subcategory.Name;
+            ViewData["subcategory"] = subcategory.SubCategoryId;
+            var medicaments = await _subcategorymedicamentsRepository.GetAllMedicamentsFromSubCategory(subcategory.SubCategoryId);
+            return View("CategoryProducts",await _medicamentsRepository.ListSearchMedicaments(medicaments, customerName));
         }
         [HttpGet]
         public async Task<IActionResult> CategoryAllProducts(int id)

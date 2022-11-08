@@ -11,6 +11,14 @@ builder.Services.AddDbContext<PharmacyDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(option =>
+{
+    option.IdleTimeout = TimeSpan.FromMinutes(30);
+    option.Cookie.IsEssential = true;
+});
+
 builder.Services.AddDefaultIdentity<User>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -32,7 +40,11 @@ builder.Services.AddTransient<BrendRepository>();
 builder.Services.AddTransient<CountryRepository>();
 builder.Services.AddTransient<ProductLineRepository>();
 builder.Services.AddTransient<SubCategoryMedicamentsRepository>();
+builder.Services.AddTransient<OrderRepository>();
+//builder.Services.AddTransient<CartViewRepository>();
 
+builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
@@ -52,6 +64,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();
