@@ -2,25 +2,53 @@
 @using Pharmacy.Repos
 @{
     ViewData["Title"] = "Home Page";
+    Layout = "/Views/Shared/_FlatLayout.cshtml";
 }
 @model List<Catalog>
 
+<div class="pcoded-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="page-header-title">
+                        <h3 class="m-b-10">Каталог</h3>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="#!">Каталог</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 
-<h3>Каталог</h3>
-<hr />
+
 @if (Model.Any())
 {
     <div class="row">
-        <div class="col-4">
-            <div class="list-group" id="list-tab" role="tablist">
-                @foreach (var dl in Model)
-                {
-                    <a class="list-group-item list-group-item-action" href="/Category/Index/@dl.Id" role="button">
-                        @dl.Name
-                    </a>
-                }
-            </div>
-        </div>
+
+        <div class="col-sm-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-3 col-sm-12">
+								<ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                     @foreach (var dl in Model)
+                                        {
+                                    <li><a class="btn btn-primary nav-link text-left active btn btn-primary" href="/Category/Index/@dl.Id" role="tab">@dl.Name</a></li>
+                                    <br/>
+                                        }
+									
+								</ul>
+							
+						</div>
+					</div>
+				</div>
+			</div>      
+    </div>
     </div>
 
 }
