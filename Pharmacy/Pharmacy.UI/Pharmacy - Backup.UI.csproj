@@ -27,9 +27,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\ViewModels\" />
-    <Folder Include="wwwroot\tmp\" />
-  </ItemGroup>
-
 </Project>
