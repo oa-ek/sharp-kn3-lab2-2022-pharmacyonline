@@ -38,7 +38,17 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Додати</a>
                             </li>
                         }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="Index">Замовлення</a>
+                        </li>
+                        @if (User.IsInRole("Maneager"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="Index">Замовлення</a>
+                            </li>
+                        }
                     </ul>
+                    <a class="btn btn-info" asp-area="" asp-action="Index" asp-controller="Cart">Кошик</a>
                     <partial name="_LoginPartial" />
                 </div>
             </div>

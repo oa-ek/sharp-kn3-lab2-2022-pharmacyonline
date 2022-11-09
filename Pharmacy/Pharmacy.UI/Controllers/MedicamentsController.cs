@@ -105,6 +105,17 @@ namespace Pharmacy.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            Medicaments med = await _medicamentsRepository.GetMedicament(id);
+
+            if (!string.Equals(med.Image, "no-photo.jpg"))
+            {
+                string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", med.Image);
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+            }
+
             await _medicamentsRepository.DeleteMedicament(id);
             return RedirectToPage("CategoryProducts");
         }

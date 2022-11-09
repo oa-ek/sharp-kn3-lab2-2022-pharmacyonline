@@ -12,5 +12,7 @@ namespace Pharmacy.Core
         public string? FirstName { get; set; }
 
         public string? LastName { get; set; }
+
+        //public ShopCart ShoppingCart { get; set; }
     }
 }

@@ -43,6 +43,10 @@ namespace Pharmacy.Repos
             if (md.Name != model.Name)
                 md.Name = model.Name;
             md.Catalog = null;
+            if (model.Image != null)
+            {
+                md.Image = model.Image;
+            }
 
             if (catalog.Any())
             {
@@ -54,6 +58,7 @@ namespace Pharmacy.Repos
 
         public async Task Delete(int id)
         {
+
             var category = await GetCategory(id);
             _ctx.Category.Remove(category);
             await _ctx.SaveChangesAsync();
@@ -66,11 +71,12 @@ namespace Pharmacy.Repos
             await _ctx.SaveChangesAsync();
         }
 
-        public async Task<Category> CreateCategory(string name, List<Catalog> catalog)
+        public async Task<Category> CreateCategory(string name, List<Catalog> catalog, string photo)
         {
             var newCt = new Category
             {
                 Name = name,
+                Image = photo,
             };
             _ctx.Category.Add(newCt);
             await _ctx.SaveChangesAsync();

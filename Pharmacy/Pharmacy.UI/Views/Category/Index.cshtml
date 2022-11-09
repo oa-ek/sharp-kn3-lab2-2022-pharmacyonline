@@ -9,29 +9,28 @@
 <hr />
 @if (Model.Any())
 {
-    <ul >
-        <ul >
 
+    <div class="container">
+        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 g-5" style="margin-top: 0.5em;">
             @foreach (var ct in Model)
             {
+                <div class="card" style="width: 20rem; display:inline-block; margin-right: 10px; padding:0">
+                    <img src="/category/getimage/@ct.Id" class="rounded mx-auto d-block" style="width: 8rem" alt="...">
+                    <div class="card-header">
+                        <a class=" list-group-item-action" style="text-decoration: none;" asp-controller="Category" asp-action="CategoryAllProducts" asp-route-id="@ct.Id"><h4 class="text-dark">@ct.Name</h4></a>
+                    </div>
 
-                <li>
-                    <span class="expand j-expand"><i class="icon-plus2"></i></span>
-                    <a href="/Category/CategoryAllProducts/@ct.Id">@ct.Name</a>
-                    <ul >
-                            @foreach (var ctg in ct.SubCategory)
-                            {
-                                <li>
-                                    <span class="expand j-expand"><i class="icon-plus2"></i></span>
-                                <a href="/Category/CategoryProducts/@ctg.SubCategoryId">@ctg.Name</a>
-                                </li>
-                            }
-
-                    </ul>
-                </li>
+                            <ul class="list-group list-group-flush">
+                                @foreach (var ctg in ct.SubCategory)
+                                {
+                                        <span class="expand j-expand"><i class="icon-plus2"></i></span>
+                                        <h6><a href="/Category/CategoryProducts/@ctg.SubCategoryId" class="list-group-item list-group-item-action" style="border:0">  + @ctg.Name</a></h6>
+                                }
+                            </ul>
+                </div>
             }
-        </ul>
-    </ul>
+        </div>
+    </div>
 }
 
 else

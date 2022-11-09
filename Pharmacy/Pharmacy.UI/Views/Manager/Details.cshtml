@@ -1,0 +1,120 @@
+﻿@using Pharmacy.Core
+@model Pharmacy.Core.OrderDetails
+@{
+    Order order = ViewBag.Order;
+    int count = 1;
+    List<OrderItems> items = ViewBag.Items;
+    float del = 0;
+    if (Model.TypeOfDelivery == "Нова пошта - Доставка до відділення")
+        del = 50;
+    if (Model.TypeOfDelivery == "Нова пошта - Доставка за адресою")
+        del = 80;
+    if (Model.TypeOfDelivery == "Укрпошта - Доставка до відділення")
+        del = 50;
+    if (Model.TypeOfDelivery == "Укрпошта - Доставка за адресою")
+        del = 55;
+}
+
+<h1>Замовлення № @order.OrderId.ToString() </h1>
+
+<div class="col-8">
+    <div class="table-responsive">
+        <table class="table table-light caption-top">
+            <caption>Товари</caption>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Назва</th>
+                    <th scope="col">К-сть</th>
+                    <th scope="col">Ціна</th>
+                    <th scope="col">Проміжний підсумок</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in items)
+                {
+
+                    <tr>
+                        <th scope="row">@count</th>
+                        <td>@u.medicaments.Name</td>
+                        <td>@u.Quantity</td>
+                        <td>@u.Price</td>
+                        <td>@u.Total грн</td>
+                    </tr>
+                    count++;
+                }
+            </tbody>
+            <tfoot>
+
+                <tr>
+                    <td class="text-start" colspan="4"><strong>Доставка: </strong><p>@Model.TypeOfDelivery</p></td>
+                    <td><p>+@del грн</p></td>
+                </tr>
+                <tr>
+                    <td class="text-end" colspan="5"><strong>Загальна сума: @Model.Total.Value.ToString("N2") грн</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+        <br />
+        @if (order.IsPaid)
+        {
+            <div class="alert alert-success" role="alert">
+                <strong>Оплачено!</strong>
+            </div>
+        }
+        else if (!order.IsPaid)
+        {
+            <div class="alert alert-danger" role="alert">
+                <strong>НЕ оплачено!</strong>
+            </div>
+        }
+    </div>
+    <br />
+
+    <div class="container" style="height: 25em; background-color:silver;">
+        <div class="row align-items-top">
+            <div class="col-sm-6">
+                <div class="card" style="background-color:ghostwhite; height: 10em; margin-top: 2.5em;">
+                    <div class="card-body">
+                        <h5 class="card-title">Адресна книга</h5>
+                        <p class="card-text">@Model.Address.Name</p>
+                        <p class="card-text">@Model.Address.Phone</p>
+                        <p class="card-text">@Model.Address.Address</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card" style="background-color:ghostwhite; height: 10em; margin-top: 2.5em;">
+                    <div class="card-body">
+                        <h5 class="card-title">Спосіб доставки</h5>
+                        <p class="card-text">@Model.Payment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-sm-6">
+                <div class="card" style="background-color:ghostwhite; height: 7em; margin-top: 2.5em;">
+                    <div class="card-body">
+                        <h5 class="card-title">Тип доставки</h5>
+                        <p class="card-text">@Model.TypeOfDelivery</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card" style="background-color:ghostwhite; height: 7em; margin-top: 2.5em;">
+                    <div class="card-body">
+                        <h5 class="card-title">Спосіб доставки</h5>
+                        <p class="card-text">@Model.Payment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="col-4">
+</div>

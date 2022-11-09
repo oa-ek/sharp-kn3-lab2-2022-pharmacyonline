@@ -14,7 +14,7 @@ namespace Pharmacy.Core
     public static class PharmacyDbContextExtension
     {
         public static void Seed1(this ModelBuilder modelBuilder)
-        {            
+        {
             modelBuilder.Entity<SubCategoryMedicaments>()
             .HasKey(bc => new { bc.MedicamentsId, bc.SubCategoryId });
             modelBuilder.Entity<SubCategoryMedicaments>()
@@ -25,6 +25,13 @@ namespace Pharmacy.Core
                 .HasOne(bc => bc.SubCategory)
                 .WithMany(c => c.Medicaments)
                 .HasForeignKey(bc => bc.SubCategoryId);
+        }
+
+            /*modelBuilder.Entity<User>()
+           .HasOne(u => u.ShoppingCart)
+           .WithOne(p => p.User)
+           .HasForeignKey<ShopCart>(p => p.UserId);
+
         }
         /*public static void Seed1(this ModelBuilder modelBuilder)
         {
@@ -55,6 +62,7 @@ namespace Pharmacy.Core
         {
             string ADMIN_ROLE_ID = Guid.NewGuid().ToString();
             string USER_ROLE_ID = Guid.NewGuid().ToString();
+            string MANAGER_ROLE_ID = Guid.NewGuid().ToString();
             
 
             builder.Entity<IdentityRole>().HasData(
@@ -69,10 +77,17 @@ namespace Pharmacy.Core
                     Id = USER_ROLE_ID,
                     Name = "User",
                     NormalizedName = "USER"
+                },
+                new IdentityRole
+                {
+                    Id = MANAGER_ROLE_ID,
+                    Name = "Manager",
+                    NormalizedName = "MANAGER"
                 });
 
             string ADMIN_ID = Guid.NewGuid().ToString();
             string USER_ID = Guid.NewGuid().ToString();
+            string MANAGER_ID = Guid.NewGuid().ToString();
 
             var admin = new User
             {
@@ -92,15 +107,25 @@ namespace Pharmacy.Core
                 NormalizedEmail = "user@pharmacy.com".ToUpper(),
                 NormalizedUserName = "user@pharmacy.com".ToUpper()
             };
+            var manager = new User
+            {
+                Id = MANAGER_ID,
+                UserName = "manager@pharmacy.com",
+                Email = "manager@pharmacy.com",
+                EmailConfirmed = true,
+                NormalizedEmail = "manager@pharmacy.com".ToUpper(),
+                NormalizedUserName = "manager@pharmacy.com".ToUpper()
+            };
 
             
                
             PasswordHasher<User> hasher = new PasswordHasher<User>();
             admin.PasswordHash = hasher.HashPassword(admin, "admin111");
             user.PasswordHash = hasher.HashPassword(user, "user111");
+            manager.PasswordHash = hasher.HashPassword(manager, "m111");
 
 
-            builder.Entity<User>().HasData(admin, user);
+            builder.Entity<User>().HasData(admin, user, manager);
 
             builder.Entity<IdentityUserRole<string>>().HasData(
                 new IdentityUserRole<string>
@@ -117,6 +142,11 @@ namespace Pharmacy.Core
                 {
                     RoleId = USER_ROLE_ID,
                     UserId = USER_ID,
+                },
+                new IdentityUserRole<string>
+                {
+                    RoleId = MANAGER_ROLE_ID,
+                    UserId = MANAGER_ID,
                 });
 
 
@@ -170,7 +200,7 @@ namespace Pharmacy.Core
                 Dosage = "",
                 Price = (float)125.62,
                 ReleaseForm = "таблетки для внутрішнього застосування",
-                Image = "https://i.apteka24.ua/products/8986bcef-7cf8-4894-854a-825e8f724920.jpeg",                
+                Image = "C:\\Users\\Admin\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\catalogue\\jonas-jaeken-VyIj995OXNQ-unsplash.jpg",                
             };
             var SubCategoryMedicaments = new SubCategoryMedicaments
             {

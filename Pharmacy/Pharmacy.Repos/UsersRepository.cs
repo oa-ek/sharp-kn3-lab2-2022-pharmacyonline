@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pharmacy.Core;
 using Pharmacy.Repos.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,14 +19,26 @@ namespace Pharmacy.Repos
         private readonly PharmacyDbContext _ctx;
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UsersRepository(PharmacyDbContext ctx,
             UserManager<User> userManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager, IHttpContextAccessor httpContextAccessor)
         {
             _ctx = ctx;
             this.userManager = userManager;
             this.roleManager = roleManager;
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<User> GetCurrentUser()
+        {
+            var current_user = _httpContextAccessor.HttpContext.User.Identity.Name;
+            var user = await userManager.FindByNameAsync(current_user);
+            return user;
+
         }
 
         public async Task<User> CreateUserAsync(string? firstName, string? lastName, string? password, string? email)
@@ -140,6 +156,16 @@ namespace Pharmacy.Repos
             {
                 await userManager.AddToRolesAsync(user, roles.ToList());
             }
+        }
+
+        public async Task<User> GetUserByIdAsync(ClaimsPrincipal principal)
+        {
+            var userId = userManager.GetUserId(principal);
+            return await userManager.FindByNameAsync(userId);
+        }
+        public async Task<User> GetUserByIdSAsync(string id)
+        {
+            return await userManager.FindByIdAsync(id);
         }
     }
 }
