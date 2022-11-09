@@ -21,6 +21,9 @@ namespace Pharmacy.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(string customerName)
         {
+            if(customerName == null)
+                return View("Orders", await _orderRepository.GetAllOrder());
+            else
             return View("Orders", await _orderRepository.GetSearchAllOrder(customerName));
         }
 

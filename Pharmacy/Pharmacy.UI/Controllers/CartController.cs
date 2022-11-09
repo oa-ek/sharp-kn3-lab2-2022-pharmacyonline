@@ -17,6 +17,26 @@ namespace Pharmacy.UI.Controllers
         {
             _medicamentsRepository = medicamentsRepository;
         }
+        public IViewComponentResult Invoke()
+        {
+            List<ShopCartItem> cart = HttpContext.Session.GetJson<List<ShopCartItem>>("Cart");
+            SmallCart smallCart;
+
+            if(cart==null || cart.Count == 0)
+            {
+                smallCart = null;
+            }
+            else
+            {
+                smallCart = new()
+                {
+                    NumberOfItems = cart.Sum(x => x.Quantity),
+                    TotalAmount = cart.Sum(x => x.Quantity * x.Price),
+                };
+            }
+
+            return (IViewComponentResult)View(smallCart);
+        }
 
         public IActionResult Index()
         {

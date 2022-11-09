@@ -82,7 +82,7 @@ namespace Pharmacy.UI.Controllers
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var category = await _categoryRepository.GetCategory(id);
-            if (!string.Equals(category.Image, "no-photo.jpg"))
+            if (string.Equals(category.Image, "no-photo.jpg"))
             {
                 string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", category.Image);
                 if (System.IO.File.Exists(oldImagePath))

@@ -51,21 +51,25 @@
                     <input type="radio" id="typeofdelivery" value="Нова пошта - Доставка до відділення" name="typeofdelivery" class="custom-control-input">
                     <label class="custom-control-label" for="typeofdelivery">Нова пошта - Доставка до відділення</label>
             </div>
+                <p style="margin-left: 2em">   50 грн</p>
             <hr />
             <div class="custom-control custom-radio">
                     <input type="radio" id="typeofdelivery" value="Нова пошта - Доставка за адресою" name="typeofdelivery" class="custom-control-input">
                 <label class="custom-control-label" for="typeofdelivery">Нова пошта - Доставка за адресою</label>
             </div>
+            <p style="margin-left: 2em">   80 грн</p>
             <hr />
             <div class="custom-control custom-radio">
                     <input type="radio" id="typeofdelivery" value="Укрпошта - Доставка до відділення" name="typeofdelivery" class="custom-control-input">
                     <label class="custom-control-label" for="typeofdelivery">Укрпошта - Доставка до відділення</label>
             </div>
+                <p style="margin-left: 2em">   50 грн</p>
             <hr />
             <div class="custom-control custom-radio">
                     <input type="radio" id="typeofdelivery" value="Укрпошта - Доставка за адресою" name="typeofdelivery" class="custom-control-input">
                     <label class="custom-control-label" for="typeofdelivery">Укрпошта - Доставка за адресою</label>
             </div>
+                <p style="margin-left: 2em">   55 грн</p>
             <hr />
         </div>
 
@@ -120,7 +124,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="4">Проміжний підсумок:@Model.GrandTotal.ToString("N2")</td>
+                                    <td colspan="4"><strong>Проміжний підсумок: @Model.GrandTotal.ToString("N2") грн</strong></td>
                                 </tr>
                                 <br/>
                                 <tr>

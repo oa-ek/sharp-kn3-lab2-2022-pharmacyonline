@@ -39,7 +39,7 @@ namespace Pharmacy.UI.Controllers
              var user = await _usersRepository.GetCurrentUser();
            //ar od = _orderRepository.GetOrderDetails(orderDetails);
             await _orderRepository.CreateOrder(cart,user, orderDetails);
-            return Redirect("/manager");
+            return RedirectToActionPermanent("Details","Manager", orderDetails.Id);
         }
 
         [HttpPost]

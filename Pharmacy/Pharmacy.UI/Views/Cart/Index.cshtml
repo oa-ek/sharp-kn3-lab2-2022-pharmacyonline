@@ -30,8 +30,7 @@
                     <p>@Model.shopCartItems.Count товар(ів/и) в кошику</p>                    
                 </div>
                 <div class="col text-end">
-                    <p ><a href="" class="font-weight-bold text-secondary">Продовжити покупки</a></p>
-                    <p ><a href="" class="font-weight-bold text-secondary">Очистити все</a></p>
+                    <p><a asp-action="Index" asp-controller="Home" class="font-weight-bold text-secondary">Продовжити покупки</a> | <a asp-action="Clear" asp-controller="Cart" class="font-weight-bold text-secondary">Очистити все</a></p>
                 </div>
             </div>
             <div class="row">
@@ -68,7 +67,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                        <td class="text-end" colspan="5">Підсумок:@Model.GrandTotal.ToString("N2") грн</td>
+                            <td class="text-end" colspan="5"><strong>Підсумок:@Model.GrandTotal.ToString("N2") грн</strong></td>
                         </tr>
                         <tr>
                             <td class="text-start" colspan="4">
@@ -92,7 +91,7 @@
             <div class="alert alert-secondary" role="alert">
                 <p>Немає товарів</p>
             </div>
-            <button asp-action="Index" asp-controller="Home" class="btn btn-primary">Продовжити покупки</button>
+            <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Продовжити покупки</a>
         </div>
     </div>
 }
