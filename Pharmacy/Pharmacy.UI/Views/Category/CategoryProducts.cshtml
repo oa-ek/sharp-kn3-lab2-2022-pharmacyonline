@@ -7,49 +7,69 @@
 @{
     @if (SignInManager.IsSignedIn(User))
     { ViewData["user"] = UserManager.GetUserAsync(User); }
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_FlatLayout.cshtml";
     var subcategory = ViewData["subcategory"];
 }
 
-<h1>@ViewData["title"].ToString()</h1>
-<hr />
-@using (Html.BeginForm("CategoryProductsS", "Category", FormMethod.Post)){
-    <span>Назва товару:</span> @Html.TextBox("CustomerName")
-    <input asp-for="@subcategory" id="id" name="id" type="hidden" />
-        <input type="submit" value="Пошук"/>
-        <br/>}
-@if(Model != null)
-{
-
-    <div class="container">
-        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 g-3" style="margin-top: 1em;">
-            @foreach (var ct in Model)
-            {
-                <div class="card" style="width: 20rem; display:inline-block; margin-right: 1em">
-                    <img src="/medicaments/getimage/@ct.MedicamentsId" class="card-img-top" style="height:16rem;" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title"><a asp-controller="Medicaments" asp-action="DetailsMedicament" asp-route-id="@ct.MedicamentsId">@Html.DisplayFor(modelItem => ct.Name)</a></h5>
-                        <p class="card-text">@Html.DisplayFor(modelItem => ct.Price) $</p>
-                        <!-- <p class="card-text">Quantity in stock: </p> -->
-                    </div>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <div class="card-body">
-                            <a class="btn btn-outline-warning" class="card-link" asp-controller="Medicaments" asp-action="Edit" asp-route-id="@ct.MedicamentsId">Edit</a>
-                            <a class="btn btn-outline-primary" class="card-link" asp-controller="Medicaments" asp-action="DetailsMedicament" asp-route-id="@ct.MedicamentsId">Details</a>
-                            <a class="btn btn-outline-danger" class="card-link" asp-controller="Medicaments" asp-action="Delete" asp-route-id="@ct.MedicamentsId">Delete</a>
+<div class="pcoded-content">
+    <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-start">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                        <h3 class="m-b-10">@ViewData["title"].ToString()</h3>
                         </div>
-                    }
-                    <div class="card-body">
-                        <a class="btn btn-primary" class="card-link" asp-controller="Cart" asp-action="Add" asp-route-id="@ct.MedicamentsId">В кошик</a>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">Каталог</a></li>
+                        </ul>
                     </div>
                 </div>
-            }
+            </div>
         </div>
-    </div>
 
-}
-else
-{
-    <div class="alert alert-danger">There aren't products</div>
-}
+
+    @using (Html.BeginForm("CategoryProductsS", "Category", FormMethod.Post))
+    {
+        <span>Назва товару:</span> @Html.TextBox("CustomerName")
+        <input asp-for="@subcategory" id="id" name="id" type="hidden" />
+        <input type="submit" value="Пошук" />
+        <br />
+    }
+    <br/>
+    @if (Model != null)
+    { 
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-columns">
+                    @foreach (var ct in Model)
+                    {
+                        <div class="card" style="width: 20rem; display:inline-block; margin-left:1em;">
+                            <img class="img-fluid card-img-top" src="/medicaments/getimage/@ct.MedicamentsId" style="height:16rem;" alt="...">
+                        <div class="card-body">
+                                <h5 class="card-title" style="margin-bottom:5px"><a asp-controller="Medicaments" asp-action="DetailsMedicament" asp-route-id="@ct.MedicamentsId" style="text-decoration:none;">@Html.DisplayFor(modelItem => ct.Name)</a></h5>
+                                <p class="card-text" style="margin-bottom:5px">@Html.DisplayFor(modelItem => ct.Price) $</p>
+                                <div class="card-body" style="padding:5px">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                        <a class="btn btn-outline-warning card-link" style="margin:0.2em; padding: 0.5em, 1em;"  asp-controller="Medicaments" asp-action="Edit" asp-route-id="@ct.MedicamentsId">Edit</a>
+                                        <a class="btn btn-outline-primary card-link" style="margin:0.2em; padding: 0.5em, 1em;" asp-controller="Medicaments" asp-action="DetailsMedicament" asp-route-id="@ct.MedicamentsId">Details</a>
+                                        <a class="btn btn-outline-danger card-link" style="margin:0.2em; padding: 0.5em, 1em;" asp-controller="Medicaments" asp-action="Delete" asp-route-id="@ct.MedicamentsId">Delete</a>
+                                }
+                                <br/>
+                                    <a class="btn btn-primary card-link" asp-controller="Cart" asp-action="Add" asp-route-id="@ct.MedicamentsId">В кошик</a>
+                                </div>
+                        </div>
+                    </div>
+                    }
+                    </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">There aren't products</div>
+    }
+
+</div>
