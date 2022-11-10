@@ -96,7 +96,7 @@ namespace Pharmacy.UI.Controllers
 
         // DELETE
 
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             return View();
         }
@@ -117,7 +117,7 @@ namespace Pharmacy.UI.Controllers
             }
 
             await _medicamentsRepository.DeleteMedicament(id);
-            return RedirectToPage("CategoryProducts");
+            return RedirectToPage("/CategoryProducts");
         }
 
         // CREATE

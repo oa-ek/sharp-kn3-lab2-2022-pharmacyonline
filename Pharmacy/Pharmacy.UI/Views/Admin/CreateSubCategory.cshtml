@@ -3,56 +3,68 @@
 
 @{
     ViewData["Title"] = "CreateSubCategory";
-
+    Layout = "~/Views/Shared/_FlatLayout.cshtml";
     var category = ViewBag.Category as IEnumerable<Category>;
 }
 
-<div class="float-end">
-    <a href="/admin/subcategories" class="btn btn-outline-dark">Повернутися до списку</a>
-</div>
-<h1>Нова підкатегорія</h1>
-<hr />
+<div class="pcoded-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-12">
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateSubCategory">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="#!">Підкатегорії</a></li>
+                        <li class="breadcrumb-item"><a href="#!">Створення</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Category" class="form-label"></label>
-                <select class="form-select" size="3" id="category" name="category">
-                    @foreach (var r in category)
-                    {
-                        <!option value="@r.Name">@r.Name</!option>
-                    }
-                </select>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Нова підкатегорія</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <form asp-action="CreateSubCategory">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Name" class="control-label"></label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Category" class="form-label"></label>
+                                    <select class="form-control" size="3" id="category" name="category">
+                                        @foreach (var r in category)
+                                        {
+                                            <!option value="@r.Name">@r.Name</!option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Створити" class="btn btn-primary" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Створити" class="btn btn-primary" />
-            </div>
-        </form>
+
+        </div>
+
+    </div>
+    <div class="float-end">
+        <a href="/admin/subcategories" class="btn btn-outline-dark">Повернутися до списку</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="SubCategories">Повернутись до списку</a>
-</div>
-
-@section Scripts {
-
-    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
-    <script src="~/lib/select2/js/select2.full.min.js"></script>
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-
-    <script>
-        $(function () {
-            $(".form-select").select2();
-        });
-    </script>
-}
