@@ -1,39 +1,64 @@
 ﻿@using Pharmacy.Core
 @{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_FlatLayout.cshtml";
 }
 @model List<Category>
 
 
-<h3>@ViewData["catalog"].ToString()</h3>
-<hr />
-@if (Model.Any())
-{
-
-    <div class="container">
-        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 g-5" style="margin-top: 0.5em;">
-            @foreach (var ct in Model)
-            {
-                <div class="card" style="width: 20rem; display:inline-block; margin-right: 10px; padding:0">
-                    <img src="/category/getimage/@ct.Id" class="rounded mx-auto d-block" style="width: 8rem" alt="...">
-                    <div class="card-header">
-                        <a class=" list-group-item-action" style="text-decoration: none;" asp-controller="Category" asp-action="CategoryAllProducts" asp-route-id="@ct.Id"><h4 class="text-dark">@ct.Name</h4></a>
+<div class="pcoded-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="page-header-title">
+                        <h3 class="m-b-10">@ViewData["catalog"].ToString()</h3>
                     </div>
-
-                            <ul class="list-group list-group-flush">
-                                @foreach (var ctg in ct.SubCategory)
-                                {
-                                        <span class="expand j-expand"><i class="icon-plus2"></i></span>
-                                        <h6><a href="/Category/CategoryProducts/@ctg.SubCategoryId" class="list-group-item list-group-item-action" style="border:0">  + @ctg.Name</a></h6>
-                                }
-                            </ul>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="index.html">Каталог</a></li>
+                        <li class="breadcrumb-item"><a href="#!">Категорії</a></li>
+                        <li class="breadcrumb-item"><a href="#!">Підкатегорії</a></li>
+                    </ul>
                 </div>
-            }
+            </div>
         </div>
     </div>
-}
+    
+    @if (Model.Any())
+    {
+        <div class="row">
+            
+                @foreach (var ct in Model)
+            {
+                <div class="col-md-6 col-xl-4">
+                    <div class="card">
+                        <img src="/category/getimage/@ct.Id" class="rounded mx-auto d-block" style="height: 7rem" alt="...">
+                        <div class="card-header" style="padding:1em">
+                            <a class="btn-light nav-link text-left" style="text-decoration: none;" asp-controller="Category" asp-action="CategoryAllProducts" asp-route-id="@ct.Id"><h4 class="text-dark" >@ct.Name</h4></a>
+                        </div>
+                        <div class="card-body" style="padding:1em">
+                            <ul class="nav flex-column nav-pills">
+                                @foreach (var ctg in ct.SubCategory)
+                                {
+                                    <li>
+                                        <a class="btn-light nav-link text-left" style="text-decoration: none;" href="/Category/CategoryProducts/@ctg.SubCategoryId" style="border:0"><h6 style="margin: 0em;">  + @ctg.Name</h6></a>
 
-else
-{
-    <div class="alert alert-danger">Відсутні</div>
-}
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                }
+
+            
+        </div>
+    }
+
+    else
+    {
+        <div class="alert alert-danger">Відсутні</div>
+    }
+</div>
