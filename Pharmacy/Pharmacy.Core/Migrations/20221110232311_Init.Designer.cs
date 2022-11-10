@@ -12,8 +12,8 @@ using Pharmacy.Core;
 namespace Pharmacy.Core.Migrations
 {
     [DbContext(typeof(PharmacyDbContext))]
-    [Migration("20221110185042_initial")]
-    partial class initial
+    [Migration("20221110232311_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,22 +53,22 @@ namespace Pharmacy.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9bde7465-0234-4095-b6ca-53ecdd570bda",
-                            ConcurrencyStamp = "daa3502a-dff3-4b3a-95e2-bede4cd1748c",
+                            Id = "8e20c2bb-da8b-4dbb-aacc-45a2bb298f7f",
+                            ConcurrencyStamp = "c9f9c012-2239-4c9d-aaee-76cc22326337",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "71777c0b-5e41-4409-aa4e-8879cfff3726",
-                            ConcurrencyStamp = "9a0afcc5-af0c-477f-a2f6-7dfc68f77b04",
+                            Id = "eb8db29e-3ed6-491c-ae0b-f74bbc795d0c",
+                            ConcurrencyStamp = "0dd2691a-74d2-4f54-8a90-f481c8b2642d",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "b76fc02d-730d-47d5-9c2d-92186858bfc1",
-                            ConcurrencyStamp = "6ae6c0b7-809f-4e53-9495-f654323da647",
+                            Id = "9f4bfff3-b63f-4830-860d-3b8fd9b776b0",
+                            ConcurrencyStamp = "f897fd41-b492-439c-9fda-774e0294e593",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         });
@@ -165,23 +165,23 @@ namespace Pharmacy.Core.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "471cdd41-081a-4ff6-9fcd-eb568860154a",
-                            RoleId = "9bde7465-0234-4095-b6ca-53ecdd570bda"
+                            UserId = "9ee907f7-7715-408a-9525-6c325147330e",
+                            RoleId = "8e20c2bb-da8b-4dbb-aacc-45a2bb298f7f"
                         },
                         new
                         {
-                            UserId = "471cdd41-081a-4ff6-9fcd-eb568860154a",
-                            RoleId = "71777c0b-5e41-4409-aa4e-8879cfff3726"
+                            UserId = "9ee907f7-7715-408a-9525-6c325147330e",
+                            RoleId = "eb8db29e-3ed6-491c-ae0b-f74bbc795d0c"
                         },
                         new
                         {
-                            UserId = "55bbcd4f-6c5c-49db-a472-ea36a88bfac7",
-                            RoleId = "71777c0b-5e41-4409-aa4e-8879cfff3726"
+                            UserId = "0502e6c8-f929-4b42-889a-1694089eb935",
+                            RoleId = "eb8db29e-3ed6-491c-ae0b-f74bbc795d0c"
                         },
                         new
                         {
-                            UserId = "91d189f1-ffd2-4292-b70b-8b476bc5512b",
-                            RoleId = "b76fc02d-730d-47d5-9c2d-92186858bfc1"
+                            UserId = "0887dd95-4e85-4246-9761-52b0ed85eedb",
+                            RoleId = "9f4bfff3-b63f-4830-860d-3b8fd9b776b0"
                         });
                 });
 
@@ -371,6 +371,16 @@ namespace Pharmacy.Core.Migrations
                             Name = "Синупрет табл. в/о №50",
                             Price = 125.62f,
                             ReleaseForm = "таблетки для внутрішнього застосування"
+                        },
+                        new
+                        {
+                            MedicamentsId = 2,
+                            Code = "2345",
+                            Dosage = "12",
+                            Image = "C:\\Users\\HP\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\sinupret.jpg",
+                            Name = "Синупрет",
+                            Price = 89.75f,
+                            ReleaseForm = "таблетки для внутрішнього застосування"
                         });
                 });
 
@@ -548,6 +558,11 @@ namespace Pharmacy.Core.Migrations
                         {
                             MedicamentsId = 1,
                             SubCategoryId = 1
+                        },
+                        new
+                        {
+                            MedicamentsId = 2,
+                            SubCategoryId = 1
                         });
                 });
 
@@ -624,49 +639,49 @@ namespace Pharmacy.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "471cdd41-081a-4ff6-9fcd-eb568860154a",
+                            Id = "9ee907f7-7715-408a-9525-6c325147330e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6938b312-1628-49d4-8983-fb5dedb9ed94",
+                            ConcurrencyStamp = "b0ab3097-3e44-47b2-839c-1cad6c8fa4b8",
                             Email = "admin@pharmacy.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@PHARMACY.COM",
                             NormalizedUserName = "ADMIN@PHARMACY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJN9BGu5s2DGKmpa5655T12WgwyvhoGFHvi/aIyBDm7XTE2V+6VLtAdkM+d2rebGGQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFJ+5nzUsaKMQ6yjXPHrLQ3Si4wuX8L3o/zX8HjSpMkpHY0Ep6oS7/mo9nowHKAFeg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "51bf93f5-9ec9-420b-be46-e42e9acb3f8e",
+                            SecurityStamp = "d24a1212-0939-4754-8a24-e219dce13651",
                             TwoFactorEnabled = false,
                             UserName = "admin@pharmacy.com"
                         },
                         new
                         {
-                            Id = "55bbcd4f-6c5c-49db-a472-ea36a88bfac7",
+                            Id = "0502e6c8-f929-4b42-889a-1694089eb935",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6f62f758-f975-4e31-8c28-9023774c7799",
+                            ConcurrencyStamp = "bd78a722-ead2-4514-a453-0b1cb1bb6971",
                             Email = "user@pharmacy.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@PHARMACY.COM",
                             NormalizedUserName = "USER@PHARMACY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF17wAmZ7F4RgXyHWsDJakq0YgnilDLqANcalJROYIscl4OMWzbis/M3kTAWicJkRQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO4ibYxomq7w9rT0gAugfaJZ3lwllbmoVzqNTwmdss2A+/p13kQ5uZVXDxhzK0EiFg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fb7fb953-4817-43c9-a472-1b102bc3b234",
+                            SecurityStamp = "868af0a7-0716-48c5-81d2-d8ab447368e5",
                             TwoFactorEnabled = false,
                             UserName = "user@pharmacy.com"
                         },
                         new
                         {
-                            Id = "91d189f1-ffd2-4292-b70b-8b476bc5512b",
+                            Id = "0887dd95-4e85-4246-9761-52b0ed85eedb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "51458cd0-c2d5-47f3-b6dd-1a33b89f9e7e",
+                            ConcurrencyStamp = "b1e22cc9-115d-4411-97aa-f9e367ef6fa6",
                             Email = "manager@pharmacy.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MANAGER@PHARMACY.COM",
                             NormalizedUserName = "MANAGER@PHARMACY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGT0qAtW41fjF/qqsupgAr1wbSgCBBo+TQkiwYucPtXGHq6QS4JJf8pTRZ26GYl5Tw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPo2xt38IOY2UIsLwt8cVjj/Kr8+c/rEQfpy2zQasFdrjbF0rNB2G+6dSEOaRiBwjQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c4d3f5dd-4a0b-46b3-9475-8720bfcb825e",
+                            SecurityStamp = "215020e6-e2c6-46d8-b532-f16af7b22f99",
                             TwoFactorEnabled = false,
                             UserName = "manager@pharmacy.com"
                         });

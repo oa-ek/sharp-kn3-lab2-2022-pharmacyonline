@@ -204,6 +204,16 @@ namespace Pharmacy.Core
                 ReleaseForm = "таблетки для внутрішнього застосування",
                 Image = "C:\\Users\\HP\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\sinupret.jpg",
             };
+            var medicaments1 = new Medicaments
+            {
+                MedicamentsId = 2,
+                Name = "Синупрет",
+                Code = "2345",
+                Dosage = "12",
+                Price = (float)89.75,
+                ReleaseForm = "таблетки для внутрішнього застосування",
+                Image = "C:\\Users\\HP\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\sinupret.jpg",
+            };
             var SubCategoryMedicaments = new SubCategoryMedicaments
             {
                 MedicamentsId = medicaments.MedicamentsId,
@@ -211,9 +221,16 @@ namespace Pharmacy.Core
                 Medicaments = null,
                 SubCategory = null,              
             };
+            var SubCategoryMedicaments1 = new SubCategoryMedicaments
+            {
+                MedicamentsId = medicaments1.MedicamentsId,
+                SubCategoryId = subCategory1.SubCategoryId,
+                Medicaments = null,
+                SubCategory = null,
+            };
             //medicaments.SubCategories = new List<SubCategoryMedicaments> { SubCategoryMedicaments };
-                builder.Entity<Medicaments>().HasData(medicaments);
-            builder.Entity<SubCategoryMedicaments>().HasData(SubCategoryMedicaments);
+            builder.Entity<Medicaments>().HasData(medicaments,medicaments1);
+            builder.Entity<SubCategoryMedicaments>().HasData(SubCategoryMedicaments,SubCategoryMedicaments1);
 
         }
     }
