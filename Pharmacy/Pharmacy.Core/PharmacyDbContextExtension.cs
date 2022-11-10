@@ -156,7 +156,6 @@ namespace Pharmacy.Core
             {
                 Id = 1,
                 Name = "Лікарські засоби",
-                
             };
             var catalog2 = new Catalog
             {
@@ -170,16 +169,19 @@ namespace Pharmacy.Core
                 {
                     Id = 1,
                     Name = "Застуда і грип",
+                    Image = "C:\\Users\\HP\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\flu.jpg",
                 },
                 new Category
                 {
                     Id = 2,
                     Name = "Серцево-судинна система",
+                    Image = "C:\\Users\\HP\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\heart.jpg",
                 },
                 new Category
                 {
                     Id = 3,
                     Name = "Кровотворення та кров",
+                    Image = "C:\\Users\\HP\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\blood.jpg",
                 }
                 );
 
@@ -200,7 +202,7 @@ namespace Pharmacy.Core
                 Dosage = "",
                 Price = (float)125.62,
                 ReleaseForm = "таблетки для внутрішнього застосування",
-                Image = "C:\\Users\\Admin\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\catalogue\\jonas-jaeken-VyIj995OXNQ-unsplash.jpg",                
+                Image = "C:\\Users\\HP\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\sinupret.jpg",
             };
             var SubCategoryMedicaments = new SubCategoryMedicaments
             {
