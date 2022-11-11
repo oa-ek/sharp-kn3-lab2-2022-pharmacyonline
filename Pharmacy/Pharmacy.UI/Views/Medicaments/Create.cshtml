@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="SubCategories" class="form-label"></label>
-                                    <select class="form-control" size="3" id="subcategories" name="subcategories" multiple>
+                                    <select class="form-select" size="3" id="subcategories" name="subcategories" multiple>
                                         @foreach (var r in subcategories)
                                         {
                                             <!option value="@r.Name">@r.Name</!option>

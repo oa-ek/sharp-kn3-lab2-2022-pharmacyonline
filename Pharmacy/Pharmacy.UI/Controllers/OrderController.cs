@@ -37,9 +37,10 @@ namespace Pharmacy.UI.Controllers
         {
             List<ShopCartItem> cart = HttpContext.Session.GetJson<List<ShopCartItem>>("Cart");
              var user = await _usersRepository.GetCurrentUser();
-           //ar od = _orderRepository.GetOrderDetails(orderDetails);
-            await _orderRepository.CreateOrder(cart,user, orderDetails);
-            return RedirectToActionPermanent("Details","Manager", orderDetails.Id);
+            //ar od = _orderRepository.GetOrderDetails(orderDetails);
+            Order order =  await _orderRepository.CreateOrder(cart,user, orderDetails);
+            //Order order = await _orderRepository.GetOrderUser(user);
+            return RedirectToActionPermanent("Index","Home");
         }
 
         [HttpPost]
@@ -92,5 +93,7 @@ namespace Pharmacy.UI.Controllers
                 return View();
             }
         }
+
+        
     }
 }

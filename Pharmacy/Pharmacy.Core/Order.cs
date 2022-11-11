@@ -17,7 +17,6 @@ namespace Pharmacy.Core
         public float Total { get; set; }
 
         [Display(Name = "Date Added")]
-        [DataType(DataType.Date)]
         public DateTime OrderDate { get; set; }
         public string? Status { get; set; }
         [Display(Name = "Статус оплати")]

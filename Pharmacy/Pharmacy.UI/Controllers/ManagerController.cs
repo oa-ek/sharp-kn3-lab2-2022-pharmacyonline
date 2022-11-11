@@ -61,5 +61,15 @@ namespace Pharmacy.UI.Controllers
             ViewBag.Items = items;
             return View(detid);
         }
+
+        public async Task<IActionResult> SuccessfulOrder(Order order)
+        {
+
+            var details = order.details;
+            ViewBag.Order = order;
+            var items = await _orderRepository.GetOrderItems(details.Id);
+            ViewBag.Items = items;
+            return View("SuccessfulOrder",details.Id);
+        }
     }
 }

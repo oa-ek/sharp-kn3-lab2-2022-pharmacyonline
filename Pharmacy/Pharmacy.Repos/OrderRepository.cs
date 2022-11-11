@@ -50,12 +50,12 @@ namespace Pharmacy.Repos
             return await _ctx.Order.Where(x=>x.OrderId.Contains(search)).ToListAsync();
         }
 
-        public async Task CreateOrder(List<ShopCartItem> cartItems,User user,OrderDetails orderDetails)
+        public async Task<Order> CreateOrder(List<ShopCartItem> cartItems,User user,OrderDetails orderDetails)
         {
             var newOrder = new Order
             {
                 Total = cartItems.Sum(x => x.Quantity * x.Price),
-                OrderDate = DateTime.Today,
+                OrderDate = DateTime.Now,
                 user = user,
                 details = null,
                 Status = "NEW", 
@@ -64,7 +64,9 @@ namespace Pharmacy.Repos
             };
             await _ctx.Order.AddAsync(newOrder);
             newOrder.details = orderDetails;
-            await _ctx.SaveChangesAsync();            
+            await _ctx.SaveChangesAsync();
+
+            return await _ctx.Order.Where(x => x.OrderDate==newOrder.OrderDate).FirstAsync(x => x.user == newOrder.user);
         }
         public async Task AddItems(int orderid, List<OrderItems> items, float total)
         {
@@ -103,6 +105,10 @@ namespace Pharmacy.Repos
             await _ctx.SaveChangesAsync();
 
             return await _ctx.OrderDetails.OrderBy(x=>x.Id).LastAsync(x => x.Address == newOrderDetails.Address);
+        }
+        public async Task<Order> GetOrderUser(User us)
+        {
+            return await _ctx.Order.OrderBy(x=>x.OrderDate).LastAsync(x => x.user.Id == us.Id);
         }
 
         public async Task CreateOrderItems(List<ShopCartItem> cartItems, OrderDetails order)

@@ -12,10 +12,12 @@ namespace Pharmacy.UI.Controllers
     {
         private readonly CartView _cartRepository;
         private readonly MedicamentsRepository _medicamentsRepository;
+        private readonly OrderRepository _orderRepository;
 
-        public CartController(MedicamentsRepository medicamentsRepository)
+        public CartController(MedicamentsRepository medicamentsRepository, OrderRepository orderRepository)
         {
             _medicamentsRepository = medicamentsRepository;
+            _orderRepository = orderRepository;
         }
         public IViewComponentResult Invoke()
         {
@@ -144,6 +146,15 @@ namespace Pharmacy.UI.Controllers
             HttpContext.Session.Remove("Cart");
 
             return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> SuccessfulOrder(int id)
+        {
+            //Order order = await _orderRepository.GetOrder(id);
+            var details = await _orderRepository.GetOrderDetails(id);
+            //ViewBag.Order = order;
+            var items = await _orderRepository.GetOrderItems(details.Id);
+            ViewBag.Items = items;
+            return View(details);
         }
     }
 }

@@ -404,9 +404,9 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "8e20c2bb-da8b-4dbb-aacc-45a2bb298f7f", "c9f9c012-2239-4c9d-aaee-76cc22326337", "Admin", "ADMIN" },
-                    { "9f4bfff3-b63f-4830-860d-3b8fd9b776b0", "f897fd41-b492-439c-9fda-774e0294e593", "Manager", "MANAGER" },
-                    { "eb8db29e-3ed6-491c-ae0b-f74bbc795d0c", "0dd2691a-74d2-4f54-8a90-f481c8b2642d", "User", "USER" }
+                    { "691d8863-e296-4896-bd1e-61a0f9aff5c9", "bbb4aa8c-4821-4d88-bd15-2165de887142", "Manager", "MANAGER" },
+                    { "8994c1d2-c79f-4108-a90f-0abfb4a3dcbb", "25062e71-2248-4b64-8f5f-f1a3b83ffa3c", "User", "USER" },
+                    { "a5bef0e0-7646-4d98-ad00-5e17dac66c29", "7e896509-3179-423d-aa18-e7b304195332", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -414,9 +414,9 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "0502e6c8-f929-4b42-889a-1694089eb935", 0, "bd78a722-ead2-4514-a453-0b1cb1bb6971", "user@pharmacy.com", true, null, null, false, null, "USER@PHARMACY.COM", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAEO4ibYxomq7w9rT0gAugfaJZ3lwllbmoVzqNTwmdss2A+/p13kQ5uZVXDxhzK0EiFg==", null, false, "868af0a7-0716-48c5-81d2-d8ab447368e5", false, "user@pharmacy.com" },
-                    { "0887dd95-4e85-4246-9761-52b0ed85eedb", 0, "b1e22cc9-115d-4411-97aa-f9e367ef6fa6", "manager@pharmacy.com", true, null, null, false, null, "MANAGER@PHARMACY.COM", "MANAGER@PHARMACY.COM", "AQAAAAEAACcQAAAAEPo2xt38IOY2UIsLwt8cVjj/Kr8+c/rEQfpy2zQasFdrjbF0rNB2G+6dSEOaRiBwjQ==", null, false, "215020e6-e2c6-46d8-b532-f16af7b22f99", false, "manager@pharmacy.com" },
-                    { "9ee907f7-7715-408a-9525-6c325147330e", 0, "b0ab3097-3e44-47b2-839c-1cad6c8fa4b8", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMIN@PHARMACY.COM", "AQAAAAEAACcQAAAAEFJ+5nzUsaKMQ6yjXPHrLQ3Si4wuX8L3o/zX8HjSpMkpHY0Ep6oS7/mo9nowHKAFeg==", null, false, "d24a1212-0939-4754-8a24-e219dce13651", false, "admin@pharmacy.com" }
+                    { "629dfcde-5cb4-41e4-b60e-ec30ba357685", 0, "083c2889-a64c-40f0-a006-24a044751fec", "manager@pharmacy.com", true, null, null, false, null, "MANAGER@PHARMACY.COM", "MANAGER@PHARMACY.COM", "AQAAAAEAACcQAAAAEJFJi1qzaWD4vXLvkUTBQ5EPg45rjnyg1QdX+zKBA/4dQgoHK9y26mOSPFn9kHWCEQ==", null, false, "05889514-9179-4d92-93c4-12fe8ad3f99d", false, "manager@pharmacy.com" },
+                    { "824bce3a-ff7d-45ec-bf42-378dafbdce55", 0, "9aa6d02f-c265-44b9-9ec8-873eb051dc07", "user@pharmacy.com", true, null, null, false, null, "USER@PHARMACY.COM", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAEL3e3otNwgUIbT1VedY2Ab9nMcOQp76duKuzFTTv5ui8Oh+hDfOJhJXkf8zfZ1MIyw==", null, false, "3f94a086-53d9-4fcd-ba13-aec9dbaa0b14", false, "user@pharmacy.com" },
+                    { "8a9758e6-be23-4e74-940d-10397023641d", 0, "90126efb-804b-494b-95e8-18b8db8cf893", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMIN@PHARMACY.COM", "AQAAAAEAACcQAAAAEKwkBBDIHUDQx3XIR0zQykQzxH6PN/EfjhOnXCMP5LG9E7slH+78Ni3IdtopsjgEEg==", null, false, "0254293d-c68c-4c1b-bdac-0a7ef0e202bc", false, "admin@pharmacy.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -433,9 +433,9 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "CatalogId", "Image", "Name" },
                 values: new object[,]
                 {
-                    { 1, null, "C:\\Users\\HP\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\flu.jpg", "Застуда і грип" },
-                    { 2, null, "C:\\Users\\HP\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\heart.jpg", "Серцево-судинна система" },
-                    { 3, null, "C:\\Users\\HP\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\blood.jpg", "Кровотворення та кров" }
+                    { 1, null, "C:\\Users\\Admin\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\flu.jpg", "Застуда і грип" },
+                    { 2, null, "C:\\Users\\Admin\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\heart.jpg", "Серцево-судинна система" },
+                    { 3, null, "C:\\Users\\Admin\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\blood.jpg", "Кровотворення та кров" }
                 });
 
             migrationBuilder.InsertData(
@@ -457,10 +457,10 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "eb8db29e-3ed6-491c-ae0b-f74bbc795d0c", "0502e6c8-f929-4b42-889a-1694089eb935" },
-                    { "9f4bfff3-b63f-4830-860d-3b8fd9b776b0", "0887dd95-4e85-4246-9761-52b0ed85eedb" },
-                    { "8e20c2bb-da8b-4dbb-aacc-45a2bb298f7f", "9ee907f7-7715-408a-9525-6c325147330e" },
-                    { "eb8db29e-3ed6-491c-ae0b-f74bbc795d0c", "9ee907f7-7715-408a-9525-6c325147330e" }
+                    { "691d8863-e296-4896-bd1e-61a0f9aff5c9", "629dfcde-5cb4-41e4-b60e-ec30ba357685" },
+                    { "8994c1d2-c79f-4108-a90f-0abfb4a3dcbb", "824bce3a-ff7d-45ec-bf42-378dafbdce55" },
+                    { "8994c1d2-c79f-4108-a90f-0abfb4a3dcbb", "8a9758e6-be23-4e74-940d-10397023641d" },
+                    { "a5bef0e0-7646-4d98-ad00-5e17dac66c29", "8a9758e6-be23-4e74-940d-10397023641d" }
                 });
 
             migrationBuilder.InsertData(
