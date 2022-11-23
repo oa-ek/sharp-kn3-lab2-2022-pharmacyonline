@@ -16,8 +16,8 @@
                         <h3 class="m-b-10">@ViewData["catalog"].ToString()</h3>
                     </div>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="index.html">Каталог</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home"><i class="feather icon-home"></i></a></li>
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Каталог</a></li>
                         <li class="breadcrumb-item"><a href="#!">Категорії</a></li>
                         <li class="breadcrumb-item"><a href="#!">Підкатегорії</a></li>
                     </ul>
@@ -25,12 +25,12 @@
             </div>
         </div>
     </div>
-    
+
     @if (Model.Any())
     {
         <div class="row">
-            
-                @foreach (var ct in Model)
+
+            @foreach (var ct in Model)
             {
                 <div class="col-md-6 col-xl-4">
                     <div class="card" style="margin-left:1em">
@@ -51,9 +51,9 @@
                         </div>
                     </div>
                 </div>
-                }
+            }
 
-            
+
         </div>
     }
 
