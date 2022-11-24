@@ -56,6 +56,17 @@
                                         }
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label asp-for="Image" class="control-label"></label>
+                                    <div class="input-group mb-3">
+
+                                        @*<div class="custom-file">*@
+                                        <input asp-for="Image" class="custom-file-input" type="file" name="picture" id="picture">
+                                        <label class="custom-file-label" for="picture"></label>
+                                        @*</div>*@
+                                        <span asp-validation-for="Image" class="text-danger"></span>
+                                    </div>
+                                </div>
                                 <div class="form-group" style="margin-top:1em">
                                     <input type="submit" value="Зберегти" class="btn btn-primary" />
                                 </div>
@@ -69,6 +80,6 @@
 
     </div>
     <div class="float-end">
-        <a <a asp-action="Categories">Повернутись до списку</a>
+        <a asp-action="Categories">Повернутись до списку</a>
     </div>
 </div>
