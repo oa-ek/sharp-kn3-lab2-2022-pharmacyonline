@@ -33,7 +33,7 @@
             @foreach (var ct in Model)
             {
                 <div class="col-md-6 col-xl-4">
-                    <div class="card" style="margin-left:1em">
+                    <div class="card" >
                         <img src="/category/getimage/@ct.Id" class="rounded mx-auto d-block" style="height: 7rem" alt="...">
                         <div class="card-header" style="padding:1em">
                             <a class="btn-light nav-link text-left" style="text-decoration: none;" asp-controller="Category" asp-action="CategoryAllProducts" asp-route-id="@ct.Id"><h4 class="text-dark">@ct.Name</h4></a>

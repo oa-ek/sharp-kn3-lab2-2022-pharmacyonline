@@ -4,6 +4,7 @@ using Pharmacy.Core;
 using Pharmacy.Repos;
 using Pharmacy.Repos.Dto;
 using System.Data;
+using System.IO;
 using static Pharmacy.Core.Pictures;
 
 namespace Pharmacy.UI.Controllers
@@ -68,7 +69,9 @@ namespace Pharmacy.UI.Controllers
                     using (FileStream fileStream = new FileStream(picturePath, FileMode.Create))
                         picture.CopyTo(fileStream);
 
-                    model.Image = picturePath;
+                    var path = Path.Combine("img", "catalogue", picture.FileName);
+
+                    model.Image = path;
                 }
                 else { model.Image = null; }
 
@@ -129,19 +132,22 @@ namespace Pharmacy.UI.Controllers
             if (ModelState.IsValid)
             {
                 string picturePath;
+                string path;
                 if (picture != null)
                 {
                     picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", picture.FileName);
                     using (FileStream fileStream = new FileStream(picturePath, FileMode.Create))
                         picture.CopyTo(fileStream);
+                    path = Path.Combine("img", "catalogue", picture.FileName);
                 }
                 else
                 {
-                    picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", "no-photo.jpg");
+                    //picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", "no-photo.jpg");
+                    path = Path.Combine("img", "catalogue", "no-photo.jpg");
                 }
 
 
-                model.Image = picturePath;
+                model.Image = path;
 
                 Category ct = await _categoryRepository.CreateCategory(model.Name, catalogs, model.Image);
                 //await _categoryRepository.AddToCatalog(ct, catalog);

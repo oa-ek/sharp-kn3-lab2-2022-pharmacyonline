@@ -41,13 +41,15 @@ namespace Pharmacy.UI.Controllers
         public async Task<FileContentResult> GetImage(int id)
         {
             var item = await _medicamentsRepository.GetMedicament(id);
-            var byteArray = System.IO.File.ReadAllBytes(item.Image);
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, item.Image);
+            var byteArray = System.IO.File.ReadAllBytes(path);
             return new FileContentResult(byteArray, "image/jpeg");
         }
 
         [HttpGet]
         public async Task<IActionResult> DetailsMedicament(int id)
         {
+            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             return View("Details", await _medicamentsRepository.InfoMedicaments(id));
         }
 
@@ -131,28 +133,36 @@ namespace Pharmacy.UI.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Create(Medicaments model, IFormFile? picture)
+        public async Task<IActionResult> Create(Medicaments model, IFormFile? picture, string[] subcategories)
         { 
             ViewBag.Subcategory = await _subcategoryRepository.GetAllSubCategory();
-            var listsubcategory = ViewBag.Subcategory;
+            var listsubcategory = new List<SubCategory>();
+
+            foreach(var i in subcategories)
+            {
+                listsubcategory.Add(await _subcategoryRepository.GetSubCategoryS(i));
+            }
 
             if (ModelState.IsValid)
             {
                 string picturePath;
+                string path;
                 if (picture != null)
                 {
                     picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", picture.FileName);
                     using (FileStream fileStream = new FileStream(picturePath, FileMode.Create))
                         picture.CopyTo(fileStream);
+                    path = Path.Combine("img", "catalogue", picture.FileName);
                 }
                 else { 
-                    picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", "no-photo.jpg");
+                    //picturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "catalogue", "no-photo.jpg");
+                    path = Path.Combine("img", "catalogue", "no-photo.jpg");
                 }
                 
 
-                model.Image = picturePath;
+                model.Image = path;
 
-                Medicaments md = await _medicamentsRepository.Create(model.Name, model.Code, model.Price, model.ReleaseForm, model.Dosage, picturePath, model.Description);
+                Medicaments md = await _medicamentsRepository.Create(model.Name, model.Code, model.Price, model.ReleaseForm, model.Dosage, path, model.Description);
                 await _subcategorymedicamentsRepository.AddToSubCategory(md, listsubcategory);
                 return RedirectToAction("DetailsMedicament", "Medicaments", new { id = md.MedicamentsId });
             }

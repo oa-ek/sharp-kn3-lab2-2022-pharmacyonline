@@ -1,14 +1,16 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Pharmacy.Core
 @using Pharmacy.Repos
+@*@using Pharmacy.UI.Areas.Identity.Pages.Account*@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@*@inject ILogger<LogoutModel> _logger;*@
 
 <nav class="pcoded-navbar  ">
     <div class="navbar-wrapper  ">
         <div class="navbar-content scroll-div ">
 
-            @if (SignInManager.IsSignedIn(User))
+            @if (User.Identity.IsAuthenticated)
             {
                 User user = await UserManager.GetUserAsync(User);
 
@@ -57,9 +59,13 @@
                         <li class="list-group-item"><a href="~/user-profile.html"><i class="feather icon-user m-r-5"></i>View Profile</a></li>
                         <li class="list-group-item"><a href="#!"><i class="feather icon-settings m-r-5"></i>Settings</a></li>
                         <li class="list-group-item">
-                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button class="btn btn-outline-light" type="submit"><i class="feather icon-log-out m-r-5"></i>Logout</button>
+
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                                <button type="submit" class="btn btn-outline-light"><i class="feather icon-log-out m-r-5"></i>Logout</button>
                             </form>
+                            @*<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button class="btn btn-outline-light" type="submit"><i class="feather icon-log-out m-r-5"></i>Logout</button>
+                        </form>*@
                         </li>
 
 

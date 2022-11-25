@@ -2386,7 +2386,7 @@ defineJQueryPlugin(Dropdown);
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
-const SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top';
+const SELECTOR_FIXED_CONTENT = '.fixed-top, .is-fixed, .sticky-top';
 const SELECTOR_STICKY_CONTENT = '.sticky-top';
 
 class ScrollBarHelper {

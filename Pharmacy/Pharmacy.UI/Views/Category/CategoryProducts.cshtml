@@ -41,10 +41,9 @@
     @if (Model != null)
     {
         <div class="row">
-            <div class="col-md-12">
-                <div class="card-columns">
                     @foreach (var ct in Model)
                     {
+                <div class="col-12 col-sm-6 col-md-4 col-xl-3">
                         <div class="card" style="width: 20rem; display:inline-block; margin-left:1em;">
                             <img class="img-fluid card-img-top" src="/medicaments/getimage/@ct.MedicamentsId" style="height:16rem;" alt="...">
                             <div class="card-body">
@@ -62,9 +61,8 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
                     }
-                </div>
-            </div>
         </div>
     }
     else

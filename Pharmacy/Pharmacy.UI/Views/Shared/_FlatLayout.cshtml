@@ -17,7 +17,7 @@
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
     <!-- Favicon icon -->
-    <link rel="icon" href="~/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/assets/images/sss.ico" type="image/x-icon">
 
     <!-- vendor css -->
     <link rel="stylesheet" href="~/assets/css/style.css">
@@ -41,5 +41,30 @@
 </body>
 
 </html>
+@section Scripts {
 
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <script src="~/lib/select2/js/select2.full.min.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
+    <script>
+        $(function () {
+            $(".fixed-button").stop;
+            $(".fixed-button.active").stop;
+        });
+    </script>
+ }
+<style>
+    .fixed-button {
+        opacity: -1 !important;
+            z-index: -10 !important;
+    }
+
+        .fixed-button.active {
+            opacity: -1 !important;
+                z-index: -10 !important;
+            overflow:hidden !important;
+        }
+</style>

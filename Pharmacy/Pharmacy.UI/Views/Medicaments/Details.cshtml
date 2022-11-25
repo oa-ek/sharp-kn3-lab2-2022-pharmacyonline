@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_FlatLayout.cshtml";
+
+    var returnUrl = ViewBag.returnUrl.ToString();
 }
 
 
@@ -46,29 +48,29 @@
                             <img src="/medicaments/getimage/@Model.MedicamentsId" class="card-img-top" style="height:16rem;" alt="...">
                         </div>
                         <div class="col-8">
-                            <div class="col-sm-2">
+                            <div class="col">
                                 <strong>@Html.DisplayNameFor(model => model.Price)</strong>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col">
                                 @Html.DisplayFor(model => model.Price)
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col">
                                 <strong>@Html.DisplayNameFor(model => model.ReleaseForm)</strong>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col">
                                 @Html.DisplayFor(model => model.ReleaseForm)
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col">
                                 <strong>@Html.DisplayNameFor(model => model.Dosage)</strong>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col">
                                 @Html.DisplayFor(model => model.Dosage)
                             </div>
                             <br/>
-                            <div class="col-sm-2">
+                            <div class="col">
                                 <strong>@Html.DisplayNameFor(model => model.Description)</strong>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col">
                                 <strong>@Html.DisplayFor(model => model.Description)</strong>
                             </div>
                         </div>
@@ -79,9 +81,12 @@
     </div>
     <hr />
 
-    <div class="text-right">
-        <a asp-action="Edit" asp-route-id="@Model.MedicamentsId" class="btn btn-primary">Edit</a>
-        <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary">Back to List</a>
+    <div class="text-start">
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.MedicamentsId" class="btn btn-primary">Edit</a>
+        }
+        <a href="@returnUrl" class="btn btn-outline-secondary">Back to List</a>
     </div>
 </div>
 

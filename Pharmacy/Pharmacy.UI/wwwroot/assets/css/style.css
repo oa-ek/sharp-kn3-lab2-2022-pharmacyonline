@@ -8004,6 +8004,7 @@ button.bg-dark:focus {
 }
 
 .fixed-bottom {
+    overflow: hidden;
     position: fixed;
     right: 0;
     bottom: 0;
@@ -24322,19 +24323,21 @@ body.box-layout .pcoded-navbar.theme-horizontal ~ .pcoded-header {
 }
 
 .fixed-button {
+    overflow: hidden;
     position: fixed;
     bottom: -50px;
     right: 30px;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
     opacity: 0;
-    z-index: 9;
+    z-index: -1;
     transition: all 0.5s ease;
 }
 
-.fixed-button.active {
-    bottom: 50px;
-    opacity: 1;
-}
+    .fixed-button.active {
+        overflow: hidden;
+        bottom: 50px;
+        opacity: 0;
+    }
 
 .social-card {
     color: #fff;
@@ -27638,7 +27641,7 @@ text.highcharts-drilldown-data-label {
     min-width: 100%;
     min-height: 100vh;
     background: #1abc9c;
-    background-image: url("../images/auth/img-auth-big.jpg");
+    /**background-image: url("../images/auth/img-auth-big.jpg");**/
     background-size: cover;
     background-attachment: fixed;
     background-position: center;

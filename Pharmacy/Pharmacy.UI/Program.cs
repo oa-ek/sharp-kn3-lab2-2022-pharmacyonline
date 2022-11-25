@@ -6,7 +6,7 @@ using Pharmacy.Core;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("PharmacyConnection");
+var connectionString = builder.Configuration.GetConnectionString("PharmacyDbContextConnection");
 builder.Services.AddDbContext<PharmacyDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -45,6 +45,8 @@ builder.Services.AddTransient<OrderRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
