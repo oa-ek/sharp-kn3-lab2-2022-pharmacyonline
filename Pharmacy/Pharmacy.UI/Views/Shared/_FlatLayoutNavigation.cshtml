@@ -1,10 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Pharmacy.Core
 @using Pharmacy.Repos
+@using Pharmacy.Repos
 @*@using Pharmacy.UI.Areas.Identity.Pages.Account*@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @*@inject ILogger<LogoutModel> _logger;*@
+
 
 <nav class="pcoded-navbar  ">
     <div class="navbar-wrapper  ">
@@ -91,10 +93,10 @@
                     <label>Navigation</label>
                 </li>
                 <li class="nav-item pcoded-hasmenu">
-                    <a asp-action="Index" asp-controller="Home" class="nav-link "><span class="pcoded-micon"><i class="feather icon-menu"></i></span><span class="pcoded-mtext">Каталог</span></a>
+                    <a  class="nav-link " asp-action="Index" asp-controller="Home"><span class="pcoded-micon"><i class="feather icon-menu"></i></span><span class="pcoded-mtext">Каталог</span></a>
                     <ul class="pcoded-submenu">
-                        <li><a href="/Category/Index/1" target="_blank">Медикаменти</a></li>
-                        <li><a href="/Category/Index/2" target="_blank">Краса та вигляд</a></li>
+                        <li><a href="/Category/Index/1">Медикаменти</a></li>
+                        <li><a href="/Category/Index/2">Краса та вигляд</a></li>
                     </ul>
                 </li>
                 @if (User.IsInRole("Admin"))

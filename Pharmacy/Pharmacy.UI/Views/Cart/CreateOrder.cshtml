@@ -19,28 +19,28 @@
             <div class="card">
                 <div class="card-header">
                     <h3>Оформлення замовлення</h3>
-                    <p>
+                    <h7>
                         Введіть свої дані нижче, щоб завершити покупку.
-                    </p>
+                    </h7>
                 </div>
-                <div class="container">
-                    <form asp-action="CreateOrder" class="form-inline">
+                <div class="card-body">
+                    <form asp-action="CreateOrder" >
                         <div class="row">
                             <div class="col-md-6">
                                 <h3><strong>Адреса доставки</strong></h3>
 
                                     <div class="form-group">
-                                        <label for="name">ПІБ</label>
+                                        <label for="name" class="control-label">ПІБ</label>
                                         <input type="text" class="form-control" id="name" name="name">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="phone">Номер Телефону</label>
+                                    <label for="phone" class="control-label">Номер Телефону</label>
                                         <input type="text" class="form-control" id="phone" name="phone">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="Address">Адреса</label>
+                                    <label for="Address" class="control-label">Адреса</label>
                                         <input type="text" class="form-control" id="Address" name="Address">
                                     </div>
 
@@ -49,42 +49,42 @@
 
                                 <h3><strong>Способи доставки</strong></h3>
                                 <div class="custom-control custom-radio text-start">
-                                    <input type="radio" id="typeofdelivery" value="Нова пошта - Доставка до відділення" name="typeofdelivery" class="custom-control-input">
-                                    <label class="custom-control-label" for="typeofdelivery">Нова пошта - Доставка до відділення</label>
+                                    <input type="radio" id="typeofdelivery1" value="Нова пошта - Доставка до відділення" name="typeofdelivery" class="custom-control-input">
+                                    <label class="custom-control-label" style="justify-content:flex-start;" for="typeofdelivery1">Нова пошта - Доставка до відділення</label>
                                 </div>
-                                <p style="margin-left: 2em">   50 грн</p>
+                                <p style="margin-left: 3em; font-weight:800">   50 грн</p>
                                 <hr />
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="typeofdelivery" value="Нова пошта - Доставка за адресою" name="typeofdelivery" class="custom-control-input">
-                                    <label class="custom-control-label" for="typeofdelivery">Нова пошта - Доставка за адресою</label>
+                                    <input type="radio" id="typeofdelivery2" value="Нова пошта - Доставка за адресою" name="typeofdelivery" class="custom-control-input">
+                                    <label class="custom-control-label" style="justify-content:flex-start;" for="typeofdelivery2">Нова пошта - Доставка за адресою</label>
                                 </div>
-                                <p style="margin-left: 2em">   80 грн</p>
+                                <p style="margin-left: 3em; font-weight:800">   80 грн</p>
                                 <hr />
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="typeofdelivery" value="Укрпошта - Доставка до відділення" name="typeofdelivery" class="custom-control-input">
-                                    <label class="custom-control-label" for="typeofdelivery">Укрпошта - Доставка до відділення</label>
+                                    <input type="radio" id="typeofdelivery3" value="Укрпошта - Доставка до відділення" name="typeofdelivery" class="custom-control-input">
+                                    <label class="custom-control-label" style="justify-content:flex-start;" for="typeofdelivery3">Укрпошта - Доставка до відділення</label>
                                 </div>
-                                <p style="margin-left: 2em">   50 грн</p>
+                                <p style="margin-left: 3em; font-weight:800">   50 грн</p>
                                 <hr />
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="typeofdelivery" value="Укрпошта - Доставка за адресою" name="typeofdelivery" class="custom-control-input">
-                                    <label class="custom-control-label" for="typeofdelivery">Укрпошта - Доставка за адресою</label>
+                                    <input type="radio" id="typeofdelivery4" value="Укрпошта - Доставка за адресою" name="typeofdelivery" class="custom-control-input">
+                                    <label class="custom-control-label" style="justify-content:flex-start;" for="typeofdelivery4">Укрпошта - Доставка за адресою</label>
                                 </div>
-                                <p style="margin-left: 2em">   55 грн</p>
+                                <p style="margin-left:3em; font-weight:800">   55 грн</p>
                                 <hr />
                             </div>
 
                             <div class="col-md-6">
                                 <h3><strong>Спосіб оплати</strong></h3>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="payment" value="Переказ на рахунок" name="payment" class="custom-control-input">
-                                    <label class="custom-control-label" for="RPai">Переказ на рахунок</label>
+                                    <input type="radio" id="payment1" value="Переказ на рахунок" name="payment" class="custom-control-input">
+                                    <label class="custom-control-label" style="justify-content:flex-start; font-weight:800" for="payment1">Переказ на рахунок</label>
                                     <p>[З вами зв'яжеться менеджер і надішле Вам реквізити зручним для Вас способом]</p>
                                 </div>
                                 <hr />
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="payment" value="Оплата при отриманні" name="payment" class="custom-control-input">
-                                    <label class="custom-control-label" for="RPai">Оплата при отриманні</label>
+                                    <input type="radio" id="payment2" value="Оплата при отриманні" name="payment" class="custom-control-input">
+                                    <label class="custom-control-label" style="justify-content:flex-start; font-weight:800" for="payment2">Оплата при отриманні</label>
                                     <p>[Просимо мати на увазі що в цьому випадку можливі додаткові комісії за зворотній переказ коштів]</p>
                                 </div>
                                 <hr />
@@ -93,6 +93,7 @@
                                 <div class="container">
                                     <h5>@Model.shopCartItems.Count товар(ів/и) в кошику</h5>
                                     <div class="row">
+                                        <div class="table-responsive">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -138,6 +139,7 @@
                                                 </tr>
                                             </tfoot>
                                         </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

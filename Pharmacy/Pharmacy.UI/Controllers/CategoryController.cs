@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pharmacy.Core;
 using Pharmacy.Repos;
@@ -13,18 +14,20 @@ namespace Pharmacy.UI.Controllers
         private readonly CatalogRepository _catalogRepository;
         private readonly MedicamentsRepository _medicamentsRepository;
         private readonly SubCategoryMedicamentsRepository _subcategorymedicamentsRepository;
-        
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
         //private readonly 
 
         public CategoryController(CategoryRepository categoryRepository, SubCategoryRepository subcategoryRepository, 
-            CatalogRepository catalogRepository, MedicamentsRepository medicamentsRepository, 
-            SubCategoryMedicamentsRepository subcategorymedicamentsRepository)
+            CatalogRepository catalogRepository, MedicamentsRepository medicamentsRepository,
+            SubCategoryMedicamentsRepository subcategorymedicamentsRepository, IWebHostEnvironment webHostEnvironment)
         {
             _categoryRepository = categoryRepository;
             _subcategoryRepository = subcategoryRepository;
             _catalogRepository = catalogRepository;
             _medicamentsRepository = medicamentsRepository;
             _subcategorymedicamentsRepository = subcategorymedicamentsRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
         public async Task<IActionResult> IndexAsync(int id)
         {
@@ -33,11 +36,13 @@ namespace Pharmacy.UI.Controllers
             ViewData["catalog"] = catalog;
             return View(await _categoryRepository.GetCategoryCatalogWithSub(id));
         }
+
         [HttpGet]
         public async Task<FileContentResult> GetImage(int id)
         {
             var item = await _categoryRepository.GetCategory(id);
-            var byteArray = System.IO.File.ReadAllBytes(item.Image);
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, item.Image);
+            var byteArray = System.IO.File.ReadAllBytes(path);
             return new FileContentResult(byteArray, "image/jpeg");
         }
 

@@ -28,19 +28,19 @@
     <Content Update="wwwroot\assets\images\logo1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\img\blood.jpg">
+    <Content Update="wwwroot\img\catalogue\blood.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\img\catalogue\sample.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\img\flu.jpg">
+    <Content Update="wwwroot\img\catalogue\flu.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\img\heart.jpg">
+    <Content Update="wwwroot\img\catalogue\heart.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\img\sinupret.jpg">
+    <Content Update="wwwroot\img\catalogue\sinupret.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
