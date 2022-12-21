@@ -7,8 +7,9 @@ namespace Pharmacy.UI.Controllers
     public class ManagerController : Controller
     {
         private readonly OrderRepository _orderRepository;
+        private readonly Service service;
 
-        public ManagerController(OrderRepository orderRepository)
+        public ManagerController(OrderRepository orderRepository, Service service)
         {
             _orderRepository = orderRepository;
         }
@@ -16,6 +17,12 @@ namespace Pharmacy.UI.Controllers
         public async Task<IActionResult> Index()
         {
             return View("Orders", await _orderRepository.GetAllOrder());
+        }
+
+        public IActionResult SendEmailDefault()
+        {
+            service.SendEmailDefault();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

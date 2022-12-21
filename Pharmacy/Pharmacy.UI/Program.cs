@@ -41,6 +41,7 @@ builder.Services.AddTransient<CountryRepository>();
 builder.Services.AddTransient<ProductLineRepository>();
 builder.Services.AddTransient<SubCategoryMedicamentsRepository>();
 builder.Services.AddTransient<OrderRepository>();
+builder.Services.AddTransient<Service>();
 //builder.Services.AddTransient<CartViewRepository>();
 
 builder.Services.AddControllers();
