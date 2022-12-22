@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Pharmacy.Repos;
 using Pharmacy.Core;
+using Pharmacy.UI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ builder.Services.AddSession(option =>
     option.IdleTimeout = TimeSpan.FromMinutes(30);
     option.Cookie.IsEssential = true;
 });
+
+
 
 builder.Services.AddDefaultIdentity<User>(options =>
 {
@@ -49,6 +52,11 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddRazorPages();
 
+/*Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });*/
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

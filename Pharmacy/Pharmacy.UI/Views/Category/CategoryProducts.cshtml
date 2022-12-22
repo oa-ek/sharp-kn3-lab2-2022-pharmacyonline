@@ -34,8 +34,10 @@
     {
         <span>Назва товару:</span> @Html.TextBox("CustomerName")
         <input asp-for="@subcategory" id="id" name="id" type="hidden" />
-        <input type="submit" value="Пошук" />
+        <input type="submit" value="Пошук"/>        
         <br />
+
+
     }
     <br />
     @if (Model != null)

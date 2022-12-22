@@ -20,5 +20,7 @@ namespace Pharmacy.Core
         public string? Phone { get; set; }
         [Display(Name = "Адреса")]
         public string? Address { get; set; }
+        [Display(Name = "Email")]
+        public string? Email { get; set; }
     }
 }

@@ -30,11 +30,11 @@ namespace Pharmacy.Repos
 
         public async Task<Order> GetOrder(string id)
         {
-            return await _ctx.Order.Include(x=>x.details).ThenInclude(x=>x.Address).FirstOrDefaultAsync(x => x.OrderId == id);
+            return await _ctx.Order.Include(x=>x.details).ThenInclude(x=>x.Address).Include(x => x.details).ThenInclude(x => x.orderItems).ThenInclude(x => x.medicaments).FirstOrDefaultAsync(x => x.OrderId == id);
         }
         public async Task<OrderDetails> GetOrderDetails(int id)
         {
-            return await _ctx.OrderDetails.Include(x => x.Address).FirstOrDefaultAsync(x => x.Id == id);
+            return await _ctx.OrderDetails.Include(x => x.Address).Include(x => x.orderItems).FirstOrDefaultAsync(x => x.Id == id);
         }
         public async Task<List<OrderItems>> GetOrderItems(int id)
         {
@@ -75,7 +75,7 @@ namespace Pharmacy.Repos
           details.orderItems = items;
             await _ctx.SaveChangesAsync();
         }
-        public async Task AddInfo(int orderid, string adrress, string phone, string name, string paid, string typeofdelivery)
+        public async Task AddInfo(int orderid, string adrress,string email, string phone, string name, string paid, string typeofdelivery)
         {
             var details = await GetOrderDetails(orderid);
             OrderAddress ad = new OrderAddress
@@ -83,6 +83,7 @@ namespace Pharmacy.Repos
                 Address = adrress,
                 Phone = phone,
                 Name = name,
+                Email= email,
             };
             await _ctx.OrderAddress.AddAsync(ad);
             await _ctx.SaveChangesAsync();

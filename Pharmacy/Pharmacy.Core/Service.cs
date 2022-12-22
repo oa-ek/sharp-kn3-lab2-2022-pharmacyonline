@@ -24,7 +24,7 @@ namespace Pharmacy.Core
             {
                 System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
                 message.IsBodyHtml = true; //тело сообщения в формате HTML
-                message.From = new MailAddress("admin@pharmacy.com", "Pharmacy"); //отправитель сообщения
+                message.From = new MailAddress("user2002anhelina@gmail.com", "Pharmacy"); //отправитель сообщения
                 message.To.Add("user2002anhelina@gmail.com"); //адресат сообщения
                 message.Subject = "Сообщение от System.Net.Mail"; //тема сообщения
                 message.Body = "<div style=\"color: red;\">Сообщение от System.Net.Mail</div>"; //тело сообщения
@@ -32,8 +32,8 @@ namespace Pharmacy.Core
 
                 using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("smtp.gmail.com")) //используем сервера Google
                 {
-                    client.Credentials = new NetworkCredential("user2002anhelina@gmail.com", "secret"); //логин-пароль от аккаунта
-                    client.Port = 465; //порт 587 либо 465
+                    client.Credentials = new NetworkCredential("user2002anhelina@gmail.com", "20122022"); //логин-пароль от аккаунта
+                    client.Port = 587; //порт 587 либо 465
                     client.EnableSsl = true; //SSL обязательно
 
                     client.Send(message);

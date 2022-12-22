@@ -45,7 +45,7 @@ namespace Pharmacy.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateOrder(string Address, string payment, string phone, string name, string typeofdelivery)
+        public async Task<IActionResult> CreateOrder(string Address, string payment, string phone, string name, string email, string typeofdelivery)
         {
             List<ShopCartItem> cart = HttpContext.Session.GetJson<List<ShopCartItem>>("Cart");
             OrderDetails d = await _orderRepository.CreateOrderDetails();
@@ -67,7 +67,7 @@ namespace Pharmacy.UI.Controllers
                 total += 55;
 
             await _orderRepository.AddItems(d.Id, orderitems, total);
-            await _orderRepository.AddInfo(d.Id, Address, phone, name, payment, typeofdelivery);
+            await _orderRepository.AddInfo(d.Id, Address,email, phone, name, payment, typeofdelivery);
             return RedirectToAction("Create", d);
         }
 

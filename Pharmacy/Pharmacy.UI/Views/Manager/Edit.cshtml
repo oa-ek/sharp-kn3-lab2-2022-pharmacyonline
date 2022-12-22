@@ -33,6 +33,7 @@
                 <div class="card-header">
                     <h5>Редагувати</h5>
                 </div>
+                    
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-8">
@@ -85,7 +86,20 @@
                             </form>
                         </div>
                     </div>
+                    <br/>
+                    @if(Model.Status == "підтверджено" && Model.details.Address.Email != null){
+                    <form asp-action="Contact" asp-controller="Manager">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input asp-for="OrderId" id="OrderId" name="OrderId" type="hidden" />
+                        <div class="form-group">
+                            <input type="submit" value="Надіслати підтвердження на email" class="btn btn-danger" />
+                        </div>
+                    </form>}
+                    @if (Model.Status == "підтверджено" && Model.details.Address.Email == null){
+                        <p>немає даних пошти</p>
+                    }
                 </div>
+                
             </div>
 
         </div>
