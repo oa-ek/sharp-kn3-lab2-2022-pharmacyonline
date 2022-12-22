@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Pharmacy.Core.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -97,7 +97,8 @@ namespace Pharmacy.Core.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -404,9 +405,9 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "691d8863-e296-4896-bd1e-61a0f9aff5c9", "bbb4aa8c-4821-4d88-bd15-2165de887142", "Manager", "MANAGER" },
-                    { "8994c1d2-c79f-4108-a90f-0abfb4a3dcbb", "25062e71-2248-4b64-8f5f-f1a3b83ffa3c", "User", "USER" },
-                    { "a5bef0e0-7646-4d98-ad00-5e17dac66c29", "7e896509-3179-423d-aa18-e7b304195332", "Admin", "ADMIN" }
+                    { "9d3d7ade-bf45-44b6-908c-7d953af8c05a", "e4d993fb-e167-4870-bb15-129efc195404", "Manager", "MANAGER" },
+                    { "c13144bd-e2a9-42ab-8f8d-7df3ae15b949", "e9b19fb9-6266-45ce-a8a0-f4e552ebfc0d", "Admin", "ADMIN" },
+                    { "c9d9d758-bead-4bc4-b731-f1611bb9c27e", "fc27c77e-3e92-4e72-859b-be666611af92", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -414,9 +415,9 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "629dfcde-5cb4-41e4-b60e-ec30ba357685", 0, "083c2889-a64c-40f0-a006-24a044751fec", "manager@pharmacy.com", true, null, null, false, null, "MANAGER@PHARMACY.COM", "MANAGER@PHARMACY.COM", "AQAAAAEAACcQAAAAEJFJi1qzaWD4vXLvkUTBQ5EPg45rjnyg1QdX+zKBA/4dQgoHK9y26mOSPFn9kHWCEQ==", null, false, "05889514-9179-4d92-93c4-12fe8ad3f99d", false, "manager@pharmacy.com" },
-                    { "824bce3a-ff7d-45ec-bf42-378dafbdce55", 0, "9aa6d02f-c265-44b9-9ec8-873eb051dc07", "user@pharmacy.com", true, null, null, false, null, "USER@PHARMACY.COM", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAEL3e3otNwgUIbT1VedY2Ab9nMcOQp76duKuzFTTv5ui8Oh+hDfOJhJXkf8zfZ1MIyw==", null, false, "3f94a086-53d9-4fcd-ba13-aec9dbaa0b14", false, "user@pharmacy.com" },
-                    { "8a9758e6-be23-4e74-940d-10397023641d", 0, "90126efb-804b-494b-95e8-18b8db8cf893", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMIN@PHARMACY.COM", "AQAAAAEAACcQAAAAEKwkBBDIHUDQx3XIR0zQykQzxH6PN/EfjhOnXCMP5LG9E7slH+78Ni3IdtopsjgEEg==", null, false, "0254293d-c68c-4c1b-bdac-0a7ef0e202bc", false, "admin@pharmacy.com" }
+                    { "059d6515-ce91-421b-a40d-14ac65c6b088", 0, "c5cb089d-4ba3-435f-9414-0d2285f96204", "admin@pharmacy.com", true, null, null, false, null, "ADMIN@PHARMACY.COM", "ADMIN@PHARMACY.COM", "AQAAAAEAACcQAAAAEAFrdVn3pPeqSqfMMb/YWZA7XazfU4nXIS//Bxd1q3eTFS42U8hsptPF0h9jZNvEDg==", null, false, "97e17f27-e44c-4d9a-9aed-25fcc4c060f4", false, "admin@pharmacy.com" },
+                    { "d556b30b-70ee-4b38-b310-509535eff39e", 0, "f6114800-6836-4d79-8fba-2b88e2ca0972", "manager@pharmacy.com", true, null, null, false, null, "MANAGER@PHARMACY.COM", "MANAGER@PHARMACY.COM", "AQAAAAEAACcQAAAAEA7wsJ2HUSISt+slOlpu1o2xyfJQ/GLCB5tjyMKwbdqs3AiQR4Tj04Tm9LZA9E7vcQ==", null, false, "435b8633-1f7c-458c-839b-7a87a950ef6a", false, "manager@pharmacy.com" },
+                    { "e2ac754d-edd8-4772-bd13-8511f2ed1b15", 0, "d0b2b0b0-0d0e-4b89-ae7a-61d6088901b7", "user@pharmacy.com", true, null, null, false, null, "USER@PHARMACY.COM", "USER@PHARMACY.COM", "AQAAAAEAACcQAAAAEChYBmfNIaOv9EEgyazmsd2QnQVSQ2f8JNrHZ8XLe5YQCRwEA/aD2xGkl0OjQ64lZg==", null, false, "9066cfff-2c8d-433b-b238-3a1f760be265", false, "user@pharmacy.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -433,9 +434,10 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "Id", "CatalogId", "Image", "Name" },
                 values: new object[,]
                 {
-                    { 1, null, "C:\\Users\\Admin\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\flu.jpg", "Застуда і грип" },
-                    { 2, null, "C:\\Users\\Admin\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\heart.jpg", "Серцево-судинна система" },
-                    { 3, null, "C:\\Users\\Admin\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\blood.jpg", "Кровотворення та кров" }
+                    { 1, null, "img\\catalogue\\flu.jpg", "Застуда і грип" },
+                    { 2, null, "img\\catalogue\\heart.jpg", "Серцево-судинна система" },
+                    { 3, null, "img\\catalogue\\blood.jpg", "Кровотворення та кров" },
+                    { 4, null, "img\\catalogue\\8000131.jpg", "Противірусні" }
                 });
 
             migrationBuilder.InsertData(
@@ -443,24 +445,32 @@ namespace Pharmacy.Core.Migrations
                 columns: new[] { "MedicamentsId", "BrendId", "Code", "CountryId", "Description", "Dosage", "Image", "Name", "Price", "ProductLineId", "ReleaseForm" },
                 values: new object[,]
                 {
-                    { 1, null, "4882", null, null, "", "C:\\Users\\HP\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\sinupret.jpg", "Синупрет табл. в/о №50", 125.62f, null, "таблетки для внутрішнього застосування" },
-                    { 2, null, "2345", null, null, "12", "C:\\Users\\HP\\Documents\\GitHub\\Pharmacy_online\\Pharmacy\\Pharmacy.UI\\wwwroot\\img\\sinupret.jpg", "Синупрет", 89.75f, null, "таблетки для внутрішнього застосування" }
+                    { 1, null, "4882", null, null, "", "img\\catalogue\\sinupret.jpg", "Синупрет табл. в/о №50", 125.62f, null, "таблетки для внутрішнього застосування" },
+                    { 2, null, "2345", null, null, "12", "img\\catalogue\\sinupret.jpg", "Синупрет", 89.75f, null, "таблетки для внутрішнього застосування" },
+                    { 3, null, "2434", null, null, "12", "img\\catalogue\\milistan.jpg", "Мілістан мультисимптомний каплети, в/о блістер №12", 175f, null, "таблетки для внутрішнього застосування" },
+                    { 4, null, "2487", null, null, "15", "img\\catalogue\\captopres.jpg", "Каптопрес 12,5-Дарниця", 89.75f, null, "таблетки" },
+                    { 5, null, "4715", null, null, "16", "img\\catalogue\\stoptys.jpg", "Стоптусин-Тева", 89.75f, null, "таблетки" }
                 });
 
             migrationBuilder.InsertData(
                 table: "SubCategory",
                 columns: new[] { "SubCategoryId", "CategoryId", "Name" },
-                values: new object[] { 1, null, "Від кашлю" });
+                values: new object[,]
+                {
+                    { 1, null, "Від кашлю" },
+                    { 2, null, "Ліки від грипу" },
+                    { 3, null, "Від підвищеного тиску" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "691d8863-e296-4896-bd1e-61a0f9aff5c9", "629dfcde-5cb4-41e4-b60e-ec30ba357685" },
-                    { "8994c1d2-c79f-4108-a90f-0abfb4a3dcbb", "824bce3a-ff7d-45ec-bf42-378dafbdce55" },
-                    { "8994c1d2-c79f-4108-a90f-0abfb4a3dcbb", "8a9758e6-be23-4e74-940d-10397023641d" },
-                    { "a5bef0e0-7646-4d98-ad00-5e17dac66c29", "8a9758e6-be23-4e74-940d-10397023641d" }
+                    { "c13144bd-e2a9-42ab-8f8d-7df3ae15b949", "059d6515-ce91-421b-a40d-14ac65c6b088" },
+                    { "c9d9d758-bead-4bc4-b731-f1611bb9c27e", "059d6515-ce91-421b-a40d-14ac65c6b088" },
+                    { "9d3d7ade-bf45-44b6-908c-7d953af8c05a", "d556b30b-70ee-4b38-b310-509535eff39e" },
+                    { "c9d9d758-bead-4bc4-b731-f1611bb9c27e", "e2ac754d-edd8-4772-bd13-8511f2ed1b15" }
                 });
 
             migrationBuilder.InsertData(
@@ -469,7 +479,10 @@ namespace Pharmacy.Core.Migrations
                 values: new object[,]
                 {
                     { 1, 1 },
-                    { 2, 1 }
+                    { 2, 1 },
+                    { 3, 2 },
+                    { 4, 3 },
+                    { 5, 1 }
                 });
 
             migrationBuilder.CreateIndex(

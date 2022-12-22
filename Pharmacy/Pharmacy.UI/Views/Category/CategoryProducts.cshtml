@@ -7,8 +7,12 @@
 @{
     @if (SignInManager.IsSignedIn(User))
     { ViewData["user"] = UserManager.GetUserAsync(User); }
+
     Layout = "~/Views/Shared/_FlatLayout.cshtml";
     var subcategory = ViewData["subcategory"];
+    List<ShopCartItem> cartitems = ViewBag.CartItem;
+    var item = new ShopCartItem();
+    var count = 0;
 }
 
 <div class="pcoded-content">
@@ -34,7 +38,7 @@
     {
         <span>Назва товару:</span> @Html.TextBox("CustomerName")
         <input asp-for="@subcategory" id="id" name="id" type="hidden" />
-        <input type="submit" value="Пошук"/>        
+        <input type="submit" value="Пошук" />
         <br />
 
 
@@ -43,28 +47,48 @@
     @if (Model != null)
     {
         <div class="row">
-                    @foreach (var ct in Model)
-                    {
+            @foreach (var ct in Model)
+            {
+                count++;
                 <div class="col-12 col-sm-6 col-md-4 col-xl-3">
-                        <div class="card" style="width: 20rem; display:inline-block; margin-left:1em;">
-                            <img class="img-fluid card-img-top" src="/medicaments/getimage/@ct.MedicamentsId" style="height:16rem;" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title" style="margin-bottom:5px"><a asp-controller="Medicaments" asp-action="DetailsMedicament" asp-route-id="@ct.MedicamentsId" style="text-decoration:none;">@Html.DisplayFor(modelItem => ct.Name)</a></h5>
-                                <p class="card-text" style="margin-bottom:5px">@Html.DisplayFor(modelItem => ct.Price) $</p>
-                                <div class="card-body" style="padding:5px">
-                                    @if (User.IsInRole("Admin"))
+                    <div class="card" style="width: 20rem; display:inline-block; margin-left:1em;">
+                        <img class="img-fluid card-img-top" src="/medicaments/getimage/@ct.MedicamentsId" style="height:16rem;" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title" style="margin-bottom:5px"><a asp-controller="Medicaments" asp-action="DetailsMedicament" asp-route-id="@ct.MedicamentsId" style="text-decoration:none;">@Html.DisplayFor(modelItem => ct.Name)</a></h5>
+                            <p class="card-text" style="margin-bottom:5px">@Html.DisplayFor(modelItem => ct.Price) $</p>
+                            <div class="card-body" style="padding:5px">
+                                <p hidden id="textCart">Товар додано в кошик</p>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a class="btn btn-outline-warning card-link" style="margin:0.2em; padding: 0.5em, 1em;" asp-controller="Medicaments" asp-action="Edit" asp-route-id="@ct.MedicamentsId">Edit</a>
+                                    <a class="btn btn-outline-primary card-link" style="margin:0.2em; padding: 0.5em, 1em;" asp-controller="Medicaments" asp-action="DetailsMedicament" asp-route-id="@ct.MedicamentsId">Details</a>
+                                    <a class="btn btn-outline-danger card-link" style="margin:0.2em; padding: 0.5em, 1em;" asp-controller="Medicaments" asp-action="Delete" asp-route-id="@ct.MedicamentsId">Delete</a>
+                                }
+                                <br />
+                                <input type="hidden" class="hiddenInput" value="@ct.MedicamentsId" asp-for="@ct.MedicamentsId" />
+                                @if(cartitems!=null){
+                                @if (cartitems.FirstOrDefault(x => x.ProductId == ct.MedicamentsId) != null)
+                                {
+                                        <a class="btn btn-outline-primary card-link addToCart" id="addToCart" value="В кошик">В кошик</a>
+
+                                }
+                                    else
                                     {
-                                        <a class="btn btn-outline-warning card-link" style="margin:0.2em; padding: 0.5em, 1em;" asp-controller="Medicaments" asp-action="Edit" asp-route-id="@ct.MedicamentsId">Edit</a>
-                                        <a class="btn btn-outline-primary card-link" style="margin:0.2em; padding: 0.5em, 1em;" asp-controller="Medicaments" asp-action="DetailsMedicament" asp-route-id="@ct.MedicamentsId">Details</a>
-                                        <a class="btn btn-outline-danger card-link" style="margin:0.2em; padding: 0.5em, 1em;" asp-controller="Medicaments" asp-action="Delete" asp-route-id="@ct.MedicamentsId">Delete</a>
+                                        <a class="btn btn-primary card-link addToCart" id="addToCart" value="В кошик">В кошик</a>
                                     }
-                                    <br />
-                                    <a class="btn btn-primary card-link" asp-controller="Cart" asp-action="Add" asp-route-id="@ct.MedicamentsId">В кошик</a>
-                                </div>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-primary card-link addToCart" id="addToCart" value="В кошик">В кошик</a>
+                                }
+                                
+
+                                @*<a class="btn btn-primary card-link" asp-controller="Cart" asp-action="Add" asp-route-id="@ct.MedicamentsId">В кошик</a>*@
                             </div>
                         </div>
-                        </div>
-                    }
+                    </div>
+                </div>
+            }
         </div>
     }
     else
@@ -73,3 +97,31 @@
     }
 
 </div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="~/leaflet/leaflet.min.js"></script>
+    <link href="~/leaflet/leaflet.min.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $('.addToCart').click(function (e) {
+                var ss = jQuery(this).parent().find('.hiddenInput').val();
+                console.log(ss);
+                $.ajax({
+                    url: '/Cart/Add',
+                    type: 'Get',
+                    data: {
+                        id: ss
+                    },
+                    success: function () {
+                        $("#addToCart").removeClass("btn-primary").addClass("btn-outline-primary");
+                       
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -65,6 +65,8 @@ namespace Pharmacy.UI.Controllers
 
             return View(Cart);
         }
+
+        
         public async Task<IActionResult> Add(int id)
         {
 

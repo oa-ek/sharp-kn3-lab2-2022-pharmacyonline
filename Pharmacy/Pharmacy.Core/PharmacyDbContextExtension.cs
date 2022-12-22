@@ -182,15 +182,32 @@ namespace Pharmacy.Core
                     Id = 3,
                     Name = "Кровотворення та кров",
                     Image = "img\\catalogue\\blood.jpg",
+                },
+                new Category
+                {
+                    Id = 4,
+                    Name = "Противірусні",
+                    Image = "img\\catalogue\\8000131.jpg",
                 }
                 );
 
             var subCategory1 = new SubCategory
             {
                 SubCategoryId = 1,
-                Name = "Від кашлю",
+                Name = "Від кашлю", //1
             };
-            builder.Entity<SubCategory>().HasData(subCategory1);
+            var subCategory2 = new SubCategory
+            {
+                SubCategoryId = 2,
+                Name = "Ліки від грипу", //1
+            };
+            var subCategory3 = new SubCategory
+            {
+                SubCategoryId = 3,
+                Name = "Від підвищеного тиску", //2
+            };
+            builder.Entity<SubCategory>().HasData(subCategory1, subCategory2, subCategory3);
+
            
 
 
@@ -214,6 +231,36 @@ namespace Pharmacy.Core
                 ReleaseForm = "таблетки для внутрішнього застосування",
                 Image = "img\\catalogue\\sinupret.jpg",
             };
+            var medicaments2 = new Medicaments
+            {
+                MedicamentsId = 3,
+                Name = "Мілістан мультисимптомний каплети, в/о блістер №12",
+                Code = "2434",
+                Dosage = "12",
+                Price = (float)175,
+                ReleaseForm = "таблетки для внутрішнього застосування",
+                Image = "img\\catalogue\\milistan.jpg",
+            };
+            var medicaments3 = new Medicaments
+            {
+                MedicamentsId = 4,
+                Name = "Каптопрес 12,5-Дарниця",
+                Code = "2487",
+                Dosage = "15",
+                Price = (float)89.75,
+                ReleaseForm = "таблетки",
+                Image = "img\\catalogue\\captopres.jpg",
+            };
+            var medicaments4 = new Medicaments
+            {
+                MedicamentsId =5,
+                Name = "Стоптусин-Тева",
+                Code = "4715",
+                Dosage = "16",
+                Price = (float)89.75,
+                ReleaseForm = "таблетки",
+                Image = "img\\catalogue\\stoptys.jpg",
+            };
             var SubCategoryMedicaments = new SubCategoryMedicaments
             {
                 MedicamentsId = medicaments.MedicamentsId,
@@ -228,9 +275,30 @@ namespace Pharmacy.Core
                 Medicaments = null,
                 SubCategory = null,
             };
+            var SubCategoryMedicaments2 = new SubCategoryMedicaments
+            {
+                MedicamentsId = medicaments2.MedicamentsId,
+                SubCategoryId = subCategory2.SubCategoryId,
+                Medicaments = null,
+                SubCategory = null,
+            };
+            var SubCategoryMedicaments3 = new SubCategoryMedicaments
+            {
+                MedicamentsId = medicaments3.MedicamentsId,
+                SubCategoryId = subCategory3.SubCategoryId,
+                Medicaments = null,
+                SubCategory = null,
+            };
+            var SubCategoryMedicaments4 = new SubCategoryMedicaments
+            {
+                MedicamentsId = medicaments4.MedicamentsId,
+                SubCategoryId = subCategory1.SubCategoryId,
+                Medicaments = null,
+                SubCategory = null,
+            };
             //medicaments.SubCategories = new List<SubCategoryMedicaments> { SubCategoryMedicaments };
-            builder.Entity<Medicaments>().HasData(medicaments,medicaments1);
-            builder.Entity<SubCategoryMedicaments>().HasData(SubCategoryMedicaments,SubCategoryMedicaments1);
+            builder.Entity<Medicaments>().HasData(medicaments,medicaments1,medicaments2,medicaments3,medicaments4);
+            builder.Entity<SubCategoryMedicaments>().HasData(SubCategoryMedicaments,SubCategoryMedicaments1, SubCategoryMedicaments2,SubCategoryMedicaments3,SubCategoryMedicaments4);
 
         }
     }

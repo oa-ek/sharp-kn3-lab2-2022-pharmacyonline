@@ -14,6 +14,7 @@ namespace Pharmacy.UI.Controllers
         private readonly CatalogRepository _catalogRepository;
         private readonly MedicamentsRepository _medicamentsRepository;
         private readonly SubCategoryMedicamentsRepository _subcategorymedicamentsRepository;
+        //private readonly CartViewRepository _cartViewRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         //private readonly 
@@ -28,6 +29,7 @@ namespace Pharmacy.UI.Controllers
             _medicamentsRepository = medicamentsRepository;
             _subcategorymedicamentsRepository = subcategorymedicamentsRepository;
             _webHostEnvironment = webHostEnvironment;
+            //_cartViewRepository = cartViewRepository;
         }
         public async Task<IActionResult> IndexAsync(int id)
         {
@@ -49,10 +51,15 @@ namespace Pharmacy.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> CategoryProducts(int id)
         {
+            Medicaments med = await _medicamentsRepository.GetMedicament(id);
+            List<ShopCartItem> cart = HttpContext.Session.GetJson<List<ShopCartItem>>("Cart") ?? new List<ShopCartItem>();
+            HttpContext.Session.SetJson("Cart", cart);
+
             ViewData["id"] = id;
             var subcategory = await _subcategoryRepository.GetSubCategory(id);
             ViewData["title"] = subcategory.Name;
             ViewData["subcategory"] = subcategory.SubCategoryId;
+            ViewBag.CartItem = cart;
             var medicaments = await _subcategorymedicamentsRepository.GetAllMedicamentsFromSubCategory(subcategory.SubCategoryId);
             return View( await _medicamentsRepository.ListMedicaments(medicaments));
         }
